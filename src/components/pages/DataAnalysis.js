@@ -3,6 +3,7 @@ import { Box, Icon, Stack } from "@chakra-ui/react";
 import { Heading } from "@chakra-ui/react";
 import { FiHash } from "react-icons/fi";
 import CustomTooltip from "../common/Tooltip";
+import CustomDateRangePicker from "../common/Datepicker";
 
 export default function DataAnalysis() {
   const containerProps = [
@@ -17,6 +18,7 @@ export default function DataAnalysis() {
       <Heading as='h1' size='2xl' noOfLines={1}>
       Data Analysis
       </Heading>
+      <CustomDateRangePicker/>
       <Stack>
         {containerProps.map(({children, ...rest}) => 
         <Container {...rest} titleIcon={FiHash}>children</Container>

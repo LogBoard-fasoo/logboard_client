@@ -7,12 +7,12 @@ Mapping 페이지 & Data Analysis 페이지.
 
 - src/components/common
   [] 안내 모달 (내용)
-  [] 달력 (디폴트 일자)
+  [] 달력/Datepicker (디폴트 일자)
   [] 드롭다운 (배열)
-  [] 툴팁 (내용)
+  [X] 툴팁 (내용)
 
 - src/components/layout
-  [] 사이드바
+  [X] 사이드바
 
 - src/components/mapping
   [] 파이 차트 (플래그, 숫자)
