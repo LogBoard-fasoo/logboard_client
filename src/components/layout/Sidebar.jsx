@@ -59,7 +59,7 @@ function SidebarContent({ onClose, ...rest }) {
             {...rest}
         >
             <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-                <Heading as="h2" fontSize="2xl" fontWeight="bold">
+                <Heading as="h2" fontSize="3xl" fontWeight="bold">
                     Fasoo
                 </Heading>
                 <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
