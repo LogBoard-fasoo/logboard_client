@@ -10,6 +10,7 @@ Mapping 페이지 & Data Analysis 페이지.
     [x] 달력/Datepicker (디폴트 일자)
     [x] 드롭다운 (placeholder, {k: v})
     [X] 툴팁 (내용)
+    [ ] Searchable dropdown (placeholder, {k:v})
 
 -   src/components/layout
     [X] 사이드바
