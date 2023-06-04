@@ -87,7 +87,7 @@ function NavItem({ icon, to, children, ...rest }) {
                 role="group"
                 cursor="pointer"
                 _hover={{
-                    bg: "blue.600",
+                    bg: "rgba(43,108,176, 0.4)",
                     color: "white",
                 }}
                 bg={location.pathname === to ? "blue.600" : "none"}
