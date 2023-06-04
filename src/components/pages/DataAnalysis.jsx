@@ -10,6 +10,7 @@ import SpecificIndustry from "../dataAnalysis/SpecificIndustry";
 import TopCompanies from "../dataAnalysis/TopCompanies";
 import SpecificCompany from "../dataAnalysis/SpecificCompany";
 import SpecificProduct from "../dataAnalysis/SpecificProduct";
+import SummaryBox from "../dataAnalysis/SummaryBox";
 
 export default function DataAnalysis() {
     const containerProps = [
@@ -58,6 +59,7 @@ function Container({ title, titleIcon, children, tooltipContent }) {
                 <CustomTooltip tooltipContent={tooltipContent} />
             </Heading>
             {children}
+            <SummaryBox />
         </Box>
     );
 }
