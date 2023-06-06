@@ -2,40 +2,8 @@ import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 
 // TODO: 기업 여러개 선택 가능
-const data = [
-    {
-        id: "파수",
-        color: "hsl(40, 70%, 50%)",
-        data: [
-            {
-                x: "4/7",
-                y: 284,
-            },
-            {
-                x: "4/14",
-                y: 243,
-            },
-            {
-                x: "4/21",
-                y: 210,
-            },
-            {
-                x: "4/28",
-                y: 26,
-            },
-            {
-                x: "4/28",
-                y: 26,
-            },
-            {
-                x: "4/28",
-                y: 26,
-            },
-        ],
-    },
-];
 
-export default function GraphChart() {
+export default function GraphChart({ data }) {
     return (
         <ResponsiveLine
             data={data}

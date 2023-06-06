@@ -32,9 +32,9 @@ const data = [
 
 export default function SpecificIndustry() {
     const props = [
-        { placeholder: "카테고리", optionsDict: { 1: "전자", 2: "음식" }, data: data },
-        { placeholder: "산업군", optionsDict: { 1: "전자", 2: "음식" }, data: data },
-        { placeholder: "제품", optionsDict: { 1: "전자", 2: "음식" }, data: data },
+        { placeholder: "카테고리를 검색할 수 있어요.", optionsDict: { 1: "전자", 2: "음식" }, data: data },
+        { placeholder: "산업군을 검색할 수 있어요.", optionsDict: { 1: "전자", 2: "음식" }, data: data },
+        { placeholder: "제품 url을 검색할 수 있어요.", optionsDict: { 1: "전자", 2: "음식" }, data: data },
     ];
     return (
         <Box>

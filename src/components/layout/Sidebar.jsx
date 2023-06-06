@@ -40,7 +40,7 @@ export default function Sidebar({ children }) {
             {/* mobilenav */}
             <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
 
-            <Box ml={{ base: 0, md: 60 }} borderRadius="xl" p="4" h="100vh">
+            <Box ml={{ base: 0, md: 60 }} borderRadius="xl" p="4" h="100%">
                 {children}
             </Box>
         </Box>
@@ -55,7 +55,7 @@ function SidebarContent({ onClose, ...rest }) {
             borderRightColor={useColorModeValue("gray.200", "gray.700")}
             w={{ base: "full", md: 60 }}
             pos="fixed"
-            h="full"
+            h="100%"
             {...rest}
         >
             <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">

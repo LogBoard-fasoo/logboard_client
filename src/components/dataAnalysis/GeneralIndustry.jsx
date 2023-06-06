@@ -30,7 +30,7 @@ export default function GeneralIndustry() {
     const props = [
         { title: "카테고리", data: data },
         { title: "산업군", data: data },
-        { title: "제품군", data: data },
+        { title: "사용기술", data: data },
     ];
     return (
         <Box>
