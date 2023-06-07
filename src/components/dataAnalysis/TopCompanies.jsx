@@ -1,5 +1,6 @@
 import React from "react";
+import RankingTable from "../common/RankingTable";
 
 export default function TopCompanies() {
-    return <div>Top Companies</div>;
+    return <RankingTable />;
 }

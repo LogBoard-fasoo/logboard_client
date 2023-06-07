@@ -30,7 +30,7 @@ export default function DataAnalysis() {
         },
         {
             title: "개별 기업 분석",
-            desc: "선택된 기간 내 궁금한 여러 기업의 방문 트렌드를 볼 수 있어요.", // TODO: 관심도 측정을 단순 카운팅 -> 재방문율인 경우 더 많은 가중치를 주는 방식으로 변경 가능
+            desc: "선택된 기간 내 궁금한 여러 기업의 방문 트렌드를 한눈에 볼 수 있어요.", // TODO: 관심도 측정을 단순 카운팅 -> 재방문율인 경우 더 많은 가중치를 주는 방식으로 변경 가능
             children: <SpecificCompany />,
         },
         {
@@ -43,10 +43,14 @@ export default function DataAnalysis() {
         <Sidebar>
             <Box h="100%" p="10">
                 <Box>
-                    <Heading as="h1" size="2xl" noOfLines={1} textShadow="3px 3px 3px rgba(0,0,0,0.2)">
-                        <FiActivity />
-                        Data Analysis
-                    </Heading>
+                    <Flex>
+                        <Heading as="h1" size="2xl" noOfLines={1} mr={3} textShadow="3px 3px 3px rgba(0,0,0,0.2)">
+                            <FiActivity />
+                        </Heading>
+                        <Heading as="h1" size="2xl" noOfLines={1} textShadow="3px 3px 3px rgba(0,0,0,0.2)">
+                            Data Analysis
+                        </Heading>
+                    </Flex>
                     <Flex>
                         <small>Fasoo.com 방문 기업 분석 대쉬보드입니다.</small>
                         <Spacer />
