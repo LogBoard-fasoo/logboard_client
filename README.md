@@ -21,4 +21,4 @@ Mapping 페이지 & Data Analysis 페이지.
 -   [x] 가로 바 차트 (x-axis 명, y-axis 명, {x:y})
 -   [x] 트렌트 그래프
 
--   src/components/mapping
+-   src/components/ip-mapping

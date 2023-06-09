@@ -16,7 +16,7 @@ import { FiActivity, FiMessageCircle, FiMenu } from "react-icons/fi";
 
 const LinkItems = [
     { name: "Data Analysis", icon: FiActivity, to: "/data-analysis" },
-    { name: "Mapping", icon: FiMessageCircle, to: "/mapping" },
+    { name: "Ip Mapping", icon: FiMessageCircle, to: "/ip-mapping" },
 ];
 
 export default function Sidebar({ children }) {
