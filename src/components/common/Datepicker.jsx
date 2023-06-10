@@ -7,9 +7,9 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { TextField } from "@mui/material";
 import styled from "@emotion/styled";
 
-export default function CustomDateRangePicker() {
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
+export default function CustomDateRangePicker(initialStartDate, initialEndDate) {
+    const [startDate, setStartDate] = useState(initialStartDate);
+    const [endDate, setEndDate] = useState(initialEndDate);
 
     const handleStartDateChange = (date) => {
         setStartDate(date);
