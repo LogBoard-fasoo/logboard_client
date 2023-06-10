@@ -9,7 +9,6 @@ import TopCompanies from "../dataAnalysis/TopCompanies";
 import SpecificCompany from "../dataAnalysis/SpecificCompany";
 import SpecificProduct from "../dataAnalysis/SpecificProduct";
 import SummaryBox from "../dataAnalysis/SummaryBox";
-import CustomDateRangePicker from "../common/Datepicker";
 
 export default function DataAnalysis() {
     const containerProps = [
@@ -62,11 +61,7 @@ export default function DataAnalysis() {
                 <Stack>
                     {containerProps.map(({ children, desc, ...rest }, idx) => (
                         <Container key={idx} {...rest} titleIcon={FiHash}>
-                            <Flex>
-                                <small>{desc}</small>
-                                <Spacer />
-                                <CustomDateRangePicker />
-                            </Flex>
+                            <small>{desc}</small>
                             {children}
                         </Container>
                     ))}

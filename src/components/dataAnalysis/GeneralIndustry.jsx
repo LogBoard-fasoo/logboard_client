@@ -1,7 +1,10 @@
 import React from "react";
-import { Box, Grid, Heading } from "@chakra-ui/react";
+import { Box, Flex, Grid, Heading, Spacer } from "@chakra-ui/react";
 import PieChart from "../common/PieChart";
 import CustomTooltip from "../common/Tooltip";
+import CustomDateRangePicker from "../common/Datepicker";
+import { useRecoilState } from "recoil";
+import { initialTimeline } from "../../recoil/atoms/generalIndustry";
 
 const data = [
     {
@@ -32,8 +35,15 @@ export default function GeneralIndustry() {
         { title: "산업군", data: data },
         { title: "사용기술", data: data },
     ];
+
+    const [timeline, setTimeline] = useRecoilState(initialTimeline);
+
     return (
         <Box>
+            <Flex>
+                <Spacer />
+                <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
+            </Flex>
             <Grid templateColumns={{ base: "1fr", xl: "1fr 1fr 1fr" }} gap={4}>
                 {props.map((prop, idx) => (
                     <GeneralIndustryBox key={idx} {...prop} />

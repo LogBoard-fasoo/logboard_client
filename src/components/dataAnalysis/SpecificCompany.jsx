@@ -1,8 +1,11 @@
 import React from "react";
 import GraphChart from "../common/GraphChart";
-import { Box, Grid, HStack, Heading } from "@chakra-ui/react";
+import { Box, Flex, Grid, HStack, Heading, Spacer } from "@chakra-ui/react";
 import SearchableDropdown from "../common/SearchableDropdown";
 import PieChart from "../common/PieChart";
+import CustomDateRangePicker from "../common/Datepicker";
+import { initialTimeline } from "../../recoil/atoms/specificCompany";
+import { useRecoilState } from "recoil";
 
 const data = [
     {
@@ -89,8 +92,13 @@ const data1 = [
 ];
 
 export default function SpecificCompany() {
+    const [timeline, setTimeline] = useRecoilState(initialTimeline);
     return (
         <Box>
+            <Flex>
+                <Spacer />
+                <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
+            </Flex>
             <Grid templateColumns={{ base: "1fr" }} gap={4}>
                 <SearchableDropdown />
                 <GraphBox data={data1} />

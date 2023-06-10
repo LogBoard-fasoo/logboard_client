@@ -1,7 +1,10 @@
 import React from "react";
 import CustomDropdown from "../common/Dropdown";
-import { Box, Grid } from "@chakra-ui/react";
+import { Box, Flex, Grid, Spacer } from "@chakra-ui/react";
 import HBarChart from "../common/HBarChart";
+import CustomDateRangePicker from "../common/Datepicker";
+import { initialTimeline } from "../../recoil/atoms/specificIndustry";
+import { useRecoilState } from "recoil";
 
 const data = [
     {
@@ -36,8 +39,14 @@ export default function SpecificIndustry() {
         { placeholder: "산업군을 검색할 수 있어요.", optionsDict: { 1: "전자", 2: "음식" }, data: data },
         { placeholder: "제품 url을 검색할 수 있어요.", optionsDict: { 1: "전자", 2: "음식" }, data: data },
     ];
+    const [timeline, setTimeline] = useRecoilState(initialTimeline);
+
     return (
         <Box>
+            <Flex>
+                <Spacer />
+                <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
+            </Flex>
             <Grid templateColumns={{ base: "1fr", xl: "1fr 1fr 1fr" }} gap={4}>
                 {props.map((prop, idx) => (
                     <SpecificIndustryBox key={idx} {...prop} />

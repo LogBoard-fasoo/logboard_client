@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -7,22 +6,21 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { TextField } from "@mui/material";
 import styled from "@emotion/styled";
 
-export default function CustomDateRangePicker() {
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
+export default function CustomDateRangePicker({ timeline, setTimeline }) {
+    const { startDate, endDate } = timeline;
 
     const handleStartDateChange = (date) => {
-        setStartDate(date);
+        setTimeline((timeline) => ({ ...timeline, startDate: date }));
         if (endDate && date > endDate) {
-            setEndDate(null);
+            setTimeline((timeline) => ({ ...timeline, startDate: null }));
         }
     };
 
     const handleEndDateChange = (date) => {
         if (startDate && date < startDate) {
-            setEndDate(null);
+            setTimeline((timeline) => ({ ...timeline, endDate: null }));
         } else {
-            setEndDate(date);
+            setTimeline((timeline) => ({ ...timeline, endDate: date }));
         }
     };
 

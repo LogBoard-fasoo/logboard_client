@@ -1,6 +1,9 @@
 import React from "react";
 import GraphChart from "../common/GraphChart";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Spacer } from "@chakra-ui/react";
+import CustomDateRangePicker from "../common/Datepicker";
+import { initialTimeline } from "../../recoil/atoms/specificProduct";
+import { useRecoilState } from "recoil";
 
 const data = [
     {
@@ -64,8 +67,14 @@ const data = [
 ];
 
 export default function SpecificProduct() {
+    const [timeline, setTimeline] = useRecoilState(initialTimeline);
+
     return (
         <Box style={{ width: "100%", height: "500px" }} bg="white" boxShadow="base" p="6" rounded="md">
+            <Flex>
+                <Spacer />
+                <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
+            </Flex>
             <GraphChart data={data} />
         </Box>
     );
