@@ -1,8 +1,11 @@
 import { atom } from "recoil";
+import getDefaultTimeline from "../../components/utils/getDefaultTimeline";
+
+const [defaultStartDate, defaultEndDate] = getDefaultTimeline();
 
 const initialTimelineState = {
-    startDate: "2022-03-01",
-    endDate: "2023-06-01",
+    startDate: defaultStartDate,
+    endDate: defaultEndDate,
 };
 
 export const initialTimeline = atom({
