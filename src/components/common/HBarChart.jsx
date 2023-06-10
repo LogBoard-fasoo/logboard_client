@@ -5,8 +5,8 @@ export default function HBarChart({ data }) {
     return (
         <ResponsiveBar
             data={data}
-            keys={["전자"]}
-            indexBy="방문수"
+            keys={["count"]}
+            indexBy="url"
             margin={{ top: 50, right: 80, bottom: 50, left: 60 }}
             padding={0.25}
             layout="horizontal"
@@ -27,7 +27,7 @@ export default function HBarChart({ data }) {
             fill={[
                 {
                     match: {
-                        id: "전자",
+                        id: "count",
                     },
                     id: "lines",
                 },
@@ -38,7 +38,7 @@ export default function HBarChart({ data }) {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: "방문수",
+                legend: "url",
                 legendPosition: "middle",
                 legendOffset: 32,
             }}
@@ -46,7 +46,7 @@ export default function HBarChart({ data }) {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: "전자",
+                legend: "count",
                 legendPosition: "middle",
                 legendOffset: -40,
             }}
@@ -82,7 +82,7 @@ export default function HBarChart({ data }) {
             ]}
             role="application"
             ariaLabel="Horizontal Bar chart"
-            barAriaLabel={(e) => e.id + ": " + e.formattedValue + " in 방문수: " + e.indexValue}
+            barAriaLabel={(e) => e.id + ": " + e.formattedValue + " in url: " + e.indexValue}
         />
     );
 }

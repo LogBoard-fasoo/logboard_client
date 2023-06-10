@@ -1,29 +1,29 @@
 import api from "../../api";
 
-export function getTopVisitedUrlByCategory(category_id, startDate, endDate) {
+export function getTopVisitedUrlByCategory(id, startDate, endDate) {
     return api.get(`/visited-urls/category`, {
         params: {
-            category_id,
+            id,
             startDate,
             endDate,
         },
     });
 }
 
-export function getTopVisitedUrlByIndustry(industry_id, startDate, endDate) {
+export function getTopVisitedUrlByIndustry(id, startDate, endDate) {
     return api.get(`/visited-urls/category`, {
         params: {
-            industry_id,
+            id,
             startDate,
             endDate,
         },
     });
 }
 
-export function getTopVisitedUrlByTechnoology(technology_id_lst, startDate, endDate) {
+export function getTopVisitedUrlByTechnoology(idStr, startDate, endDate) {
     return api.get(`/visited-urls/category`, {
         params: {
-            technology_id_lst, // **TODO: key 이름 문의
+            idStr, // **TODO: key 이름 문의
             startDate,
             endDate,
         },

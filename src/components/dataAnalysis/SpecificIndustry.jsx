@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CustomDropdown from "../common/Dropdown";
 import { Box, Flex, Grid, Spacer } from "@chakra-ui/react";
 import HBarChart from "../common/HBarChart";
@@ -7,60 +7,40 @@ import { initialTimeline } from "../../recoil/atoms/specificIndustry";
 import { useRecoilState } from "recoil";
 import { getAllCategoryTypes, getAllIndsutryTypes, getAllTechnologyTypes } from "../../services/dataAnalysis/types";
 import { useQueries, useQuery } from "@tanstack/react-query";
+import {
+    getTopVisitedUrlByCategory,
+    getTopVisitedUrlByIndustry,
+    getTopVisitedUrlByTechnoology,
+} from "../../services/dataAnalysis/visitedUrls";
 
 const _data = [
     {
-        방문수: "AD",
-        전자: 4,
+        url: "AD",
+        count: 4,
     },
     {
-        방문수: "AE",
-        전자: 2,
+        url: "AE",
+        count: 2,
     },
     {
-        방문수: "AG",
-        전자: 10,
+        url: "AG",
+        count: 10,
     },
     {
-        방문수: "AI",
-        전자: 5,
+        url: "AI",
+        count: 5,
     },
     {
-        방문수: "AL",
-        전자: 8,
+        url: "AL",
+        count: 8,
     },
     {
-        방문수: "AM",
-        전자: 9,
+        url: "AM",
+        count: 9,
     },
 ];
 
 export default function SpecificIndustry() {
-    const results = useQueries({
-        queries: [
-            { queryKey: ["categories"], queryFn: getAllCategoryTypes, staleTime: Infinity },
-            { queryKey: ["industries"], queryFn: getAllIndsutryTypes, staleTime: Infinity },
-            { queryKey: ["technologies"], queryFn: getAllTechnologyTypes, staleTime: Infinity },
-        ],
-    });
-
-    const props = [
-        {
-            placeholder: "카테고리를 검색할 수 있어요.",
-            optionsDict: results[0].data?.data,
-            data: _data,
-        },
-        {
-            placeholder: "산업군을 검색할 수 있어요.",
-            optionsDict: results[1].data?.data,
-            data: _data,
-        },
-        {
-            placeholder: "제품 url을 검색할 수 있어요.",
-            optionsDict: results[2].data?.data,
-            data: _data,
-        },
-    ];
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
 
     return (
@@ -70,21 +50,84 @@ export default function SpecificIndustry() {
                 <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
             </Flex>
             <Grid templateColumns={{ base: "1fr", xl: "1fr 1fr 1fr" }} gap={4}>
-                {props.map((prop, idx) => (
-                    <SpecificIndustryBox key={idx} {...prop} />
-                ))}
+                <CategoryBox timeline={timeline} />
+                <IndustryBox timeline={timeline} />
+                <TechnologyBox timeline={timeline} />
             </Grid>
         </Box>
     );
 }
 
-function SpecificIndustryBox({ placeholder, optionsDict, data }) {
+function SpecificIndustryBox({ data, ...rest }) {
     return (
         <Box boxShadow="base" p="6" rounded="md" bg="white">
-            <CustomDropdown placeholder={placeholder} optionsDict={optionsDict} />
+            <CustomDropdown {...rest} />
             <Box style={{ width: "100%", height: "400px" }}>
-                <HBarChart data={data} />
+                {data.length > 0 ? <HBarChart data={data} /> : "검색 결과가 존재하지 않아요."}
             </Box>
         </Box>
     );
+}
+
+function CategoryBox(timeline) {
+    const [typeId, settypeId] = useState(null);
+    const [data, setdata] = useState([]);
+    const { startDate, endDate } = timeline.timeline;
+
+    const allTypes = useQuery({ queryKey: ["categories"], queryFn: getAllCategoryTypes, staleTime: Infinity });
+
+    useEffect(() => {
+        getTopVisitedUrlByCategory(typeId, startDate, endDate).then((res) => setdata(res.data));
+    }, [typeId]);
+
+    const prop = {
+        placeholder: "카테고리를 검색할 수 있어요.",
+        optionsDict: allTypes.data?.data,
+        onChangeFn: (e) => settypeId(parseInt(e.target.value)),
+        data: data,
+    };
+
+    return <SpecificIndustryBox {...prop} />;
+}
+
+function IndustryBox(timeline) {
+    const [typeId, settypeId] = useState(null);
+    const [data, setdata] = useState([]);
+    const { startDate, endDate } = timeline.timeline;
+
+    const allTypes = useQuery({ queryKey: ["industry"], queryFn: getAllIndsutryTypes, staleTime: Infinity });
+
+    useEffect(() => {
+        getTopVisitedUrlByIndustry(typeId, startDate, endDate).then((res) => setdata(res.data));
+    }, [typeId]);
+
+    const prop = {
+        placeholder: "산업군을 검색할 수 있어요.",
+        optionsDict: allTypes.data?.data,
+        onChangeFn: (e) => settypeId(parseInt(e.target.value)),
+        data: data,
+    };
+
+    return <SpecificIndustryBox {...prop} />;
+}
+
+function TechnologyBox(timeline) {
+    const [typeId, settypeId] = useState(null);
+    const [data, setdata] = useState([]);
+    const { startDate, endDate } = timeline.timeline;
+
+    const allTypes = useQuery({ queryKey: ["technology"], queryFn: getAllTechnologyTypes, staleTime: Infinity });
+
+    useEffect(() => {
+        getTopVisitedUrlByTechnoology([1, 2], startDate, endDate).then((res) => setdata(res.data)); // TODO
+    }, [typeId]);
+
+    const prop = {
+        placeholder: "사용 기술을 검색할 수 있어요.",
+        optionsDict: allTypes.data?.data,
+        onChangeFn: (e) => settypeId(parseInt(e.target.value)),
+        data: data,
+    };
+
+    return <SpecificIndustryBox {...prop} />;
 }
