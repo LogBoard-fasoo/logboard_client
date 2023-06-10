@@ -5,8 +5,8 @@ import HBarChart from "../common/HBarChart";
 import CustomDateRangePicker from "../common/Datepicker";
 import { initialTimeline } from "../../recoil/atoms/specificIndustry";
 import { useRecoilState } from "recoil";
-import { getAllCategoryTypes } from "../../services/dataAnalysis/types";
-import { useQuery } from "@tanstack/react-query";
+import { getAllCategoryTypes, getAllIndsutryTypes, getAllTechnologyTypes } from "../../services/dataAnalysis/types";
+import { useQueries, useQuery } from "@tanstack/react-query";
 
 const _data = [
     {
@@ -36,25 +36,30 @@ const _data = [
 ];
 
 export default function SpecificIndustry() {
-    const { data } = useQuery("categories", getAllCategoryTypes, {
-        refetchOnWindowFocus: false, // 완료 후 실행할 함수
-        retry: 1, // 실패 시 1번 재호출
-        onSuccess: (data) => {
-            console.log(data);
-        },
-        onError: (e) => {
-            console.log(e.message);
-        },
+    const results = useQueries({
+        queries: [
+            { queryKey: ["categories"], queryFn: getAllCategoryTypes, staleTime: Infinity },
+            { queryKey: ["industries"], queryFn: getAllIndsutryTypes, staleTime: Infinity },
+            { queryKey: ["technologies"], queryFn: getAllTechnologyTypes, staleTime: Infinity },
+        ],
     });
 
-    useEffect(() => {
-        console.log(data);
-    }, [data]);
-
     const props = [
-        { placeholder: "카테고리를 검색할 수 있어요.", optionsDict: { 1: "전자", 2: "음식" }, data: _data },
-        { placeholder: "산업군을 검색할 수 있어요.", optionsDict: { 1: "전자", 2: "음식" }, data: _data },
-        { placeholder: "제품 url을 검색할 수 있어요.", optionsDict: { 1: "전자", 2: "음식" }, data: _data },
+        {
+            placeholder: "카테고리를 검색할 수 있어요.",
+            optionsDict: results[0].data?.data,
+            data: _data,
+        },
+        {
+            placeholder: "산업군을 검색할 수 있어요.",
+            optionsDict: results[1].data?.data,
+            data: _data,
+        },
+        {
+            placeholder: "제품 url을 검색할 수 있어요.",
+            optionsDict: results[2].data?.data,
+            data: _data,
+        },
     ];
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
 
