@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomDropdown from "../common/Dropdown";
 import { Box, Flex, Grid, Spacer } from "@chakra-ui/react";
 import HBarChart from "../common/HBarChart";
 import CustomDateRangePicker from "../common/Datepicker";
 import { initialTimeline } from "../../recoil/atoms/specificIndustry";
 import { useRecoilState } from "recoil";
+import { getAllCategoryTypes } from "../../services/dataAnalysis/types";
+import { useQuery } from "@tanstack/react-query";
 
-const data = [
+const _data = [
     {
         방문수: "AD",
         전자: 4,
@@ -34,10 +36,25 @@ const data = [
 ];
 
 export default function SpecificIndustry() {
+    const { data } = useQuery("categories", getAllCategoryTypes, {
+        refetchOnWindowFocus: false, // 완료 후 실행할 함수
+        retry: 1, // 실패 시 1번 재호출
+        onSuccess: (data) => {
+            console.log(data);
+        },
+        onError: (e) => {
+            console.log(e.message);
+        },
+    });
+
+    useEffect(() => {
+        console.log(data);
+    }, [data]);
+
     const props = [
-        { placeholder: "카테고리를 검색할 수 있어요.", optionsDict: { 1: "전자", 2: "음식" }, data: data },
-        { placeholder: "산업군을 검색할 수 있어요.", optionsDict: { 1: "전자", 2: "음식" }, data: data },
-        { placeholder: "제품 url을 검색할 수 있어요.", optionsDict: { 1: "전자", 2: "음식" }, data: data },
+        { placeholder: "카테고리를 검색할 수 있어요.", optionsDict: { 1: "전자", 2: "음식" }, data: _data },
+        { placeholder: "산업군을 검색할 수 있어요.", optionsDict: { 1: "전자", 2: "음식" }, data: _data },
+        { placeholder: "제품 url을 검색할 수 있어요.", optionsDict: { 1: "전자", 2: "음식" }, data: _data },
     ];
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
 
