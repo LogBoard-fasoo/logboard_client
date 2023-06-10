@@ -5,6 +5,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { TextField } from "@mui/material";
 import styled from "@emotion/styled";
+import dayjs from "dayjs";
 
 export default function CustomDateRangePicker({ timeline, setTimeline }) {
     const { startDate, endDate } = timeline;
@@ -35,7 +36,7 @@ export default function CustomDateRangePicker({ timeline, setTimeline }) {
         <ThemeProvider theme={theme}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePickerStyle
-                    value={startDate}
+                    value={dayjs(startDate)}
                     renderInput={(params) => <TextField {...params} />}
                     onChange={handleStartDateChange}
                     label="시작일"
@@ -43,7 +44,7 @@ export default function CustomDateRangePicker({ timeline, setTimeline }) {
                 />
 
                 <DatePickerStyle
-                    value={endDate}
+                    value={dayjs(endDate)}
                     renderInput={(params) => <TextField {...params} />}
                     onChange={handleEndDateChange}
                     label="종료일"

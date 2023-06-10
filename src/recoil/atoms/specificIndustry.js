@@ -6,6 +6,6 @@ const initialTimelineState = {
 };
 
 export const initialTimeline = atom({
-    key: "initialTimeline",
+    key: "initialTimelineSpecificIndustry",
     default: initialTimelineState,
 });
