@@ -17,59 +17,61 @@ import {
     Wrap,
     HStack,
     Textarea,
+    Input,
 } from "@chakra-ui/react";
 import MessageTypeRadioGroup from "./MessageTypeRadioGroup";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { CustomDatePicker } from "../common/Datepicker";
+import { motion } from "framer-motion";
 
 const data = [
     {
         ipAddress: "168.92.10.201",
         cname: "Pana",
         messageType: "Company",
-        message: 180,
+        message: "SAST 제품에 관심이 있으신가요?",
         validDate: 180,
     },
     {
         ipAddress: "168.92.40.201",
         cname: "Fasoo",
         messageType: "Company",
-        message: 180,
+        message: "",
         validDate: 180,
     },
     {
         ipAddress: "168.92.10.201",
         cname: "Sparrow",
         messageType: "Company",
-        message: 180,
+        message: "",
         validDate: 180,
     },
     {
         ipAddress: "168.92.20.201",
         cname: "SK",
         messageType: "Company",
-        message: 180,
+        message: "",
         validDate: 180,
     },
     {
         ipAddress: "168.92.30.201",
         cname: "CJ",
         messageType: "Company",
-        message: 180,
+        message: "",
         validDate: 180,
     },
     {
         ipAddress: "168.92.30.201",
         cname: "CJ",
         messageType: "Company",
-        message: 180,
+        message: "",
         validDate: 180,
     },
     {
         ipAddress: "168.92.30.201",
         cname: "CJ",
         messageType: "Company",
-        message: 180,
+        message: "",
         validDate: 180,
     },
 ];
@@ -97,6 +99,14 @@ const cnames = [
     },
 ];
 
+function SmoothTransition({ children }) {
+    return (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+            {children}
+        </motion.div>
+    );
+}
+
 export default function IpMappingTable() {
     const [openRow, setOpenRow] = useState(null);
 
@@ -116,58 +126,66 @@ export default function IpMappingTable() {
                 </Thead>
                 <Tbody>
                     {data.map((company, index) => {
+                        const isDisabled = openRow !== index;
                         return (
                             <>
                                 <Tr key={Math.random().toString()}>
                                     <Td>
-                                        &nbsp;
-                                        <HStack
-                                            onClick={
-                                                openRow === index ? () => setOpenRow(null) : () => setOpenRow(index)
-                                            }
-                                        >
+                                        <HStack onClick={isDisabled ? () => setOpenRow(index) : () => setOpenRow(null)}>
                                             <small>{index + 1}</small>
                                             <Text as="b" cursor="pointer" color="text_grey">
                                                 {company.ipAddress}
                                             </Text>
-                                            {openRow === index ? <FiChevronUp /> : <FiChevronDown />}
+                                            {isDisabled ? <FiChevronDown /> : <FiChevronUp />}
                                         </HStack>
                                     </Td>
                                     <Td>
                                         <Link rel="noreferrer" target="_blank">
-                                            {company.cname}
+                                            <Input
+                                                disabled={isDisabled}
+                                                placeholder="유추기업명을 입력해주세요."
+                                                value={company.cname}
+                                            />
                                         </Link>
                                     </Td>
                                     <Td>
-                                        <MessageTypeRadioGroup />
+                                        <MessageTypeRadioGroup isDisabled={isDisabled} />
                                     </Td>
                                     <Td>
-                                        <Textarea placeholder="커스텀 메시지를 작성해주세요." vaue={company.message} />
+                                        <Textarea
+                                            disabled={isDisabled}
+                                            placeholder="커스텀 메시지를 작성해주세요."
+                                            value={company.message}
+                                        />
                                     </Td>
                                     <Td>
-                                        <CustomDatePicker />
+                                        <CustomDatePicker isDisabled={isDisabled} />
                                     </Td>
                                     <Td isNumeric>
-                                        <Button colorScheme="blue">저장</Button>
+                                        <Button isDisabled={isDisabled} colorScheme="blue">
+                                            저장
+                                        </Button>
                                     </Td>
                                 </Tr>
-                                {openRow === index ? (
+                                {!isDisabled ? (
                                     <Tr key={Math.random().toString()}>
-                                        <Td colspan="7">
-                                            <small>의심 매칭 기업</small>
-                                            <Wrap>
-                                                {cnames.map((cname, index) => (
-                                                    <Card variant="elevated" key={index}>
-                                                        <CardHeader>
-                                                            <Heading size="md">{cname.cname}</Heading>
-                                                        </CardHeader>
-                                                        <CardBody>
-                                                            <Text>도메인: {cname.domain}</Text>
-                                                            <Text>직원규모: {cname.employeeRange}</Text>
-                                                        </CardBody>
-                                                    </Card>
-                                                ))}
-                                            </Wrap>
+                                        <Td colSpan="7">
+                                            <SmoothTransition>
+                                                <small>의심 매칭 기업</small>
+                                                <Wrap>
+                                                    {cnames.map((cname, index) => (
+                                                        <Card variant="elevated" key={index}>
+                                                            <CardHeader>
+                                                                <Heading size="md">{cname.cname}</Heading>
+                                                            </CardHeader>
+                                                            <CardBody>
+                                                                <Text>도메인: {cname.domain}</Text>
+                                                                <Text>직원규모: {cname.employeeRange}</Text>
+                                                            </CardBody>
+                                                        </Card>
+                                                    ))}
+                                                </Wrap>
+                                            </SmoothTransition>
                                         </Td>
                                     </Tr>
                                 ) : null}

@@ -8,7 +8,7 @@ import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import { formatDate } from "../utils/formatDate";
 
-export function CustomDatePicker({ setTimeline }) {
+export function CustomDatePicker({ isDisabled, setTimeline }) {
     const theme = createTheme();
 
     return (
@@ -18,6 +18,7 @@ export function CustomDatePicker({ setTimeline }) {
                     renderInput={(params) => <TextField {...params} />}
                     onChange={setTimeline}
                     label="유효일"
+                    disabled={isDisabled}
                 />
             </LocalizationProvider>
         </ThemeProvider>
