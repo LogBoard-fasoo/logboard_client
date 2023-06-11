@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CustomDropdown from "../common/Dropdown";
-import { Box, Flex, Grid, Spacer } from "@chakra-ui/react";
+import { Box, Flex, Grid, Image, Spacer, Text } from "@chakra-ui/react";
 import HBarChart from "../common/HBarChart";
 import CustomDateRangePicker from "../common/Datepicker";
 import { initialTimeline } from "../../recoil/atoms/specificIndustry";
@@ -13,6 +13,7 @@ import {
     getTopVisitedUrlByTechnoology,
 } from "../../services/dataAnalysis/visitedUrls";
 import { formatDate } from "../utils/formatDate";
+import { Images } from "../../assets/images";
 
 // const _data = [
 //     {
@@ -64,7 +65,15 @@ function SpecificIndustryBox({ data, ...rest }) {
         <Box boxShadow="base" p="6" rounded="md" bg="white">
             <CustomDropdown {...rest} />
             <Box style={{ width: "100%", height: "400px" }}>
-                {data.length > 0 ? <HBarChart data={data} /> : "검색 결과가 존재하지 않아요."}
+                {data.length > 0 ? (
+                    <HBarChart data={data} />
+                ) : (
+                    <Flex flexDirection="column" justifyContent="center" alignItems="center" w="100%" h="100%">
+                        <Image src={Images.NoResult} alt="No result" mb={2} />
+                        <Text>검색 결과가 존재하지 않아요.</Text>
+                        <small>다른 기간 또는 필터를 선택해주세요.</small>
+                    </Flex>
+                )}
             </Box>
         </Box>
     );
