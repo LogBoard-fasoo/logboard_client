@@ -8,6 +8,22 @@ import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import { formatDate } from "../utils/formatDate";
 
+export function CustomDatePicker({ setTimeline }) {
+    const theme = createTheme();
+
+    return (
+        <ThemeProvider theme={theme}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePickerStyle
+                    renderInput={(params) => <TextField {...params} />}
+                    onChange={setTimeline}
+                    label="유효일"
+                />
+            </LocalizationProvider>
+        </ThemeProvider>
+    );
+}
+
 export default function CustomDateRangePicker({ timeline, setTimeline }) {
     const { startDate, endDate } = timeline;
 

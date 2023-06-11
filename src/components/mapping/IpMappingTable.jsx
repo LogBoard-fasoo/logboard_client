@@ -16,9 +16,11 @@ import {
     CardBody,
     Wrap,
     HStack,
+    Textarea,
 } from "@chakra-ui/react";
 import MessageTypeRadioGroup from "./MessageTypeRadioGroup";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { CustomDatePicker } from "../common/Datepicker";
 
 const data = [
     {
@@ -139,8 +141,12 @@ export default function IpMappingTable() {
                                     <Td>
                                         <MessageTypeRadioGroup />
                                     </Td>
-                                    <Td>{company.message}</Td>
-                                    <Td>{company.validDate}</Td>
+                                    <Td>
+                                        <Textarea placeholder="커스텀 메시지를 작성해주세요." vaue={company.message} />
+                                    </Td>
+                                    <Td>
+                                        <CustomDatePicker />
+                                    </Td>
                                     <Td isNumeric>
                                         <Button colorScheme="blue">저장</Button>
                                     </Td>
