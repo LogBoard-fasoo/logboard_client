@@ -11,6 +11,7 @@ Mapping 페이지 & Data Analysis 페이지.
 -   [x] 드롭다운 (placeholder, {k: v})
 -   [x] 툴팁 (내용)
 -   [x] Searchable dropdown (placeholder, {k:v})
+-   [ ] 기업정보 card
 
 -   src/components/layout
 -   [x] 사이드바
@@ -22,3 +23,6 @@ Mapping 페이지 & Data Analysis 페이지.
 -   [x] 트렌트 그래프
 
 -   src/components/ip-mapping
+-   [x] Radio button group
+-   [ ] IP table
+-   [ ] 유추 기업 container

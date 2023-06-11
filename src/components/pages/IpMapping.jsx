@@ -1,10 +1,16 @@
 import React from "react";
 import Sidebar from "../layout/Sidebar";
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Box, Flex, HStack, Heading, Spacer } from "@chakra-ui/react";
 import { FiMessageCircle } from "react-icons/fi";
 import IpMappingTable from "../mapping/IpMappingTable";
+import CustomDateRangePicker from "../common/Datepicker";
+import { initialMappingState } from "../../recoil/atoms/ipMapping";
+import { useRecoilState } from "recoil";
+import CustomRadioGroup from "../mapping/RadioGroup";
 
 function Mapping() {
+    const [ipMappingState, setIpMappingState] = useRecoilState(initialMappingState);
+
     return (
         <Sidebar>
             <Box h="100%" p="10">
@@ -18,6 +24,11 @@ function Mapping() {
                 </Flex>
                 <small>IP별 커스텀 팝업 메시지를 작성할 수 있는 페이지입니다.</small>
                 <Box bg="gray.50" borderRadius="xl" p={6} boxShadow="base" rounded="md">
+                    <HStack>
+                        <CustomRadioGroup />
+                        <Spacer />
+                        <CustomDateRangePicker timeline={ipMappingState} setTimeline={setIpMappingState} />
+                    </HStack>
                     <IpMappingTable />
                 </Box>
             </Box>

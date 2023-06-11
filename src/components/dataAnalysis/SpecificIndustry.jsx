@@ -6,7 +6,7 @@ import CustomDateRangePicker from "../common/Datepicker";
 import { initialTimeline } from "../../recoil/atoms/specificIndustry";
 import { useRecoilState } from "recoil";
 import { getAllCategoryTypes, getAllIndsutryTypes, getAllTechnologyTypes } from "../../services/dataAnalysis/types";
-import { useQueries, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
     getTopVisitedUrlByCategory,
     getTopVisitedUrlByIndustry,
@@ -14,32 +14,32 @@ import {
 } from "../../services/dataAnalysis/visitedUrls";
 import { formatDate } from "../utils/formatDate";
 
-const _data = [
-    {
-        url: "AD",
-        count: 4,
-    },
-    {
-        url: "AE",
-        count: 2,
-    },
-    {
-        url: "AG",
-        count: 10,
-    },
-    {
-        url: "AI",
-        count: 5,
-    },
-    {
-        url: "AL",
-        count: 8,
-    },
-    {
-        url: "AM",
-        count: 9,
-    },
-];
+// const _data = [
+//     {
+//         url: "AD",
+//         count: 4,
+//     },
+//     {
+//         url: "AE",
+//         count: 2,
+//     },
+//     {
+//         url: "AG",
+//         count: 10,
+//     },
+//     {
+//         url: "AI",
+//         count: 5,
+//     },
+//     {
+//         url: "AL",
+//         count: 8,
+//     },
+//     {
+//         url: "AM",
+//         count: 9,
+//     },
+// ];
 
 export default function SpecificIndustry() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
