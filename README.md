@@ -27,3 +27,4 @@ Mapping 페이지 & Data Analysis 페이지.
 -   [x] Radio button group
 -   [ ] IP table
 -   [ ] 유추 기업 container
+-   [ ] mapping된 ip / message가 있는 ip 필터 기능 추가 
