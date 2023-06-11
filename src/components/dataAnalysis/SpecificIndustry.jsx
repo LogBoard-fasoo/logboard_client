@@ -12,6 +12,7 @@ import {
     getTopVisitedUrlByIndustry,
     getTopVisitedUrlByTechnoology,
 } from "../../services/dataAnalysis/visitedUrls";
+import { formatDate } from "../utils/formatDate";
 
 const _data = [
     {
@@ -77,8 +78,8 @@ function CategoryBox(timeline) {
     const allTypes = useQuery({ queryKey: ["categories"], queryFn: getAllCategoryTypes, staleTime: Infinity });
 
     useEffect(() => {
-        getTopVisitedUrlByCategory(typeId, startDate, endDate).then((res) => setdata(res.data));
-    }, [typeId]);
+        getTopVisitedUrlByCategory(typeId, formatDate(startDate), formatDate(endDate)).then((res) => setdata(res.data));
+    }, [typeId, startDate, endDate]);
 
     const prop = {
         placeholder: "카테고리를 검색할 수 있어요.",
@@ -98,8 +99,8 @@ function IndustryBox(timeline) {
     const allTypes = useQuery({ queryKey: ["industry"], queryFn: getAllIndsutryTypes, staleTime: Infinity });
 
     useEffect(() => {
-        getTopVisitedUrlByIndustry(typeId, startDate, endDate).then((res) => setdata(res.data));
-    }, [typeId]);
+        getTopVisitedUrlByIndustry(typeId, formatDate(startDate), formatDate(endDate)).then((res) => setdata(res.data));
+    }, [typeId, startDate, endDate]);
 
     const prop = {
         placeholder: "산업군을 검색할 수 있어요.",
@@ -119,8 +120,10 @@ function TechnologyBox(timeline) {
     const allTypes = useQuery({ queryKey: ["technology"], queryFn: getAllTechnologyTypes, staleTime: Infinity });
 
     useEffect(() => {
-        getTopVisitedUrlByTechnoology([1, 2], startDate, endDate).then((res) => setdata(res.data)); // TODO
-    }, [typeId]);
+        getTopVisitedUrlByTechnoology([1, 2], formatDate(startDate), formatDate(endDate)).then((res) =>
+            setdata(res.data),
+        ); // TODO
+    }, [typeId, startDate, endDate]);
 
     const prop = {
         placeholder: "사용 기술을 검색할 수 있어요.",

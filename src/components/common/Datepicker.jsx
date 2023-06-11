@@ -6,12 +6,13 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { TextField } from "@mui/material";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
+import { formatDate } from "../utils/formatDate";
 
 export default function CustomDateRangePicker({ timeline, setTimeline }) {
     const { startDate, endDate } = timeline;
 
     const handleStartDateChange = (date) => {
-        setTimeline((timeline) => ({ ...timeline, startDate: date }));
+        setTimeline((timeline) => ({ ...timeline, startDate: date instanceof Date ? formatDate(date) : date }));
         if (endDate && date > endDate) {
             setTimeline((timeline) => ({ ...timeline, startDate: null }));
         }
@@ -21,7 +22,7 @@ export default function CustomDateRangePicker({ timeline, setTimeline }) {
         if (startDate && date < startDate) {
             setTimeline((timeline) => ({ ...timeline, endDate: null }));
         } else {
-            setTimeline((timeline) => ({ ...timeline, endDate: date }));
+            setTimeline((timeline) => ({ ...timeline, endDate: date instanceof Date ? formatDate(date) : date }));
         }
     };
 
