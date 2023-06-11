@@ -11,6 +11,7 @@ Mapping 페이지 & Data Analysis 페이지.
 -   [x] 드롭다운 (placeholder, {k: v})
 -   [x] 툴팁 (내용)
 -   [x] Searchable dropdown (placeholder, {k:v})
+-   [x] Radio group
 -   [ ] 기업정보 card
 
 -   src/components/layout

@@ -6,7 +6,7 @@ import IpMappingTable from "../mapping/IpMappingTable";
 import CustomDateRangePicker from "../common/Datepicker";
 import { initialMappingState } from "../../recoil/atoms/ipMapping";
 import { useRecoilState } from "recoil";
-import CustomRadioGroup from "../mapping/RadioGroup";
+import CustomRadioGroup from "../mapping/IpCustomRadioGroup";
 
 function Mapping() {
     const [ipMappingState, setIpMappingState] = useRecoilState(initialMappingState);
