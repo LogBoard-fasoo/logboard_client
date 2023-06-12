@@ -10,7 +10,7 @@ export default function SearchableDropdown({ isMulti = false, selectName, option
                 name={selectName}
                 options={options}
                 placeholder={placeholder}
-                onChange={(e) => onChangeFn(e?.value)}
+                onChange={(e) => onChangeFn(e)}
             />
         </FormControl>
     );

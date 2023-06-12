@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import GraphChart from "../common/GraphChart";
-import { Box, Flex, Grid, HStack, Heading, Spacer } from "@chakra-ui/react";
+import {
+    Accordion,
+    AccordionButton,
+    AccordionIcon,
+    AccordionItem,
+    AccordionPanel,
+    Box,
+    Flex,
+    Grid,
+    HStack,
+    Heading,
+    Spacer,
+} from "@chakra-ui/react";
 import SearchableDropdown from "../common/SearchableDropdown";
 import PieChart from "../common/PieChart";
 import CustomDateRangePicker from "../common/Datepicker";
@@ -93,6 +105,9 @@ const data1 = [
 
 export default function SpecificCompany() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
+    const [selectedCompanies, setSelectedCompanies] = useState([]);
+
+    console.log("selectedCompanies", selectedCompanies);
 
     const companies = [
         { value: 0, label: "Fasoo" },
@@ -108,7 +123,9 @@ export default function SpecificCompany() {
         selectName: "companies",
         options: companies,
         placeholder: "기업을 검색할 수 있어요.",
+        onChangeFn: (e) => setSelectedCompanies(e),
     };
+
     return (
         <Box>
             <Flex>
@@ -118,9 +135,31 @@ export default function SpecificCompany() {
             <Grid templateColumns={{ base: "1fr" }} gap={4}>
                 <SearchableDropdown {...dropDownProps} />
                 <GraphBox data={data1} />
-                <PieBox />
+                {selectedCompanies.map((c) => (
+                    <CompanyPieBox key={c.index} cname={c.label} data={data} />
+                ))}
             </Grid>
         </Box>
+    );
+}
+
+function CompanyPieBox({ cname, data }) {
+    return (
+        <Accordion allowMultiple>
+            <AccordionItem>
+                <h2>
+                    <AccordionButton px={0}>
+                        <Box as="span" flex="1" textAlign="left">
+                            <Heading fontSize={"xl"}># {cname}&apos;s report</Heading>
+                        </Box>
+                        <AccordionIcon />
+                    </AccordionButton>
+                </h2>
+                <AccordionPanel px={0}>
+                    <PieBox data={data} />
+                </AccordionPanel>
+            </AccordionItem>
+        </Accordion>
     );
 }
 
@@ -135,7 +174,7 @@ function GraphBox({ data }) {
     );
 }
 
-function PieBox() {
+function PieBox({ data }) {
     return (
         <HStack>
             <Box style={{ width: "100%", height: "500px" }} bg="white" boxShadow="base" p="6" rounded="md">

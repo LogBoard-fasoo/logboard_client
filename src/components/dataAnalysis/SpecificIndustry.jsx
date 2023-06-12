@@ -75,7 +75,7 @@ function CategoryBox(timeline) {
         selectName: "categories",
         placeholder: "카테고리를 검색할 수 있어요.",
         options: allTypes.data?.data,
-        onChangeFn: (value) => settypeId(parseInt(value)),
+        onChangeFn: (e) => settypeId(parseInt(e?.value)),
         data: data,
     };
 
@@ -97,7 +97,7 @@ function IndustryBox(timeline) {
         selectName: "industries",
         placeholder: "산업군을 검색할 수 있어요.",
         options: allTypes.data?.data,
-        onChangeFn: (value) => settypeId(parseInt(value)),
+        onChangeFn: (e) => settypeId(parseInt(e?.value)),
         data: data,
     };
 
@@ -121,7 +121,7 @@ function TechnologyBox(timeline) {
         selectName: "technologies",
         placeholder: "사용 기술을 검색할 수 있어요.",
         options: allTypes.data?.data,
-        onChangeFn: (value) => settypeId(parseInt(value)),
+        onChangeFn: (e) => settypeId(parseInt(e?.value)),
         data: data,
     };
 
