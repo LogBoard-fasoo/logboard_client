@@ -19,6 +19,7 @@ import CustomDateRangePicker from "../common/Datepicker";
 import { initialTimeline } from "../../recoil/atoms/specificCompany";
 import { useRecoilState } from "recoil";
 import { getAllCompanies } from "../../services/dataAnalysis/types";
+import { getWeeklyTrendsByCompany } from "../../services/dataAnalysis/visitors";
 
 const data = [
     {
@@ -106,12 +107,18 @@ const data1 = [
 
 export default function SpecificCompany() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
+    const { startDate, endDate } = timeline;
     const [allCompanies, setAllCompanies] = useState([]);
     const [selectedCompanies, setSelectedCompanies] = useState([]);
+    const [companyTrends, setCompanyTrends] = useState([]);
 
     useEffect(() => {
         getAllCompanies().then((res) => setAllCompanies(res.data));
     }, []);
+
+    // useEffect(() => {
+    //     getWeeklyTrendsByCompany(selectedCompanies, startDate, endDate).then((res) => setCompanyTrends(res.data));
+    // }, [selectedCompanies, startDate, endDate]);
 
     const dropDownProps = {
         isMulti: true,

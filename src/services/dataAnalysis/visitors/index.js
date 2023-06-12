@@ -30,10 +30,20 @@ export function getCountsByTechnology(count, startDate, endDate) {
     });
 }
 
-export function getWeeklyTrendsByCompany(company_id, startDate, endDate) {
+export function getWeeklyTrendsByCompany(companyId, startDate, endDate) {
     return api.get(`/visitors/weekly-trends/company`, {
         params: {
-            company_id,
+            companyId,
+            startDate,
+            endDate,
+        },
+    });
+}
+
+export function getWeeklyTrendByUrl(url, startDate, endDate) {
+    return api.get(`/visitors/weekly-trends/URL`, {
+        params: {
+            url,
             startDate,
             endDate,
         },

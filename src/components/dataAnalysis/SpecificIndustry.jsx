@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Grid, Image, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, Heading, Image, Spacer, Text } from "@chakra-ui/react";
 import HBarChart from "../common/HBarChart";
 import CustomDateRangePicker from "../common/Datepicker";
 import { initialTimeline } from "../../recoil/atoms/specificIndustry";
@@ -72,6 +72,7 @@ function CategoryBox(timeline) {
     }, [typeId, startDate, endDate]);
 
     const prop = {
+        title: "Category",
         selectName: "categories",
         placeholder: "카테고리를 검색할 수 있어요.",
         options: allTypes.data?.data,
@@ -94,6 +95,7 @@ function IndustryBox(timeline) {
     }, [typeId, startDate, endDate]);
 
     const prop = {
+        title: "Industry",
         selectName: "industries",
         placeholder: "산업군을 검색할 수 있어요.",
         options: allTypes.data?.data,
@@ -117,6 +119,7 @@ function TechnologyBox(timeline) {
     }, [typeId, startDate, endDate]);
 
     const prop = {
+        title: "Technology",
         selectName: "technologies",
         placeholder: "사용 기술을 검색할 수 있어요.",
         options: allTypes.data?.data,
@@ -128,9 +131,12 @@ function TechnologyBox(timeline) {
     return <SpecificIndustryBox {...prop} />;
 }
 
-function SpecificIndustryBox({ data, ...rest }) {
+function SpecificIndustryBox({ data, title, ...rest }) {
     return (
         <Box boxShadow="base" p="6" rounded="md" bg="white">
+            <Heading as="h4" fontSize="xl">
+                {title}
+            </Heading>
             <SearchableDropdown {...rest} />
             <Box style={{ width: "100%", height: "400px" }}>
                 {data.length > 0 ? (
