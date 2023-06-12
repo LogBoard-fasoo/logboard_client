@@ -24,7 +24,7 @@ export default function SummaryBox() {
                     </Box>
                     <AccordionIcon />
                 </AccordionButton>
-                <AccordionPanel p={0}>
+                <AccordionPanel px={0}>
                     <Card>
                         <CardBody>
                             <Stack divider={<StackDivider />} spacing="4">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import GraphChart from "../common/GraphChart";
 import { Box, Flex, Grid, Spacer } from "@chakra-ui/react";
 import CustomDateRangePicker from "../common/Datepicker";
@@ -69,6 +69,9 @@ const data = [
 
 export default function SpecificProduct() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
+    const [selectedUrl, setSelectedUrl] = useState(null);
+
+    console.log(selectedUrl);
 
     const urls = [
         { value: 0, label: "fasoo-sast" },
@@ -77,10 +80,10 @@ export default function SpecificProduct() {
     ];
 
     const dropDownProps = {
-        isMulti: false,
         selectName: "urls",
         options: urls,
         placeholder: "제품을 검색할 수 있어요.",
+        onChangeFn: (e) => setSelectedUrl(parseInt(e?.value)),
     };
 
     return (
@@ -91,7 +94,9 @@ export default function SpecificProduct() {
             </Flex>
             <Grid templateColumns={{ base: "1fr" }} gap={4}>
                 <SearchableDropdown {...dropDownProps} />
-                <GraphChart data={data} />
+                <Box style={{ width: "100%", height: "500px" }} bg="white" boxShadow="base" p="6" rounded="md">
+                    <GraphChart data={data} />
+                </Box>
             </Grid>
         </Box>
     );

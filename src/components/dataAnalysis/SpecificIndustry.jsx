@@ -123,6 +123,7 @@ function TechnologyBox(timeline) {
         options: allTypes.data?.data,
         onChangeFn: (e) => settypeId(parseInt(e?.value)),
         data: data,
+        isMulti: true,
     };
 
     return <SpecificIndustryBox {...prop} />;

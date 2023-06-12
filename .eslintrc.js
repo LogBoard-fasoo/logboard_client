@@ -12,7 +12,7 @@ module.exports = {
         },
     },
     plugins: ["react", "react-hooks"],
-    extends: ["eslint:recommended", "plugin:react/recommended", "plugin:react-hooks/recommended", "prettier"],
+    extends: ["plugin:react/recommended", "plugin:react-hooks/recommended", "prettier"],
     settings: {
         react: {
             version: "detect",

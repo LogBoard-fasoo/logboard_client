@@ -58,7 +58,7 @@ export default function DataAnalysis() {
                         </Button>
                     </Flex>
                 </Box>
-                <Stack>
+                <Stack gap={4}>
                     {containerProps.map(({ children, desc, ...rest }, idx) => (
                         <Container key={idx} {...rest} titleIcon={FiHash}>
                             <small>{desc}</small>

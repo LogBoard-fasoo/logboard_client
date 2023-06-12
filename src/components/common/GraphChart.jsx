@@ -1,8 +1,6 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 
-// TODO: 기업 여러개 선택 가능
-
 export default function GraphChart({ data }) {
     return (
         <ResponsiveLine
