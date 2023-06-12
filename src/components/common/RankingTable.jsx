@@ -46,7 +46,26 @@ export default function RankingTable({ timeline }) {
 
     return (
         <SmoothTransition>
-            <TableContainer borderRadius={7}>
+            <TableContainer
+                borderRadius={7}
+                h="500px"
+                overflowY="scroll"
+                css={{
+                    "&::-webkit-scrollbar": {
+                        width: "8px",
+                    },
+                    "&::-webkit-scrollbar-track": {
+                        background: "#F7FAFC",
+                    },
+                    "&::-webkit-scrollbar-thumb": {
+                        background: "#CBD5E0",
+                        borderRadius: "4px",
+                    },
+                    "&::-webkit-scrollbar-thumb:hover": {
+                        background: "#A0AEC0",
+                    },
+                }}
+            >
                 <Table size="md">
                     <Thead bg="blue.600">
                         <Tr>
