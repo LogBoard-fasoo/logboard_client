@@ -10,7 +10,6 @@ export default function SearchableDropdown({ isMulti = false, selectName, option
                 name={selectName}
                 options={options}
                 placeholder={placeholder}
-                closeMenuOnSelect={false}
                 onChange={onChangeFn}
             />
         </FormControl>

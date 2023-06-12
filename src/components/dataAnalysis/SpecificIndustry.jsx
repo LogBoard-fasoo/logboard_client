@@ -60,25 +60,6 @@ export default function SpecificIndustry() {
     );
 }
 
-function SpecificIndustryBox({ data, ...rest }) {
-    return (
-        <Box boxShadow="base" p="6" rounded="md" bg="white">
-            <CustomDropdown {...rest} />
-            <Box style={{ width: "100%", height: "400px" }}>
-                {data.length > 0 ? (
-                    <HBarChart data={data} />
-                ) : (
-                    <Flex flexDirection="column" justifyContent="center" alignItems="center" w="100%" h="100%">
-                        <Image src={Images.NoResult} alt="No result" mb={2} />
-                        <Text>검색 결과가 존재하지 않아요.</Text>
-                        <small>다른 기간 또는 필터를 선택해주세요.</small>
-                    </Flex>
-                )}
-            </Box>
-        </Box>
-    );
-}
-
 function CategoryBox(timeline) {
     const [typeId, settypeId] = useState(null);
     const [data, setdata] = useState([]);
@@ -93,8 +74,8 @@ function CategoryBox(timeline) {
     const prop = {
         selectName: "categories",
         placeholder: "카테고리를 검색할 수 있어요.",
-        optionsDict: allTypes.data?.data,
-        onChangeFn: (e) => settypeId(parseInt(e.target.value)),
+        options: allTypes.data?.data,
+        onChangeFn: (e) => settypeId(parseInt(e?.value)),
         data: data,
     };
 
@@ -115,8 +96,8 @@ function IndustryBox(timeline) {
     const prop = {
         selectName: "industries",
         placeholder: "산업군을 검색할 수 있어요.",
-        optionsDict: allTypes.data?.data,
-        onChangeFn: (e) => settypeId(parseInt(e.target.value)),
+        options: allTypes.data?.data,
+        onChangeFn: (e) => settypeId(parseInt(e?.value)),
         data: data,
     };
 
@@ -139,8 +120,8 @@ function TechnologyBox(timeline) {
     const prop = {
         selectName: "technologies",
         placeholder: "사용 기술을 검색할 수 있어요.",
-        optionsDict: allTypes.data?.data,
-        onChangeFn: (e) => settypeId(parseInt(e.target.value)),
+        options: allTypes.data?.data,
+        onChangeFn: (e) => settypeId(parseInt(e?.value)),
         data: data,
         isMulti: true,
     };
