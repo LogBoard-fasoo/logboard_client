@@ -1,42 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Flex, Grid, Heading, Spacer } from "@chakra-ui/react";
 import PieChart from "../common/PieChart";
 import CustomTooltip from "../common/Tooltip";
 import CustomDateRangePicker from "../common/Datepicker";
 import { useRecoilState } from "recoil";
 import { initialTimeline } from "../../recoil/atoms/generalIndustry";
+import { getCountsByCategory, getCountsByIndustry, getCountsByTechnology } from "../../services/dataAnalysis/visitors";
 
-const data = [
-    {
-        id: "elixir",
-        value: 51,
-    },
-    {
-        id: "java",
-        value: 264,
-    },
-    {
-        id: "php",
-        value: 112,
-    },
-    {
-        id: "haskell",
-        value: 534,
-    },
-    {
-        id: "c",
-        value: 526,
-    },
-];
+// const data = [
+//     {
+//         id: "elixir",
+//         value: 51,
+//     },
+//     {
+//         id: "java",
+//         value: 264,
+//     },
+//     {
+//         id: "php",
+//         value: 112,
+//     },
+//     {
+//         id: "haskell",
+//         value: 534,
+//     },
+//     {
+//         id: "c",
+//         value: 526,
+//     },
+// ];
 
 export default function GeneralIndustry() {
+    const [categories, setCategories] = useState([]);
+    const [industries, setIndustries] = useState([]);
+    const [technologies, setTechnologies] = useState([]);
+    const [timeline, setTimeline] = useRecoilState(initialTimeline);
+    const { startDate, endDate } = timeline;
+
     const props = [
-        { title: "카테고리", data: data },
-        { title: "산업군", data: data },
-        { title: "사용기술", data: data },
+        { title: "카테고리", data: categories },
+        { title: "산업군", data: industries },
+        { title: "사용기술", data: technologies },
     ];
 
-    const [timeline, setTimeline] = useRecoilState(initialTimeline);
+    useEffect(() => {
+        const itemCount = 5;
+        getCountsByCategory(itemCount, startDate, endDate).then((res) => setCategories(res.data));
+        getCountsByIndustry(itemCount, startDate, endDate).then((res) => setIndustries(res.data));
+        getCountsByTechnology(itemCount, startDate, endDate).then((res) => setTechnologies(res.data));
+    }, [startDate, endDate]);
 
     return (
         <Box>

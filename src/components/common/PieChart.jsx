@@ -10,6 +10,7 @@ export default function PieChart({ data }) {
             padAngle={0.7}
             cornerRadius={3}
             activeOuterRadiusOffset={8}
+            colors={{ scheme: "set3" }}
             borderWidth={1}
             borderColor={{
                 from: "color",
