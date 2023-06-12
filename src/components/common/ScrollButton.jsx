@@ -1,27 +1,34 @@
-import React, { useState, useEffect } from "react";
-import { FiChevronUp } from "react-icons/fi";
+import React, { useEffect, useState } from "react";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { motion } from "framer-motion";
 
-export default function ScrollToTopButton() {
-    const [isVisible, setIsVisible] = useState(false);
-
-    const handleScroll = () => {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-        const scrollHeight = document.documentElement.scrollHeight;
-
-        if (scrollTop > 0.2 * scrollHeight && scrollTop + windowHeight < scrollHeight) {
-            setIsVisible(true);
-        } else {
-            setIsVisible(false);
-        }
-    };
+export default function ScrollButton() {
+    const [moveToTop, setMoveToTop] = useState(true);
 
     function scrollToTop() {
         window.scrollTo({
             top: 0,
             behavior: "smooth",
         });
+    }
+
+    function scrollToBottom() {
+        window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: "smooth",
+        });
+    }
+
+    function handleScroll() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        const scrollHeight = document.documentElement.scrollHeight;
+
+        if (scrollTop >= 0.4 * scrollHeight && scrollTop + windowHeight <= scrollHeight) {
+            setMoveToTop(false);
+        } else {
+            setMoveToTop(true);
+        }
     }
 
     useEffect(() => {
@@ -35,8 +42,7 @@ export default function ScrollToTopButton() {
         <motion.button
             whileHover={{ scale: 1.1, opacity: "100%" }}
             whileTap={{ scale: 0.9 }}
-            className={`scroll-to-top-button ${isVisible ? "visible" : ""}`}
-            onClick={scrollToTop}
+            onClick={moveToTop ? scrollToBottom : scrollToTop}
             style={{
                 backgroundColor: "#2B6CB0",
                 opacity: "40%",
@@ -46,9 +52,10 @@ export default function ScrollToTopButton() {
                 position: "fixed",
                 right: "5vh",
                 bottom: "5vh",
+                zIndex: 5,
             }}
         >
-            <FiChevronUp size={40} />
+            {moveToTop ? <FiChevronDown size={40} /> : <FiChevronUp size={40} />}
         </motion.button>
     );
 }

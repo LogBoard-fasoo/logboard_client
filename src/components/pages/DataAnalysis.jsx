@@ -9,7 +9,7 @@ import TopCompanies from "../dataAnalysis/TopCompanies";
 import SpecificCompany from "../dataAnalysis/SpecificCompany";
 import SpecificProduct from "../dataAnalysis/SpecificProduct";
 import SummaryBox from "../dataAnalysis/SummaryBox";
-import ScrollToTopButton from "../common/ScrollToTopButton";
+import ScrollButton from "../common/ScrollButton";
 
 export default function DataAnalysis() {
     const containerProps = [
@@ -67,7 +67,7 @@ export default function DataAnalysis() {
                         </Container>
                     ))}
                 </Stack>
-                <ScrollToTopButton />
+                <ScrollButton />
             </Box>
         </Sidebar>
     );
