@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GraphChart from "../common/GraphChart";
 import {
     Accordion,
@@ -18,6 +18,7 @@ import PieChart from "../common/PieChart";
 import CustomDateRangePicker from "../common/Datepicker";
 import { initialTimeline } from "../../recoil/atoms/specificCompany";
 import { useRecoilState } from "recoil";
+import { getAllCompanies } from "../../services/dataAnalysis/types";
 
 const data = [
     {
@@ -105,23 +106,17 @@ const data1 = [
 
 export default function SpecificCompany() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
+    const [allCompanies, setAllCompanies] = useState([]);
     const [selectedCompanies, setSelectedCompanies] = useState([]);
 
-    console.log("selectedCompanies", selectedCompanies);
-
-    const companies = [
-        { value: 0, label: "Fasoo" },
-        { value: 1, label: "Sparrow" },
-        { value: 2, label: "Clearbit" },
-        { value: 3, label: "Amazon" },
-        { value: 4, label: "Google" },
-        { value: 5, label: "Naver" },
-    ];
+    useEffect(() => {
+        getAllCompanies().then((res) => setAllCompanies(res.data));
+    }, []);
 
     const dropDownProps = {
         isMulti: true,
         selectName: "companies",
-        options: companies,
+        options: allCompanies,
         placeholder: "기업을 검색할 수 있어요.",
         onChangeFn: (e) => setSelectedCompanies(e),
     };

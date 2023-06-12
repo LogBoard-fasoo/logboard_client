@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GraphChart from "../common/GraphChart";
 import { Box, Flex, Grid, Spacer } from "@chakra-ui/react";
 import CustomDateRangePicker from "../common/Datepicker";
 import { initialTimeline } from "../../recoil/atoms/specificProduct";
 import { useRecoilState } from "recoil";
 import SearchableDropdown from "../common/SearchableDropdown";
+import { getAllUrls } from "../../services/dataAnalysis/types";
 
 const data = [
     {
@@ -69,19 +70,16 @@ const data = [
 
 export default function SpecificProduct() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
+    const [allProducts, setAllProducts] = useState([]);
     const [selectedUrl, setSelectedUrl] = useState(null);
 
-    console.log(selectedUrl);
-
-    const urls = [
-        { value: 0, label: "fasoo-sast" },
-        { value: 1, label: "fasoo-drm" },
-        { value: 2, label: "fasoo-allinone" },
-    ];
+    useEffect(() => {
+        getAllUrls().then((res) => setAllProducts(res.data));
+    }, []);
 
     const dropDownProps = {
         selectName: "urls",
-        options: urls,
+        options: allProducts,
         placeholder: "제품을 검색할 수 있어요.",
         onChangeFn: (e) => setSelectedUrl(parseInt(e?.value)),
     };

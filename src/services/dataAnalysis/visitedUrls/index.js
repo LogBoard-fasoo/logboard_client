@@ -21,9 +21,9 @@ export function getTopVisitedUrlByIndustry(id, startDate, endDate) {
 }
 
 export function getTopVisitedUrlByTechnoology(idStr, startDate, endDate) {
-    return api.get(`/visited-urls/category`, {
+    return api.get(`/visited-urls/technology`, {
         params: {
-            idStr, // **TODO: key 이름 문의
+            idStr,
             startDate,
             endDate,
         },
