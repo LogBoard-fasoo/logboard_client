@@ -29,18 +29,11 @@ export default function CustomDateRangePicker({ timeline, setTimeline }) {
     const { startDate, endDate } = timeline;
 
     const handleStartDateChange = (date) => {
-        setTimeline((timeline) => ({ ...timeline, startDate: date instanceof Date ? formatDate(date) : date }));
-        if (endDate && date > endDate) {
-            setTimeline((timeline) => ({ ...timeline, startDate: null }));
-        }
+        setTimeline((timeline) => ({ ...timeline, startDate: formatDate(date) }));
     };
 
     const handleEndDateChange = (date) => {
-        if (startDate && date < startDate) {
-            setTimeline((timeline) => ({ ...timeline, endDate: null }));
-        } else {
-            setTimeline((timeline) => ({ ...timeline, endDate: date instanceof Date ? formatDate(date) : date }));
-        }
+        setTimeline((timeline) => ({ ...timeline, endDate: formatDate(date) }));
     };
 
     const shouldDisableDate = (date) => {
@@ -59,6 +52,7 @@ export default function CustomDateRangePicker({ timeline, setTimeline }) {
                     onChange={handleStartDateChange}
                     label="시작일"
                     shouldDisableDate={shouldDisableDate}
+                    maxDate={dayjs(endDate)}
                 />
 
                 <DatePickerStyle
@@ -67,7 +61,7 @@ export default function CustomDateRangePicker({ timeline, setTimeline }) {
                     onChange={handleEndDateChange}
                     label="종료일"
                     shouldDisableDate={shouldDisableDate}
-                    minDate={startDate}
+                    minDate={dayjs(startDate)}
                 />
             </LocalizationProvider>
         </ThemeProvider>

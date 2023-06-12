@@ -1,6 +1,6 @@
 export default function getDefaultTimeline() {
     const today = new Date();
-    const daysUntilPreviousFriday = (today.getDay() - 5 + 7) % 7; // 오늘부터 금요일까지 요일차
+    const daysUntilPreviousFriday = (today.getDay() - 6 + 7) % 7; // 오늘부터 금요일까지 요일차
 
     // 가장 가까운 과거 금요일
     const closestPreviousFriday = new Date(
@@ -15,11 +15,11 @@ export default function getDefaultTimeline() {
         closestPreviousFriday.getDate() - 14,
     );
 
-    // const defaultStartDate = previousFriday.toISOString().split("T")[0];
-    // const defaultEndDate = closestPreviousFriday.toISOString().split("T")[0];
+    const defaultStartDate = previousFriday.toISOString().split("T")[0];
+    const defaultEndDate = closestPreviousFriday.toISOString().split("T")[0];
 
-    const defaultStartDate = previousFriday;
-    const defaultEndDate = closestPreviousFriday;
+    // const defaultStartDate = previousFriday;
+    // const defaultEndDate = closestPreviousFriday;
 
     return [defaultStartDate, defaultEndDate];
 }

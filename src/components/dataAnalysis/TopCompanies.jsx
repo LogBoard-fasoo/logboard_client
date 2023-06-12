@@ -14,7 +14,7 @@ export default function TopCompanies() {
                 <Spacer />
                 <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
             </Flex>
-            <RankingTable />
+            <RankingTable timeline={timeline} />
         </Box>
     );
 }

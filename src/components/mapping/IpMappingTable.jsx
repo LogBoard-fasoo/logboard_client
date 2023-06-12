@@ -22,7 +22,7 @@ import {
 import MessageTypeRadioGroup from "./MessageTypeRadioGroup";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { CustomDatePicker } from "../common/Datepicker";
-import { motion } from "framer-motion";
+import SmoothTransition from "../../styles/animate/SmoothTransition";
 
 const data = [
     {
@@ -98,14 +98,6 @@ const cnames = [
         employeeRange: "200k-500k",
     },
 ];
-
-function SmoothTransition({ children }) {
-    return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
-            {children}
-        </motion.div>
-    );
-}
 
 export default function IpMappingTable() {
     const [openRow, setOpenRow] = useState(null);
