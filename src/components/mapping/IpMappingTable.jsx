@@ -121,7 +121,7 @@ export default function IpMappingTable() {
                         const isDisabled = openRow !== index;
                         return (
                             <>
-                                <Tr key={Math.random().toString()}>
+                                <Tr key={Math.random().toString() + index}>
                                     <Td>
                                         <HStack onClick={isDisabled ? () => setOpenRow(index) : () => setOpenRow(null)}>
                                             <small>{index + 1}</small>

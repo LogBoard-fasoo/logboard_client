@@ -72,6 +72,7 @@ export default function RankingTable({ timeline }) {
                             <Th color="white">Company</Th>
                             <Th color="white">Domain</Th>
                             <Th color="white">Country</Th>
+                            <Th color="white">Industry</Th>
                             <Th color="white" isNumeric>
                                 Counts
                             </Th>
@@ -94,6 +95,7 @@ export default function RankingTable({ timeline }) {
                                     </Link>
                                 </Td>
                                 <Td>{company.country}</Td>
+                                <Td>{company.industry}</Td>
                                 <Td isNumeric>
                                     <Text as="b" color="blue.600">
                                         {company.count}

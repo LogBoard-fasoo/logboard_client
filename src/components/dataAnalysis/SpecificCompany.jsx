@@ -20,6 +20,7 @@ import { initialTimeline } from "../../recoil/atoms/specificCompany";
 import { useRecoilState } from "recoil";
 import { getAllCompanies } from "../../services/dataAnalysis/types";
 import { getWeeklyTrendsByCompany } from "../../services/dataAnalysis/visitors";
+import { getTop5UrlOfCompany, getTopCategoryOfCompany } from "../../services/dataAnalysis/companies";
 
 const data = [
     {
@@ -116,9 +117,10 @@ export default function SpecificCompany() {
         getAllCompanies().then((res) => setAllCompanies(res.data));
     }, []);
 
-    // useEffect(() => {
-    //     getWeeklyTrendsByCompany(selectedCompanies, startDate, endDate).then((res) => setCompanyTrends(res.data));
-    // }, [selectedCompanies, startDate, endDate]);
+    useEffect(() => {
+        selectedCompanies.length > 0 &&
+            getWeeklyTrendsByCompany(selectedCompanies, startDate, endDate).then((res) => setCompanyTrends(res.data));
+    }, [selectedCompanies, startDate, endDate]);
 
     const dropDownProps = {
         isMulti: true,
@@ -136,16 +138,28 @@ export default function SpecificCompany() {
             </Flex>
             <Grid templateColumns={{ base: "1fr" }} gap={4}>
                 <SearchableDropdown {...dropDownProps} />
-                <GraphBox data={data1} />
+                <GraphBox data={companyTrends} />
                 {selectedCompanies.map((c) => (
-                    <CompanyPieBox key={c.index} cname={c.label} data={data} />
+                    <CompanyPieBox key={c.label} cId={c.value} cname={c.label} timeline={timeline} />
                 ))}
             </Grid>
         </Box>
     );
 }
 
-function CompanyPieBox({ cname, data }) {
+function CompanyPieBox({ cId, cname, timeline }) {
+    const { startDate, endDate } = timeline;
+    const [pieDataUrl, setPieDataUrl] = useState([]);
+    const [pieDataCat, setPieDataCat] = useState([]);
+
+    useEffect(() => {
+        getTop5UrlOfCompany(cId, startDate, endDate).then((res) => setPieDataUrl(res.data));
+    }, [startDate, endDate]);
+
+    useEffect(() => {
+        getTopCategoryOfCompany(cId, startDate, endDate).then((res) => setPieDataCat(res.data));
+    }, [startDate, endDate]);
+
     return (
         <Accordion allowMultiple>
             <AccordionItem>
@@ -158,7 +172,7 @@ function CompanyPieBox({ cname, data }) {
                     </AccordionButton>
                 </h2>
                 <AccordionPanel px={0}>
-                    <PieBox data={data} />
+                    <PieBox pieDataUrl={pieDataUrl} pieDataCat={pieDataCat} />
                 </AccordionPanel>
             </AccordionItem>
         </Accordion>
@@ -176,20 +190,20 @@ function GraphBox({ data }) {
     );
 }
 
-function PieBox({ data }) {
+function PieBox({ pieDataUrl, pieDataCat }) {
     return (
         <HStack>
             <Box style={{ width: "100%", height: "500px" }} bg="white" boxShadow="base" p="6" rounded="md">
                 <Heading as="h5" fontSize="xl">
                     관심 제품군
                 </Heading>
-                <PieChart data={data} />
+                <PieChart data={pieDataCat} />
             </Box>
             <Box style={{ width: "100%", height: "500px" }} bg="white" boxShadow="base" p="6" rounded="md">
                 <Heading as="h5" fontSize="xl">
                     관심제품 Top 5
                 </Heading>
-                <PieChart data={data} />
+                <PieChart data={pieDataUrl} />
             </Box>
         </HStack>
     );
