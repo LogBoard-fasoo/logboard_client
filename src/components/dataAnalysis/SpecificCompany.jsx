@@ -93,6 +93,22 @@ const data1 = [
 
 export default function SpecificCompany() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
+
+    const companies = [
+        { value: 0, label: "Fasoo" },
+        { value: 1, label: "Sparrow" },
+        { value: 2, label: "Clearbit" },
+        { value: 3, label: "Amazon" },
+        { value: 4, label: "Google" },
+        { value: 5, label: "Naver" },
+    ];
+
+    const dropDownProps = {
+        isMulti: true,
+        selectName: "companies",
+        options: companies,
+        placeholder: "기업을 검색할 수 있어요.",
+    };
     return (
         <Box>
             <Flex>
@@ -100,7 +116,7 @@ export default function SpecificCompany() {
                 <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
             </Flex>
             <Grid templateColumns={{ base: "1fr" }} gap={4}>
-                <SearchableDropdown />
+                <SearchableDropdown {...dropDownProps} />
                 <GraphBox data={data1} />
                 <PieBox />
             </Grid>

@@ -1,9 +1,10 @@
 import React from "react";
 import GraphChart from "../common/GraphChart";
-import { Box, Flex, Spacer } from "@chakra-ui/react";
+import { Box, Flex, Grid, Spacer } from "@chakra-ui/react";
 import CustomDateRangePicker from "../common/Datepicker";
 import { initialTimeline } from "../../recoil/atoms/specificProduct";
 import { useRecoilState } from "recoil";
+import SearchableDropdown from "../common/SearchableDropdown";
 
 const data = [
     {
@@ -69,13 +70,29 @@ const data = [
 export default function SpecificProduct() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
 
+    const urls = [
+        { value: 0, label: "fasoo-sast" },
+        { value: 1, label: "fasoo-drm" },
+        { value: 2, label: "fasoo-allinone" },
+    ];
+
+    const dropDownProps = {
+        isMulti: false,
+        selectName: "urls",
+        options: urls,
+        placeholder: "제품을 검색할 수 있어요.",
+    };
+
     return (
-        <Box style={{ width: "100%", height: "500px" }} bg="white" boxShadow="base" p="6" rounded="md">
+        <Box>
             <Flex>
                 <Spacer />
                 <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
             </Flex>
-            <GraphChart data={data} />
+            <Grid templateColumns={{ base: "1fr" }} gap={4}>
+                <SearchableDropdown {...dropDownProps} />
+                <GraphChart data={data} />
+            </Grid>
         </Box>
     );
 }
