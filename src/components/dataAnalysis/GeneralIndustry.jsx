@@ -39,6 +39,12 @@ export default function GeneralIndustry() {
         refetchAll();
     }, [startDate, endDate]);
 
+    const TIPS = [
+        { title: "카테고리", tip: "해당 카테고리에 속하는 기업이 파수 제품에 관심이 많습니다." },
+        { title: "산업군", tip: "해당 산업군에 속하는 기업이 파수 제품에 관심이 많습니다." },
+        { title: "사용기술", tip: "파수 제품에 관심이 많은 기업은 다음 기술을 많이 사용합니다." },
+    ];
+
     return (
         <Box>
             <Flex>
@@ -46,24 +52,20 @@ export default function GeneralIndustry() {
                 <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
             </Flex>
             <Grid templateColumns={{ base: "1fr", xl: "1fr 1fr 1fr" }} gap={4}>
-                <GeneralIndustryBox
-                    key={"카테고리"}
-                    title={"카테고리"}
-                    tooltipContent={
-                        <small>
-                            Tip! <br />
-                            해당 카테고리에 속하는 기업이 파수 제품에 관심이 많습니다.
-                        </small>
-                    }
-                    data={results[0]?.data?.data}
-                />
-                <GeneralIndustryBox key={"산업군"} title={"산업군"} tooltipContent={""} data={results[1]?.data?.data} />
-                <GeneralIndustryBox
-                    key={"사용기술"}
-                    title={"사용기술"}
-                    tooltipContent={""}
-                    data={results[2]?.data?.data}
-                />
+                {TIPS.map((tip, idx) => (
+                    <GeneralIndustryBox
+                        key={idx}
+                        title={tip.title}
+                        tooltipContent={
+                            <small>
+                                <strong>Tip!</strong>
+                                <br />
+                                <span>{tip.tip}</span>
+                            </small>
+                        }
+                        data={results[idx]?.data?.data}
+                    />
+                ))}
             </Grid>
         </Box>
     );
