@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Sidebar from "../layout/Sidebar";
 import { Box, Button, Flex, Icon, Spacer, Stack } from "@chakra-ui/react";
 import { Heading } from "@chakra-ui/react";
@@ -16,7 +16,11 @@ export default function DataAnalysis() {
         {
             title: "산업 동향",
             desc: "선택된 기간 내 Fasoo에 가장 큰 관심을 보이는 기업 카테고리와 산업, 그 기업이 많이 사용하는 기술을 뽑아봤어요.",
-            children: <GeneralIndustry />,
+            children: (
+                <Suspense>
+                    <GeneralIndustry />
+                </Suspense>
+            ),
         },
         {
             title: "개별 산업 분석",

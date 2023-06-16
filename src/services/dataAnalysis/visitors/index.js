@@ -31,15 +31,14 @@ export function getCountsByTechnology(count, startDate, endDate) {
 }
 
 export function getWeeklyTrendsByCompany(companyIds, startDate, endDate) {
-    return api.get(
-        `/visitors/weekly-trends/company${"?companyIds=" + companyIds.map((c) => c.value).join("&companyIds=")}`,
-        {
-            params: {
-                startDate,
-                endDate,
-            },
+    const companyIdsStr = companyIds.map((e) => e.value).join(",");
+    return api.get(`/visitors/weekly-trends/company`, {
+        params: {
+            companyIds: companyIdsStr,
+            startDate,
+            endDate,
         },
-    );
+    });
 }
 
 export function getWeeklyTrendByUrl(url, startDate, endDate) {

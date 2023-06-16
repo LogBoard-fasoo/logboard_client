@@ -11,36 +11,8 @@ import {
     getTopVisitedUrlByIndustry,
     getTopVisitedUrlByTechnoology,
 } from "../../services/dataAnalysis/visitedUrls";
-import { formatDate } from "../utils/formatDate";
 import { Images } from "../../assets/images";
 import SearchableDropdown from "../common/SearchableDropdown";
-
-// const _data = [
-//     {
-//         url: "AD",
-//         count: 4,
-//     },
-//     {
-//         url: "AE",
-//         count: 2,
-//     },
-//     {
-//         url: "AG",
-//         count: 10,
-//     },
-//     {
-//         url: "AI",
-//         count: 5,
-//     },
-//     {
-//         url: "AL",
-//         count: 8,
-//     },
-//     {
-//         url: "AM",
-//         count: 9,
-//     },
-// ];
 
 export default function SpecificIndustry() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
@@ -62,22 +34,31 @@ export default function SpecificIndustry() {
 
 function CategoryBox(timeline) {
     const [typeId, settypeId] = useState(null);
-    const [data, setdata] = useState([]);
     const { startDate, endDate } = timeline.timeline;
 
-    const allTypes = useQuery({ queryKey: ["categories"], queryFn: getAllCategoryTypes, staleTime: Infinity });
+    const { data: allTypes } = useQuery({
+        queryKey: ["categories"],
+        queryFn: getAllCategoryTypes,
+        staleTime: Infinity,
+    });
+
+    const { data: ranking, refetch } = useQuery({
+        enabled: typeId ? true : false,
+        queryKey: ["topUrlByCategory"],
+        queryFn: () => getTopVisitedUrlByCategory(typeId, startDate, endDate),
+    });
 
     useEffect(() => {
-        getTopVisitedUrlByCategory(typeId, startDate, endDate).then((res) => setdata(res.data));
+        refetch();
     }, [typeId, startDate, endDate]);
 
     const prop = {
         title: "Category",
         selectName: "categories",
         placeholder: "카테고리를 검색할 수 있어요.",
-        options: allTypes.data?.data,
+        options: allTypes?.data,
         onChangeFn: (e) => settypeId(parseInt(e?.value)),
-        data: data,
+        data: ranking?.data || [],
     };
 
     return <SpecificIndustryBox {...prop} />;
@@ -85,22 +66,31 @@ function CategoryBox(timeline) {
 
 function IndustryBox(timeline) {
     const [typeId, settypeId] = useState(null);
-    const [data, setdata] = useState([]);
     const { startDate, endDate } = timeline.timeline;
 
-    const allTypes = useQuery({ queryKey: ["industry"], queryFn: getAllIndsutryTypes, staleTime: Infinity });
+    const { data: allTypes } = useQuery({
+        queryKey: ["industries"],
+        queryFn: getAllCategoryTypes,
+        staleTime: Infinity,
+    });
+
+    const { data: ranking, refetch } = useQuery({
+        enabled: typeId ? true : false,
+        queryKey: ["topUrlByIndustry"],
+        queryFn: () => getTopVisitedUrlByIndustry(typeId, startDate, endDate),
+    });
 
     useEffect(() => {
-        getTopVisitedUrlByIndustry(typeId, startDate, endDate).then((res) => setdata(res.data));
+        refetch();
     }, [typeId, startDate, endDate]);
 
     const prop = {
         title: "Industry",
         selectName: "industries",
         placeholder: "산업군을 검색할 수 있어요.",
-        options: allTypes.data?.data,
+        options: allTypes?.data,
         onChangeFn: (e) => settypeId(parseInt(e?.value)),
-        data: data,
+        data: ranking?.data || [],
     };
 
     return <SpecificIndustryBox {...prop} />;
@@ -108,23 +98,31 @@ function IndustryBox(timeline) {
 
 function TechnologyBox(timeline) {
     const [typeId, settypeId] = useState(null);
-    const [data, setdata] = useState([]);
     const { startDate, endDate } = timeline.timeline;
 
-    const allTypes = useQuery({ queryKey: ["technology"], queryFn: getAllTechnologyTypes, staleTime: Infinity });
+    const { data: allTypes } = useQuery({
+        queryKey: ["industries"],
+        queryFn: getAllCategoryTypes,
+        staleTime: Infinity,
+    });
+
+    const { data: ranking, refetch } = useQuery({
+        enabled: typeId ? true : false,
+        queryKey: ["topUrlByTechnology"],
+        queryFn: () => getTopVisitedUrlByTechnoology(typeId, startDate, endDate),
+    });
 
     useEffect(() => {
-        if (typeId) getTopVisitedUrlByTechnoology(typeId, startDate, endDate).then((res) => setdata(res.data));
-        else setdata([]);
+        refetch();
     }, [typeId, startDate, endDate]);
 
     const prop = {
         title: "Technology",
         selectName: "technologies",
         placeholder: "사용 기술을 검색할 수 있어요.",
-        options: allTypes.data?.data,
+        options: allTypes?.data || [],
         onChangeFn: (e) => settypeId(e.map((tech) => tech.value).join()),
-        data: data,
+        data: ranking?.data || [],
         isMulti: true,
     };
 

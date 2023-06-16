@@ -82,7 +82,6 @@ export default function SpecificProduct() {
     }, []);
 
     useEffect(() => {
-        console.log(selectedUrl, startDate, endDate);
         selectedUrl && getWeeklyTrendByUrl(selectedUrl, startDate, endDate).then((res) => setUrlTrend([res.data]));
     }, [selectedUrl, startDate, endDate]);
 

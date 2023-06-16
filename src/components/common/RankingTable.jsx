@@ -1,47 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Text, Link } from "@chakra-ui/react";
 import { getTop30Companies } from "../../services/dataAnalysis/companies";
-import { initialTimeline } from "../../recoil/atoms/topCompanies";
-import { useRecoilState } from "recoil";
 import SmoothTransition from "../../styles/animate/SmoothTransition";
-
-const data = [
-    {
-        cname: "Pana",
-        domain: "www.pana.com",
-        country: "United states",
-        visits: 180,
-    },
-    {
-        cname: "SK",
-        domain: "www.sk.com",
-        country: "Korea",
-        visits: 140,
-    },
-    {
-        cname: "CJ",
-        domain: "www.cj.com",
-        country: "Korea",
-        visits: 100,
-    },
-    {
-        cname: "SK",
-        domain: "www.cj.com",
-        country: "Korea",
-        visits: 20,
-    },
-];
+import { useQuery } from "@tanstack/react-query";
 
 export default function RankingTable({ timeline }) {
     const { startDate, endDate } = timeline;
-    const [topCompanies, setTopCompanies] = useState([]);
+
+    const { data, refetch } = useQuery({
+        queryKey: ["getTop30Companies"],
+        queryFn: () => getTop30Companies(startDate, endDate),
+    });
 
     useEffect(() => {
-        getTop30Companies(startDate, endDate).then((res) => setTopCompanies(res.data));
-    }, []);
-
-    useEffect(() => {
-        getTop30Companies(startDate, endDate).then((res) => setTopCompanies(res.data));
+        refetch();
     }, [startDate, endDate]);
 
     return (
@@ -80,7 +52,7 @@ export default function RankingTable({ timeline }) {
                         </Tr>
                     </Thead>
                     <Tbody bg="white">
-                        {topCompanies.map((company, index) => (
+                        {data?.data.map((company, index) => (
                             <Tr key={Math.random().toString()}>
                                 <Td>
                                     <small>{company.rank}</small>
