@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import Sidebar from "../layout/Sidebar";
-import { Box, Button, Flex, Icon, Spacer, Stack } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Spacer, Stack, Text } from "@chakra-ui/react";
 import { Heading } from "@chakra-ui/react";
 import { FiHash, FiActivity } from "react-icons/fi";
 import GeneralIndustry from "../dataAnalysis/GeneralIndustry";
@@ -21,9 +21,14 @@ export default function DataAnalysis() {
                 <Suspense>
                     <AlertInfo
                         title={"Industry와 Category의 차이점은 뭔가요?"}
-                        content='Industry는 시장은 구분하는 큰 범주, Category는 특정 제품이나 서비스가 속하는 좀 더 세부 범주를
-                        의미합니다. 맥도날드를 예시로, 맥노날드의 Industry는 "음식 서비스 산업", Category는
-                        "패스트푸드"로 분류될 수 있겠죠? 😉'
+                        content={
+                            <span>
+                                Industry는 시장은 구분하는 큰 범주, Category는 특정 제품이나 서비스가 속하는 좀 더 세부
+                                범주를 의미합니다. <br />
+                                맥도날드를 예시로, 맥노날드의 Industry는 &quot음식 서비스 산업&quot, Category는
+                                &quot패스트푸드&quot로 분류될 수 있겠죠? 😉
+                            </span>
+                        }
                     ></AlertInfo>
                     <GeneralIndustry />
                 </Suspense>
@@ -63,9 +68,11 @@ export default function DataAnalysis() {
                         </Heading>
                     </Flex>
                     <Flex>
-                        <small>Fasoo.com 방문 기업 분석 대쉬보드입니다.</small>
+                        <Text fontSize={"sm"} my={2}>
+                            Fasoo.com 방문 기업 분석 대쉬보드입니다.
+                        </Text>
                         <Spacer />
-                        <Button bg="blue.600" color="white" as="a">
+                        <Button bg="blue.600" color="white" as="a" my={2}>
                             PDF로 다운로드
                         </Button>
                     </Flex>
@@ -73,7 +80,9 @@ export default function DataAnalysis() {
                 <Stack gap={4}>
                     {containerProps.map(({ children, desc, ...rest }, idx) => (
                         <Container key={idx} {...rest} titleIcon={FiHash}>
-                            <small>{desc}</small>
+                            <Text fontSize={"sm"} my={2}>
+                                {desc}
+                            </Text>
                             {children}
                         </Container>
                     ))}

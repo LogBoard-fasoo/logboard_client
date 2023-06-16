@@ -47,7 +47,7 @@ export default function GeneralIndustry() {
 
     return (
         <Box>
-            <Flex>
+            <Flex my={3}>
                 <Spacer />
                 <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
             </Flex>

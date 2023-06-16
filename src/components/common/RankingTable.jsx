@@ -53,7 +53,7 @@ export default function RankingTable({ timeline }) {
                     </Thead>
                     <Tbody bg="white">
                         {data?.data.map((company, index) => (
-                            <Tr key={Math.random().toString()}>
+                            <Tr key={Math.random().toString()} bg={index < 5 ? "yellow.100" : "none"}>
                                 <Td>
                                     <small>{company.rank}</small>
                                     &nbsp;&nbsp;

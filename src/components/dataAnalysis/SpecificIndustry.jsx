@@ -19,7 +19,7 @@ export default function SpecificIndustry() {
 
     return (
         <Box>
-            <Flex>
+            <Flex my={3}>
                 <Spacer />
                 <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
             </Flex>
@@ -132,7 +132,7 @@ function TechnologyBox(timeline) {
 function SpecificIndustryBox({ data, title, ...rest }) {
     return (
         <Box boxShadow="base" p="6" rounded="md" bg="white">
-            <Heading as="h4" fontSize="xl">
+            <Heading as="h4" fontSize="xl" mb={2}>
                 {title}
             </Heading>
             <SearchableDropdown {...rest} />

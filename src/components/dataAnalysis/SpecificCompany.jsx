@@ -132,7 +132,7 @@ export default function SpecificCompany() {
 
     return (
         <Box>
-            <Flex>
+            <Flex my={3}>
                 <Spacer />
                 <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
             </Flex>
@@ -194,7 +194,7 @@ function PieBox({ pieDataUrl, pieDataCat }) {
     return (
         <HStack>
             <Box style={{ width: "100%", height: "500px" }} bg="white" boxShadow="base" p="6" rounded="md">
-                <Heading as="h5" fontSize="xl">
+                <Heading as="h5" fontSize="xl" mb={2}>
                     관심 제품군
                 </Heading>
                 <PieChart data={pieDataCat} />

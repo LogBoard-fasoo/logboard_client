@@ -94,7 +94,7 @@ export default function SpecificProduct() {
 
     return (
         <Box>
-            <Flex>
+            <Flex my={3}>
                 <Spacer />
                 <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
             </Flex>

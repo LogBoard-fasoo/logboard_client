@@ -10,7 +10,7 @@ export default function TopCompanies() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
     return (
         <Box>
-            <Flex>
+            <Flex my={3}>
                 <Spacer />
                 <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
             </Flex>
