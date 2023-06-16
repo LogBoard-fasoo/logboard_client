@@ -70,7 +70,7 @@ function IndustryBox(timeline) {
 
     const { data: allTypes } = useQuery({
         queryKey: ["industries"],
-        queryFn: getAllCategoryTypes,
+        queryFn: getAllIndsutryTypes,
         staleTime: Infinity,
     });
 

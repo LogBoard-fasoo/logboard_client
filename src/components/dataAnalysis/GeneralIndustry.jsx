@@ -35,12 +35,6 @@ export default function GeneralIndustry() {
         ],
     });
 
-    const props = [
-        { title: "카테고리", data: results[0]?.data?.data },
-        { title: "산업군", data: results[1]?.data?.data },
-        { title: "사용기술", data: results[2]?.data?.data },
-    ];
-
     useEffect(() => {
         refetchAll();
     }, [startDate, endDate]);
@@ -52,21 +46,36 @@ export default function GeneralIndustry() {
                 <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
             </Flex>
             <Grid templateColumns={{ base: "1fr", xl: "1fr 1fr 1fr" }} gap={4}>
-                {props.map((prop, idx) => (
-                    <GeneralIndustryBox key={idx} {...prop} />
-                ))}
+                <GeneralIndustryBox
+                    key={"카테고리"}
+                    title={"카테고리"}
+                    tooltipContent={
+                        <small>
+                            Tip! <br />
+                            해당 카테고리에 속하는 기업이 파수 제품에 관심이 많습니다.
+                        </small>
+                    }
+                    data={results[0]?.data?.data}
+                />
+                <GeneralIndustryBox key={"산업군"} title={"산업군"} tooltipContent={""} data={results[1]?.data?.data} />
+                <GeneralIndustryBox
+                    key={"사용기술"}
+                    title={"사용기술"}
+                    tooltipContent={""}
+                    data={results[2]?.data?.data}
+                />
             </Grid>
         </Box>
     );
 }
 
-function GeneralIndustryBox({ data, title }) {
+function GeneralIndustryBox({ data, title, tooltipContent }) {
     return (
         <Box boxShadow="base" p="6" rounded="md" bg="white">
             <Box style={{ width: "100%", height: "400px" }}>
                 <Heading as="h3" fontSize="xl" fontWeight="bold">
                     {title}
-                    <CustomTooltip tooltipContent={"Tip!"} />
+                    <CustomTooltip tooltipContent={tooltipContent} />
                 </Heading>
                 <PieChart data={data} />
             </Box>

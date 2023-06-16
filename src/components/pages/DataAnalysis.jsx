@@ -10,6 +10,7 @@ import SpecificCompany from "../dataAnalysis/SpecificCompany";
 import SpecificProduct from "../dataAnalysis/SpecificProduct";
 import SummaryBox from "../dataAnalysis/SummaryBox";
 import ScrollButton from "../common/ScrollButton";
+import AlertInfo from "../common/AlertInfo";
 
 export default function DataAnalysis() {
     const containerProps = [
@@ -18,6 +19,12 @@ export default function DataAnalysis() {
             desc: "선택된 기간 내 Fasoo에 가장 큰 관심을 보이는 기업 카테고리와 산업, 그 기업이 많이 사용하는 기술을 뽑아봤어요.",
             children: (
                 <Suspense>
+                    <AlertInfo
+                        title={"Industry와 Category의 차이점은 뭔가요?"}
+                        content='Industry는 시장은 구분하는 큰 범주, Category는 특정 제품이나 서비스가 속하는 좀 더 세부 범주를
+                        의미합니다. 맥도날드를 예시로, 맥노날드의 Industry는 "음식 서비스 산업", Category는
+                        "패스트푸드"로 분류될 수 있겠죠? 😉'
+                    ></AlertInfo>
                     <GeneralIndustry />
                 </Suspense>
             ),
@@ -34,7 +41,7 @@ export default function DataAnalysis() {
         },
         {
             title: "개별 기업 분석",
-            desc: "선택된 기간 내 궁금한 여러 기업의 방문 트렌드를 한눈에 볼 수 있어요.", // TODO: 관심도 측정을 단순 카운팅 -> 재방문율인 경우 더 많은 가중치를 주는 방식으로 변경 가능
+            desc: "선택된 기간 내 궁금한 여러 기업의 방문 트렌드를 한눈에 볼 수 있어요.",
             children: <SpecificCompany />,
         },
         {
