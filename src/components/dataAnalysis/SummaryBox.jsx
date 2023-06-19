@@ -7,56 +7,47 @@ import {
     Box,
     Card,
     CardBody,
+    HStack,
     Heading,
     Stack,
     StackDivider,
     Text,
 } from "@chakra-ui/react";
 import React from "react";
+import { FiCheck } from "react-icons/fi";
 
-export default function SummaryBox() {
+export default function SummaryBox({ summaryContent }) {
     return (
-        <Accordion defaultIndex={[0]} allowMultiple mt={2}>
-            <AccordionItem>
-                <AccordionButton px={0}>
-                    <Box flex="1" textAlign="left">
-                        <Heading size="md">Summary</Heading>
-                    </Box>
-                    <AccordionIcon />
-                </AccordionButton>
-                <AccordionPanel px={0}>
-                    <Card>
-                        <CardBody>
-                            <Stack divider={<StackDivider />} spacing="4">
-                                <Box>
-                                    <Heading size="xs" textTransform="uppercase">
-                                        Summary
-                                    </Heading>
-                                    <Text pt="2" fontSize="sm">
-                                        View a summary of all your clients over the last month.
-                                    </Text>
-                                </Box>
-                                <Box>
-                                    <Heading size="xs" textTransform="uppercase">
-                                        Overview
-                                    </Heading>
-                                    <Text pt="2" fontSize="sm">
-                                        Check out the overview of your clients.
-                                    </Text>
-                                </Box>
-                                <Box>
-                                    <Heading size="xs" textTransform="uppercase">
-                                        Analysis
-                                    </Heading>
-                                    <Text pt="2" fontSize="sm">
-                                        See a detailed analysis of all your business clients.
-                                    </Text>
-                                </Box>
-                            </Stack>
-                        </CardBody>
-                    </Card>
-                </AccordionPanel>
-            </AccordionItem>
-        </Accordion>
+        summaryContent && ( // TODO: && 조건문 삭제
+            <Accordion defaultIndex={[0]} allowMultiple mt={2}>
+                <AccordionItem>
+                    <AccordionButton px={0}>
+                        <Box flex="1" textAlign="left">
+                            <Heading size="md">Summary</Heading>
+                        </Box>
+                        <AccordionIcon />
+                    </AccordionButton>
+                    <AccordionPanel px={0}>
+                        <Card>
+                            <CardBody>
+                                <Stack divider={<StackDivider />} spacing="4">
+                                    {Object.keys(summaryContent).map((k) => (
+                                        <Box key={Math.random().toString() + k}>
+                                            <Heading size="xs" textTransform="uppercase">
+                                                {k}
+                                            </Heading>
+                                            <HStack alignItems={"center"} pt={2}>
+                                                <FiCheck />
+                                                <Text fontSize="sm">{summaryContent[k]}</Text>
+                                            </HStack>
+                                        </Box>
+                                    ))}
+                                </Stack>
+                            </CardBody>
+                        </Card>
+                    </AccordionPanel>
+                </AccordionItem>
+            </Accordion>
+        )
     );
 }

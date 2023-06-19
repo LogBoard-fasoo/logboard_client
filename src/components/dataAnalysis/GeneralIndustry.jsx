@@ -23,7 +23,7 @@ export default function GeneralIndustry() {
                 suspense: true,
             },
             {
-                queryKey: ["generalIndustryIndustry"],
+                queryKey: ["generalIndustryData"],
                 queryFn: () => getCountsByIndustry(5, startDate, endDate),
                 suspense: true,
             },

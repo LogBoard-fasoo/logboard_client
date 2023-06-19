@@ -11,6 +11,16 @@ import SpecificProduct from "../dataAnalysis/SpecificProduct";
 import SummaryBox from "../dataAnalysis/SummaryBox";
 import ScrollButton from "../common/ScrollButton";
 import AlertInfo from "../common/AlertInfo";
+import { queryClient } from "../../App";
+import { initialTimeline } from "../../recoil/atoms/generalIndustry";
+
+import useSummarizeTimeline from "../../hooks/useSummarizeTimeline";
+
+function summarizeKeys(queryKey) {
+    const data = queryClient.getQueryData([queryKey])?.data;
+    if (!data) return;
+    return data.map((d, idx) => ` (${idx + 1}) ${d.id}`);
+}
 
 export default function DataAnalysis() {
     const containerProps = [
@@ -43,26 +53,41 @@ export default function DataAnalysis() {
                     <GeneralIndustry />
                 </Suspense>
             ),
+            summaryContent: {
+                카테고리: `${useSummarizeTimeline(initialTimeline)} 동안 ${summarizeKeys(
+                    "generalCategoryData",
+                )} 카테고리에 속한 기업이 파수에 큰 관심을 보입니다.`,
+                산업군: `${useSummarizeTimeline(initialTimeline)} 동안 ${summarizeKeys(
+                    "generalIndustryData",
+                )} 산업군 속한 기업이 파수에 큰 관심을 보입니다.`,
+                사용기술: `${useSummarizeTimeline(initialTimeline)} 동안 관심을 보인 기업은 ${summarizeKeys(
+                    "generalTechnologyData",
+                )} 기술을 가장 많이 사용합니다.`,
+            },
         },
         {
             title: "개별 산업 분석",
             desc: "선택된 기간 내 기업의 카테고리, 산업, 자주 사용하는 기술 별로 관심있는 제품을 확인할 수 있어요.",
             children: <SpecificIndustry />,
+            summaryContent: {},
         },
         {
             title: "상위 관심 기업",
             desc: "선택된 기간 내 파수에 가장 많이 방문한 기업 상위 Top 30을 볼 수 있어요.",
             children: <TopCompanies />,
+            summaryContent: {},
         },
         {
             title: "개별 기업 분석",
             desc: "선택된 기간 내 궁금한 여러 기업의 방문 트렌드를 한눈에 볼 수 있어요.",
             children: <SpecificCompany />,
+            summaryContent: {},
         },
         {
             title: "개별 제품 분석",
             desc: "선택된 기간 내 제품의 관심도 동향을 볼 수 있어요.",
             children: <SpecificProduct />,
+            summaryContent: {},
         },
     ];
     return (
@@ -103,7 +128,7 @@ export default function DataAnalysis() {
     );
 }
 
-function Container({ title, titleIcon, children }) {
+function Container({ title, titleIcon, summaryContent, children }) {
     return (
         <Box bg="gray.50" borderRadius="xl" p={6} boxShadow="base" rounded="md">
             <Heading as="h2" size="lg">
@@ -118,7 +143,7 @@ function Container({ title, titleIcon, children }) {
                 {title}
             </Heading>
             {children}
-            <SummaryBox />
+            <SummaryBox summaryContent={summaryContent} />
         </Box>
     );
 }
