@@ -21,90 +21,8 @@ import { useRecoilState } from "recoil";
 import { getAllCompanies } from "../../services/dataAnalysis/types";
 import { getWeeklyTrendsByCompany } from "../../services/dataAnalysis/visitors";
 import { getTop5UrlOfCompany, getTopCategoryOfCompany } from "../../services/dataAnalysis/companies";
-
-const data = [
-    {
-        id: "elixir",
-        value: 51,
-    },
-    {
-        id: "java",
-        value: 264,
-    },
-    {
-        id: "php",
-        value: 112,
-    },
-    {
-        id: "haskell",
-        value: 534,
-    },
-    {
-        id: "c",
-        value: 526,
-    },
-];
-
-const data1 = [
-    {
-        id: "파수",
-        data: [
-            {
-                x: "4/7",
-                y: 284,
-            },
-            {
-                x: "4/14",
-                y: 243,
-            },
-            {
-                x: "4/21",
-                y: 210,
-            },
-            {
-                x: "4/28",
-                y: 26,
-            },
-            {
-                x: "4/28",
-                y: 26,
-            },
-            {
-                x: "4/28",
-                y: 26,
-            },
-        ],
-    },
-    {
-        id: "스패로우",
-        data: [
-            {
-                x: "4/7",
-                y: 600,
-            },
-            {
-                x: "4/14",
-                y: 30,
-            },
-            {
-                x: "4/21",
-                y: 210,
-            },
-            {
-                x: "4/28",
-                y: 35,
-            },
-            {
-                x: "4/28",
-                y: 20,
-            },
-            {
-                x: "4/28",
-                y: 26,
-            },
-        ],
-    },
-];
+import CustomTooltip from "../common/Tooltip";
+import NoResultFound from "../common/NoResultFound";
 
 export default function SpecificCompany() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
@@ -184,8 +102,18 @@ function GraphBox({ data }) {
         <Box style={{ width: "100%", height: "500px" }} bg="white" boxShadow="base" p="6" rounded="md">
             <Heading as="h5" fontSize="xl">
                 주별 방문 트렌드
+                <CustomTooltip
+                    tooltipContent={
+                        <small>
+                            <strong>Tip!</strong>
+                            <br />
+                            <li>여러 기업을 선택할 수 있어요.</li>
+                            <li>선택한 기업의 주별 방문 트렌드에요. </li>
+                        </small>
+                    }
+                />
             </Heading>
-            <GraphChart data={data} />
+            {data.length > 0 ? <GraphChart data={data} /> : <NoResultFound />}
         </Box>
     );
 }

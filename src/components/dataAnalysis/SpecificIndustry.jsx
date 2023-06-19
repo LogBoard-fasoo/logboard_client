@@ -14,6 +14,7 @@ import {
 import { Images } from "../../assets/images";
 import SearchableDropdown from "../common/SearchableDropdown";
 import CustomTooltip from "../common/Tooltip";
+import NoResultFound from "../common/NoResultFound";
 
 export default function SpecificIndustry() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
@@ -154,15 +155,7 @@ function SpecificIndustryBox({ data, title, tip, typeId, ...rest }) {
             </Heading>
             <SearchableDropdown {...rest} />
             <Box style={{ width: "100%", height: "400px" }}>
-                {typeId && data.length > 0 ? (
-                    <HBarChart data={data} />
-                ) : (
-                    <Flex flexDirection="column" justifyContent="center" alignItems="center" w="100%" h="100%">
-                        <Image src={Images.NoResult} alt="No result" mb={2} w="50%" />
-                        <Text>검색 결과가 존재하지 않아요.</Text>
-                        <Text fontSize="xs">다른 기간 또는 필터를 선택해주세요.</Text>
-                    </Flex>
-                )}
+                {typeId && data.length > 0 ? <HBarChart data={data} /> : <NoResultFound />}
             </Box>
         </Box>
     );

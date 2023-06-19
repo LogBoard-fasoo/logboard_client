@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import Sidebar from "../layout/Sidebar";
 import { Box, Button, Flex, Icon, Spacer, Stack, Text } from "@chakra-ui/react";
 import { Heading } from "@chakra-ui/react";
-import { FiHash, FiActivity } from "react-icons/fi";
+import { FiHash, FiActivity, FiCheckCircle } from "react-icons/fi";
 import GeneralIndustry from "../dataAnalysis/GeneralIndustry";
 import SpecificIndustry from "../dataAnalysis/SpecificIndustry";
 import TopCompanies from "../dataAnalysis/TopCompanies";
@@ -22,12 +22,22 @@ export default function DataAnalysis() {
                     <AlertInfo
                         title={"Industry와 Category의 차이점은 뭔가요?"}
                         content={
-                            <span>
-                                Industry는 시장은 구분하는 큰 범주, Category는 특정 제품이나 서비스가 속하는 좀 더 세부
-                                범주를 의미합니다. <br />
-                                맥도날드를 예시로, 맥노날드의 Industry는 &apos;음식 서비스 산업&apos;, Category는
-                                &apos;패스트푸드&apos;로 분류될 수 있겠죠? 😉
-                            </span>
+                            <Box>
+                                <Flex alignItems={"center"}>
+                                    <FiCheckCircle color="green" />
+                                    <span>
+                                        &nbsp; Industry는 시장은 구분하는 큰 범주, Category는 특정 제품이나 서비스가
+                                        속하는 좀 더 세부 범주를 의미합니다.
+                                    </span>
+                                </Flex>
+                                <Flex alignItems={"center"}>
+                                    <FiCheckCircle color="green" />
+                                    <span>
+                                        &nbsp;맥도날드를 예시로, 맥노날드의 Industry는 &apos;음식 서비스 산업&apos;,
+                                        Category는 &apos;패스트푸드&apos;로 분류될 수 있겠죠? 😉
+                                    </span>
+                                </Flex>
+                            </Box>
                         }
                     ></AlertInfo>
                     <GeneralIndustry />

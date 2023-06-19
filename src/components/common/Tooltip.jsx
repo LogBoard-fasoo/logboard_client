@@ -6,7 +6,7 @@ export default function CustomTooltip({ tooltipContent }) {
     return (
         <Tooltip hasArrow label={tooltipContent} placement="right-start" bg="red.50" color="black" fontSize="lg">
             <span>
-                <Icon as={FiHelpCircle} boxSize={5} color="red.300" ml={1} />
+                <Icon as={FiHelpCircle} boxSize={5} color="red.300" ml={1} pt={1} />
             </span>
         </Tooltip>
     );
