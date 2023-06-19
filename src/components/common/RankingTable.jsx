@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Text, Link } from "@chakra-ui/react";
 import { getTop30Companies } from "../../services/dataAnalysis/companies";
 import SmoothTransition from "../../styles/animate/SmoothTransition";
 import { useQuery } from "@tanstack/react-query";
+import SummaryBox from "../dataAnalysis/SummaryBox";
+import useSummarizeTimeline from "../../hooks/useSummarizeTimeline";
+import { getTop5CompaniesName } from "../utils/summarizeKeys";
 
 export default function RankingTable({ timeline }) {
     const { startDate, endDate } = timeline;
+    const timelineStr = useSummarizeTimeline(startDate, endDate);
+    const summaryContent = {
+        기업랭킹: `${timelineStr} 간 파수에 가장 큰 관심을 보인 기업은 ${getTop5CompaniesName()} 입니다.`,
+    };
 
     const { data, refetch } = useQuery({
         queryKey: ["getTop30Companies"],
@@ -79,6 +86,7 @@ export default function RankingTable({ timeline }) {
                     </Tbody>
                 </Table>
             </TableContainer>
+            <SummaryBox summaryContent={summaryContent} />
         </SmoothTransition>
     );
 }

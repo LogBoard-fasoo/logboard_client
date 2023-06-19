@@ -14,7 +14,7 @@ import {
     Text,
 } from "@chakra-ui/react";
 import React from "react";
-import { FiCheck } from "react-icons/fi";
+import { FiCheckCircle } from "react-icons/fi";
 
 export default function SummaryBox({ summaryContent }) {
     return (
@@ -37,7 +37,7 @@ export default function SummaryBox({ summaryContent }) {
                                                 {k}
                                             </Heading>
                                             <HStack alignItems={"center"} pt={2} w={"85%"}>
-                                                <FiCheck />
+                                                <FiCheckCircle color="green" />
                                                 <Text fontSize="sm">{summaryContent[k]}</Text>
                                             </HStack>
                                         </Box>

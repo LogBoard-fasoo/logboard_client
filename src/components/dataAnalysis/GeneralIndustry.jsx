@@ -39,13 +39,13 @@ export default function GeneralIndustry() {
     });
 
     const summaryContent = {
-        카테고리: `${useSummarizeTimeline(initialTimeline)} 동안 ${summarizeKeys(
+        카테고리: `${useSummarizeTimeline(startDate, endDate)} 동안 ${summarizeKeys(
             "generalCategoryData",
         )} 카테고리에 속한 기업이 파수에 큰 관심을 보입니다.`,
-        산업군: `${useSummarizeTimeline(initialTimeline)} 동안 ${summarizeKeys(
+        산업군: `${useSummarizeTimeline(startDate, endDate)} 동안 ${summarizeKeys(
             "generalIndustryData",
         )} 산업군 속한 기업이 파수에 큰 관심을 보입니다.`,
-        사용기술: `${useSummarizeTimeline(initialTimeline)} 동안 관심을 보인 기업은 ${summarizeKeys(
+        사용기술: `${useSummarizeTimeline(startDate, endDate)} 동안 관심을 보인 기업은 ${summarizeKeys(
             "generalTechnologyData",
         )} 기술을 가장 많이 사용합니다.`,
     };

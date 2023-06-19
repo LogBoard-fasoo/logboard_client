@@ -15,35 +15,22 @@ import SearchableDropdown from "../common/SearchableDropdown";
 import CustomTooltip from "../common/Tooltip";
 import NoResultFound from "../common/NoResultFound";
 import SummaryBox from "./SummaryBox";
-import useSummarizeTimeline from "../../hooks/useSummarizeTimeline";
-import { getTypeName, summarizeUrls } from "../utils/summarizeKeys";
+import useSummaryContent from "../../hooks/useSummaryContent";
 
 export default function SpecificIndustry() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
+    const { startDate, endDate } = timeline;
     const [categoryId, setCategoryId] = useState(null);
     const [industryId, setIndustryId] = useState(null);
     const [technologyId, setTechnologyId] = useState(null);
-    const timelineStr = useSummarizeTimeline(initialTimeline);
-    const noResultStr = "기간 선택 또는 검색어를 입력해주세요.";
 
-    const summaryContent = {
-        카테고리: categoryId
-            ? `${timelineStr} 동안 ${getTypeName("categories", categoryId)} 카테고리에 속한 기업은 ${summarizeUrls(
-                  "topUrlByCategory",
-                  categoryId,
-              )} 제품에 큰 관심을 보입니다. `
-            : noResultStr,
-        산업군: industryId
-            ? `${timelineStr} 동안  ${getTypeName("industries", industryId)} 산업군에 속한 기업은 ${summarizeUrls(
-                  "topUrlByIndustry",
-              )} 제품에 큰 관심을 보였습니다. `
-            : noResultStr,
-        사용기술: technologyId
-            ? `${timelineStr} 동안 ${getTypeName("technologies", technologyId)} 기술을 사용하는 기업은 ${summarizeUrls(
-                  "topUrlByTechnology",
-              )} 제품에 큰 관심을 보입니다.`
-            : noResultStr,
-    };
+    const [summaryContent, setSummaryContent] = useSummaryContent(
+        startDate,
+        endDate,
+        categoryId,
+        industryId,
+        technologyId,
+    );
 
     return (
         <Box>
@@ -52,16 +39,31 @@ export default function SpecificIndustry() {
                 <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
             </Flex>
             <Grid templateColumns={{ base: "1fr", xl: "1fr 1fr 1fr" }} gap={4}>
-                <CategoryBox timeline={timeline} categoryId={categoryId} setCategoryId={setCategoryId} />
-                <IndustryBox timeline={timeline} industryId={industryId} setIndustryId={setIndustryId} />
-                <TechnologyBox timeline={timeline} technologyId={technologyId} setTechnologyId={setTechnologyId} />
+                <CategoryBox
+                    timeline={timeline}
+                    categoryId={categoryId}
+                    setCategoryId={setCategoryId}
+                    setSummaryContent={setSummaryContent}
+                />
+                <IndustryBox
+                    timeline={timeline}
+                    industryId={industryId}
+                    setIndustryId={setIndustryId}
+                    setSummaryContent={setSummaryContent}
+                />
+                <TechnologyBox
+                    timeline={timeline}
+                    technologyId={technologyId}
+                    setTechnologyId={setTechnologyId}
+                    setSummaryContent={setSummaryContent}
+                />
             </Grid>
             <SummaryBox summaryContent={summaryContent} />
         </Box>
     );
 }
 
-function CategoryBox({ timeline, categoryId, setCategoryId }) {
+function CategoryBox({ timeline, categoryId, setCategoryId, setSummaryContent }) {
     const { startDate, endDate } = timeline;
 
     const { data: allTypes } = useQuery({
@@ -78,6 +80,7 @@ function CategoryBox({ timeline, categoryId, setCategoryId }) {
 
     useEffect(() => {
         categoryId && refetch();
+        setSummaryContent((d) => ({ ...d, categoryId }));
     }, [categoryId, startDate, endDate]);
 
     const prop = {
@@ -94,7 +97,7 @@ function CategoryBox({ timeline, categoryId, setCategoryId }) {
     return <SpecificIndustryBox {...prop} />;
 }
 
-function IndustryBox({ timeline, industryId, setIndustryId }) {
+function IndustryBox({ timeline, industryId, setIndustryId, setSummaryContent }) {
     const { startDate, endDate } = timeline;
 
     const { data: allTypes } = useQuery({
@@ -111,6 +114,7 @@ function IndustryBox({ timeline, industryId, setIndustryId }) {
 
     useEffect(() => {
         industryId && refetch();
+        setSummaryContent((d) => ({ ...d, industryId }));
     }, [industryId, startDate, endDate]);
 
     const prop = {
@@ -127,7 +131,7 @@ function IndustryBox({ timeline, industryId, setIndustryId }) {
     return <SpecificIndustryBox {...prop} />;
 }
 
-function TechnologyBox({ timeline, technologyId, setTechnologyId }) {
+function TechnologyBox({ timeline, technologyId, setTechnologyId, setSummaryContent }) {
     const { startDate, endDate } = timeline;
 
     const { data: allTypes } = useQuery({
@@ -145,6 +149,7 @@ function TechnologyBox({ timeline, technologyId, setTechnologyId }) {
 
     useEffect(() => {
         technologyId && refetch();
+        setSummaryContent((d) => ({ ...d, technologyId }));
     }, [technologyId, startDate, endDate]);
 
     const prop = {
