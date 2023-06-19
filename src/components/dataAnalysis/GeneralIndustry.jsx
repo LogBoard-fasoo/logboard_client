@@ -74,7 +74,7 @@ export default function GeneralIndustry() {
 function GeneralIndustryBox({ data, title, tooltipContent }) {
     return (
         <Box boxShadow="base" p="6" rounded="md" bg="white">
-            <Box style={{ width: "100%", height: "400px" }}>
+            <Box style={{ width: "100%", height: "550px" }}>
                 <Heading as="h3" fontSize="xl" fontWeight="bold">
                     {title}
                     <CustomTooltip tooltipContent={tooltipContent} />

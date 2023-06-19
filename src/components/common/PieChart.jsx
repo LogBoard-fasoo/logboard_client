@@ -1,11 +1,11 @@
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
 
-export default function PieChart({ data }) {
+export default function PieChart({ data, includeLegend = true }) {
     return (
         <ResponsivePie
             data={data}
-            margin={{ top: 40, right: 80, bottom: 80, left: 55 }}
+            margin={{ top: -100, right: 80, bottom: 30, left: 55 }}
             innerRadius={0.5}
             padAngle={0.7}
             cornerRadius={3}
@@ -45,31 +45,35 @@ export default function PieChart({ data }) {
                     spacing: 10,
                 },
             ]}
-            legends={[
-                {
-                    anchor: "bottom",
-                    direction: "row",
-                    justify: false,
-                    translateX: 0,
-                    translateY: 56,
-                    itemsSpacing: 0,
-                    itemWidth: 100,
-                    itemHeight: 18,
-                    itemTextColor: "#999",
-                    itemDirection: "left-to-right",
-                    itemOpacity: 1,
-                    symbolSize: 18,
-                    symbolShape: "circle",
-                    effects: [
-                        {
-                            on: "hover",
-                            style: {
-                                itemTextColor: "#000",
-                            },
-                        },
-                    ],
-                },
-            ]}
+            legends={
+                includeLegend
+                    ? [
+                          {
+                              anchor: "bottom",
+                              direction: "column",
+                              justify: false,
+                              translateX: -40,
+                              translateY: -10,
+                              itemsSpacing: 0,
+                              itemWidth: 100,
+                              itemHeight: 25,
+                              itemTextColor: "#999",
+                              itemDirection: "left-to-right",
+                              itemOpacity: 1,
+                              symbolSize: 18,
+                              symbolShape: "circle",
+                              effects: [
+                                  {
+                                      on: "hover",
+                                      style: {
+                                          itemTextColor: "#000",
+                                      },
+                                  },
+                              ],
+                          },
+                      ]
+                    : []
+            }
         />
     );
 }

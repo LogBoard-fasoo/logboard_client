@@ -90,7 +90,7 @@ function CompanyPieBox({ cId, cname, timeline }) {
                     </AccordionButton>
                 </h2>
                 <AccordionPanel px={0}>
-                    <PieBox pieDataUrl={pieDataUrl} pieDataCat={pieDataCat} />
+                    <PieBox cname={cname} pieDataUrl={pieDataUrl} pieDataCat={pieDataCat} />
                 </AccordionPanel>
             </AccordionItem>
         </Accordion>
@@ -118,18 +118,38 @@ function GraphBox({ data }) {
     );
 }
 
-function PieBox({ pieDataUrl, pieDataCat }) {
+function PieBox({ cname, pieDataUrl, pieDataCat }) {
     return (
         <HStack>
-            <Box style={{ width: "100%", height: "500px" }} bg="white" boxShadow="base" p="6" rounded="md">
+            <Box style={{ width: "100%", height: "550px" }} bg="white" boxShadow="base" p="6" rounded="md">
                 <Heading as="h5" fontSize="xl" mb={2}>
-                    관심 제품군
+                    관심 제품 영역
+                    <CustomTooltip
+                        tooltipContent={
+                            <small>
+                                <strong>Tip!</strong>
+                                <br />
+                                <li>{cname}이 관심있는 제품 영역입니다.</li>
+                                <li>services는 컨설팅, products는 제품, solutions는 솔루션을 의미합니다.</li>
+                            </small>
+                        }
+                    />
                 </Heading>
                 <PieChart data={pieDataCat} />
             </Box>
-            <Box style={{ width: "100%", height: "500px" }} bg="white" boxShadow="base" p="6" rounded="md">
+            <Box style={{ width: "100%", height: "550px" }} bg="white" boxShadow="base" p="6" rounded="md">
                 <Heading as="h5" fontSize="xl">
                     관심제품 Top 5
+                    <CustomTooltip
+                        tooltipContent={
+                            <small>
+                                <strong>Tip!</strong>
+                                <br />
+                                <li>{cname}이 관심있는 제품의 Top 10입니다.</li>
+                                <li>결과 내 url은 제품의 url과 매칭됩니다.</li>
+                            </small>
+                        }
+                    />
                 </Heading>
                 <PieChart data={pieDataUrl} />
             </Box>
