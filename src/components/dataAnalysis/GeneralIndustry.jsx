@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { Box, Flex, Grid, Heading, Spacer } from "@chakra-ui/react";
+import { Box, Flex, Grid, Heading, Highlight, Spacer } from "@chakra-ui/react";
 import PieChart from "../common/PieChart";
 import CustomTooltip from "../common/Tooltip";
 import CustomDateRangePicker from "../common/Datepicker";
