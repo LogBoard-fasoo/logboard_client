@@ -36,7 +36,7 @@ export default function SummaryBox({ summaryContent }) {
                                             <Heading size="xs" textTransform="uppercase">
                                                 {k}
                                             </Heading>
-                                            <HStack alignItems={"center"} pt={2}>
+                                            <HStack alignItems={"center"} pt={2} w={"85%"}>
                                                 <FiCheck />
                                                 <Text fontSize="sm">{summaryContent[k]}</Text>
                                             </HStack>

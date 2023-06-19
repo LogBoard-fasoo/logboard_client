@@ -7,6 +7,9 @@ import { useRecoilState } from "recoil";
 import { initialTimeline } from "../../recoil/atoms/generalIndustry";
 import { getCountsByCategory, getCountsByIndustry, getCountsByTechnology } from "../../services/dataAnalysis/visitors";
 import { useQueries } from "@tanstack/react-query";
+import SummaryBox from "./SummaryBox";
+import useSummarizeTimeline from "../../hooks/useSummarizeTimeline";
+import { summarizeKeys } from "../utils/summarizeKeys";
 
 export default function GeneralIndustry() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
@@ -35,15 +38,27 @@ export default function GeneralIndustry() {
         ],
     });
 
-    useEffect(() => {
-        refetchAll();
-    }, [startDate, endDate]);
+    const summaryContent = {
+        카테고리: `${useSummarizeTimeline(initialTimeline)} 동안 ${summarizeKeys(
+            "generalCategoryData",
+        )} 카테고리에 속한 기업이 파수에 큰 관심을 보입니다.`,
+        산업군: `${useSummarizeTimeline(initialTimeline)} 동안 ${summarizeKeys(
+            "generalIndustryData",
+        )} 산업군 속한 기업이 파수에 큰 관심을 보입니다.`,
+        사용기술: `${useSummarizeTimeline(initialTimeline)} 동안 관심을 보인 기업은 ${summarizeKeys(
+            "generalTechnologyData",
+        )} 기술을 가장 많이 사용합니다.`,
+    };
 
     const TIPS = [
         { title: "카테고리", tip: "해당 카테고리에 속하는 기업이 파수 제품에 관심이 많습니다." },
         { title: "산업군", tip: "해당 산업군에 속하는 기업이 파수 제품에 관심이 많습니다." },
         { title: "사용기술", tip: "파수 제품에 관심이 많은 기업은 다음 기술을 많이 사용합니다." },
     ];
+
+    useEffect(() => {
+        refetchAll();
+    }, [startDate, endDate]);
 
     return (
         <Box>
@@ -67,6 +82,7 @@ export default function GeneralIndustry() {
                     />
                 ))}
             </Grid>
+            <SummaryBox summaryContent={summaryContent} />
         </Box>
     );
 }
