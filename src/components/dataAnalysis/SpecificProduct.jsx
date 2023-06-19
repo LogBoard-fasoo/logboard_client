@@ -43,14 +43,14 @@ export default function SpecificProduct() {
                     <List spacing={3}>
                         <ListItem>
                             <Flex alignItems={"center"}>
-                                <FiCheckCircle color="green" />
-                                <span>&nbsp; 제품명은 fasoo.com의 url로 검색할 수 있어요.</span>
+                                <FiCheckCircle color="green" size={15} />
+                                <span>&nbsp; 제품명은 fasoo.com의 제품 url로 검색할 수 있어요.</span>
                             </Flex>
                         </ListItem>
                         <ListItem>
                             <Link href="https://www.fasoo.com/solutions/ransomware" isExternal>
                                 <Flex alignItems={"center"}>
-                                    <FiExternalLink /> &nbsp; 예제.
+                                    <FiExternalLink /> &nbsp; 예시.
                                 </Flex>
                                 <strong>제품명:</strong> 랜섬웨어 대응 솔루션 <br />
                                 <strong>검색어:</strong> solutions/ransomware <br />

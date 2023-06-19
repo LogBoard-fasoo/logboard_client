@@ -10,6 +10,7 @@ import SpecificCompany from "../dataAnalysis/SpecificCompany";
 import SpecificProduct from "../dataAnalysis/SpecificProduct";
 import ScrollButton from "../common/ScrollButton";
 import AlertInfo from "../common/AlertInfo";
+import DownloadToPdfBtn from "../dataAnalysis/DownloadToPdfBtn";
 
 export default function DataAnalysis() {
     const containerProps = [
@@ -23,7 +24,7 @@ export default function DataAnalysis() {
                         content={
                             <Box>
                                 <Flex alignItems={"center"}>
-                                    <FiCheckCircle color="green" />
+                                    <FiCheckCircle color="green" size={15} />
                                     <span>
                                         &nbsp; Industry는 시장은 구분하는 큰 범주, Category는 특정 제품이나 서비스가
                                         속하는 좀 더 세부 범주를 의미합니다.
@@ -32,7 +33,7 @@ export default function DataAnalysis() {
                                 <Flex alignItems={"center"}>
                                     <FiCheckCircle color="green" />
                                     <span>
-                                        &nbsp;맥도날드를 예시로, 맥노날드의 Industry는 &apos;음식 서비스 산업&apos;,
+                                        &nbsp; 맥도날드를 예시로, 맥노날드의 Industry는 &apos;음식 서비스 산업&apos;,
                                         Category는 &apos;패스트푸드&apos;로 분류될 수 있겠죠? 😉
                                     </span>
                                 </Flex>
@@ -81,9 +82,10 @@ export default function DataAnalysis() {
                             Fasoo.com 방문 기업 분석 대쉬보드입니다.
                         </Text>
                         <Spacer />
-                        <Button bg="blue.600" color="white" as="a" my={2}>
-                            PDF로 다운로드
-                        </Button>
+                        <DownloadToPdfBtn />
+                        {/* <Button bg="blue.600" color="white" as="a" my={2}> */}
+                        {/* PDF로 다운로드 */}
+                        {/* </Button> */}
                     </Flex>
                 </Box>
                 <Stack gap={4}>

@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from "../layout/Sidebar";
-import { Box, Flex, HStack, Heading, Spacer } from "@chakra-ui/react";
+import { Box, Flex, HStack, Heading, Spacer, Text } from "@chakra-ui/react";
 import { FiMessageCircle } from "react-icons/fi";
 import IpMappingTable from "../mapping/IpMappingTable";
 import CustomDateRangePicker from "../common/Datepicker";
@@ -22,7 +22,9 @@ function Mapping() {
                         IP Mapping
                     </Heading>
                 </Flex>
-                <small>IP별 커스텀 팝업 메시지를 작성할 수 있는 페이지입니다.</small>
+                <Text fontSize={"sm"} my={2}>
+                    IP별 커스텀 팝업 메시지를 작성할 수 있는 페이지입니다.
+                </Text>
                 <Box bg="gray.50" borderRadius="xl" p={6} boxShadow="base" rounded="md">
                     <HStack my={3}>
                         <CustomRadioGroup />
