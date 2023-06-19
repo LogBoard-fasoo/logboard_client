@@ -13,6 +13,7 @@ import {
 } from "../../services/dataAnalysis/visitedUrls";
 import { Images } from "../../assets/images";
 import SearchableDropdown from "../common/SearchableDropdown";
+import CustomTooltip from "../common/Tooltip";
 
 export default function SpecificIndustry() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
@@ -49,16 +50,18 @@ function CategoryBox(timeline) {
     });
 
     useEffect(() => {
-        refetch();
+        typeId && refetch();
     }, [typeId, startDate, endDate]);
 
     const prop = {
         title: "Category",
         selectName: "categories",
         placeholder: "카테고리를 검색할 수 있어요.",
+        typeId,
         options: allTypes?.data,
         onChangeFn: (e) => settypeId(parseInt(e?.value)),
         data: ranking?.data || [],
+        tip: "선택한 카테고리에 속하는 기업은 해당 제품들에 가장 관심이 많아요.",
     };
 
     return <SpecificIndustryBox {...prop} />;
@@ -81,16 +84,18 @@ function IndustryBox(timeline) {
     });
 
     useEffect(() => {
-        refetch();
+        typeId && refetch();
     }, [typeId, startDate, endDate]);
 
     const prop = {
         title: "Industry",
         selectName: "industries",
         placeholder: "산업군을 검색할 수 있어요.",
+        typeId,
         options: allTypes?.data,
         onChangeFn: (e) => settypeId(parseInt(e?.value)),
         data: ranking?.data || [],
+        tip: "선택한 카테고리에 속하는 기업은 해당 제품들에 가장 관심이 많아요.",
     };
 
     return <SpecificIndustryBox {...prop} />;
@@ -101,43 +106,55 @@ function TechnologyBox(timeline) {
     const { startDate, endDate } = timeline.timeline;
 
     const { data: allTypes } = useQuery({
-        queryKey: ["industries"],
-        queryFn: getAllCategoryTypes,
+        queryKey: ["technologies"],
+        queryFn: getAllTechnologyTypes,
         staleTime: Infinity,
     });
 
     const { data: ranking, refetch } = useQuery({
         enabled: typeId ? true : false,
+        enabled: false,
         queryKey: ["topUrlByTechnology"],
         queryFn: () => getTopVisitedUrlByTechnoology(typeId, startDate, endDate),
     });
 
     useEffect(() => {
-        refetch();
+        typeId && refetch();
     }, [typeId, startDate, endDate]);
 
     const prop = {
         title: "Technology",
         selectName: "technologies",
         placeholder: "사용 기술을 검색할 수 있어요.",
+        typeId,
         options: allTypes?.data || [],
         onChangeFn: (e) => settypeId(e.map((tech) => tech.value).join()),
         data: ranking?.data || [],
         isMulti: true,
+        tip: "선택한 카테고리에 속하는 기업은 해당 제품들에 가장 관심이 많아요.",
     };
 
     return <SpecificIndustryBox {...prop} />;
 }
 
-function SpecificIndustryBox({ data, title, ...rest }) {
+function SpecificIndustryBox({ data, title, tip, typeId, ...rest }) {
     return (
         <Box boxShadow="base" p="6" rounded="md" bg="white">
             <Heading as="h4" fontSize="xl" mb={2}>
                 {title}
+                <CustomTooltip
+                    tooltipContent={
+                        <small>
+                            <strong>Tip!</strong>
+                            <br />
+                            <span>{tip}</span>
+                        </small>
+                    }
+                />
             </Heading>
             <SearchableDropdown {...rest} />
             <Box style={{ width: "100%", height: "400px" }}>
-                {data.length > 0 ? (
+                {typeId && data.length > 0 ? (
                     <HBarChart data={data} />
                 ) : (
                     <Flex flexDirection="column" justifyContent="center" alignItems="center" w="100%" h="100%">

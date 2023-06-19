@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, Tooltip } from "@chakra-ui/react";
+import { Center, Icon, Tooltip } from "@chakra-ui/react";
 import { FiHelpCircle } from "react-icons/fi";
 
 export default function CustomTooltip({ tooltipContent }) {

@@ -25,8 +25,8 @@ export default function DataAnalysis() {
                             <span>
                                 Industry는 시장은 구분하는 큰 범주, Category는 특정 제품이나 서비스가 속하는 좀 더 세부
                                 범주를 의미합니다. <br />
-                                맥도날드를 예시로, 맥노날드의 Industry는 &quot음식 서비스 산업&quot, Category는
-                                &quot패스트푸드&quot로 분류될 수 있겠죠? 😉
+                                맥도날드를 예시로, 맥노날드의 Industry는 &apos;음식 서비스 산업&apos;, Category는
+                                &apos;패스트푸드&apos;로 분류될 수 있겠죠? 😉
                             </span>
                         }
                     ></AlertInfo>
