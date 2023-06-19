@@ -13,14 +13,14 @@ export default function AlertInfo({ title, content }) {
 
     return (
         !closed && (
-            <Alert status="warning" flexDirection={"column"} fontSize={"sm"}>
+            <Alert status="warning" flexDirection={"column"} fontSize={"sm"} _hover={{ cursor: "pointer" }}>
                 <Box onClick={handleToggle} width={"100%"} display={"flex"} alignItems={"center"}>
                     <Box display={"flex"} w={"100%"} alignItems={"center"}>
                         {isVisible ? <FiChevronUp /> : <FiChevronDown />}
                         &nbsp;&nbsp;
                         <strong>{title}</strong>
                     </Box>
-                    <FiX onClick={setClosed} />
+                    <FiX onClick={() => setClosed(true)} />
                 </Box>
                 <Box w={"100%"} px={2}>
                     {isVisible && (

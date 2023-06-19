@@ -18,36 +18,35 @@ import { FiCheckCircle } from "react-icons/fi";
 
 export default function SummaryBox({ summaryContent }) {
     return (
-        summaryContent && ( // TODO: && 조건문 삭제
-            <Accordion defaultIndex={[0]} allowMultiple mt={2}>
-                <AccordionItem>
-                    <AccordionButton px={0}>
-                        <Box flex="1" textAlign="left">
-                            <Heading size="md">Summary</Heading>
-                        </Box>
-                        <AccordionIcon />
-                    </AccordionButton>
-                    <AccordionPanel px={0}>
-                        <Card>
-                            <CardBody>
-                                <Stack divider={<StackDivider />} spacing="4">
-                                    {Object.keys(summaryContent).map((k) => (
-                                        <Box key={Math.random().toString() + k}>
-                                            <Heading size="xs" textTransform="uppercase">
-                                                {k}
-                                            </Heading>
-                                            <HStack alignItems={"center"} pt={2} w={"85%"}>
-                                                <FiCheckCircle color="green" />
-                                                <Text fontSize="sm">{summaryContent[k]}</Text>
-                                            </HStack>
-                                        </Box>
-                                    ))}
-                                </Stack>
-                            </CardBody>
-                        </Card>
-                    </AccordionPanel>
-                </AccordionItem>
-            </Accordion>
-        )
+        // 디폴트로 open한 상태를 원한다면 defaultIndex={[0]} 속성 추가
+        <Accordion allowMultiple mt={2}>
+            <AccordionItem>
+                <AccordionButton px={0}>
+                    <Box flex="1" textAlign="left">
+                        <Heading size="md">Summary</Heading>
+                    </Box>
+                    <AccordionIcon />
+                </AccordionButton>
+                <AccordionPanel px={0}>
+                    <Card>
+                        <CardBody>
+                            <Stack divider={<StackDivider />} spacing="4">
+                                {Object.keys(summaryContent).map((k) => (
+                                    <Box key={Math.random().toString() + k}>
+                                        <Heading size="xs" textTransform="uppercase">
+                                            {k}
+                                        </Heading>
+                                        <HStack alignItems={"center"} pt={2} w={"85%"}>
+                                            <FiCheckCircle color="green" />
+                                            <Text fontSize="sm">{summaryContent[k]}</Text>
+                                        </HStack>
+                                    </Box>
+                                ))}
+                            </Stack>
+                        </CardBody>
+                    </Card>
+                </AccordionPanel>
+            </AccordionItem>
+        </Accordion>
     );
 }
