@@ -25,7 +25,7 @@ function Mapping() {
                 <Text fontSize={"sm"} my={2}>
                     IP별 커스텀 팝업 메시지를 작성할 수 있는 페이지입니다.
                 </Text>
-                <Box bg="gray.50" borderRadius="xl" p={6} boxShadow="base" rounded="md">
+                <Box bg="gray.50" borderRadius="xl" p={6} mt={5} boxShadow="base" rounded="md">
                     <HStack my={3}>
                         <CustomRadioGroup />
                         <Spacer />
