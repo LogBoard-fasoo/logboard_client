@@ -33,9 +33,20 @@ export default function DataAnalysis() {
                                 <Flex alignItems={"center"}>
                                     <FiCheckCircle color="green" />
                                     <span>
-                                        &nbsp; 맥도날드를 예시로, 맥노날드의 Industry는 &apos;음식 서비스 산업&apos;,
-                                        Category는 &apos;패스트푸드&apos;로 분류될 수 있겠죠? 😉
+                                        &nbsp; 하나의 기업은 하나의 산업군과 여러개의 카테고리를 가질 수 있어요.
                                     </span>
+                                </Flex>
+                                <Flex alignItems={"center"}>
+                                    <FiCheckCircle color="green" />
+                                    <span>
+                                        &nbsp; 파수를 예시로, 파수의 Industry는 &apos;Internet Software &
+                                        Services&apos;, Category는 &apos;Consulting & Professional Serivces, Information
+                                        Technology & Services, B2B, B2C, Security&apos; 등 으로 분류될 수 있겠죠? 😉
+                                    </span>
+                                    {/* <span>
+                                        &nbsp; 맥도날드를 예시로, 맥노날드의 Industry는 &apos;음식 서비스 산업&apos;,
+                                        Category는 &apos;패스트푸드&apos;, &apos;B2C&apos;로 분류될 수 있겠죠? 😉
+                                    </span> */}
                                 </Flex>
                             </Box>
                         }

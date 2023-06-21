@@ -12,7 +12,7 @@ export default function getDefaultTimeline() {
     const previousFriday = new Date(
         closestPreviousFriday.getFullYear(),
         closestPreviousFriday.getMonth(),
-        closestPreviousFriday.getDate() - 14,
+        closestPreviousFriday.getDate() - 28,
     );
 
     const defaultStartDate = previousFriday.toISOString().split("T")[0];

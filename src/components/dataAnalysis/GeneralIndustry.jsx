@@ -21,13 +21,13 @@ export default function GeneralIndustry() {
     const results = useQueries({
         queries: [
             {
-                queryKey: ["generalCategoryData"],
-                queryFn: () => getCountsByCategory(5, startDate, endDate),
+                queryKey: ["generalIndustryData"],
+                queryFn: () => getCountsByIndustry(5, startDate, endDate),
                 suspense: true,
             },
             {
-                queryKey: ["generalIndustryData"],
-                queryFn: () => getCountsByIndustry(5, startDate, endDate),
+                queryKey: ["generalCategoryData"],
+                queryFn: () => getCountsByCategory(5, startDate, endDate),
                 suspense: true,
             },
             {
@@ -39,20 +39,20 @@ export default function GeneralIndustry() {
     });
 
     const summaryContent = {
-        카테고리: `${useSummarizeTimeline(startDate, endDate)} 동안 ${summarizeKeys(
-            "generalCategoryData",
-        )} 카테고리에 속한 기업이 파수에 큰 관심을 보입니다.`,
         산업군: `${useSummarizeTimeline(startDate, endDate)} 동안 ${summarizeKeys(
             "generalIndustryData",
         )} 산업군 속한 기업이 파수에 큰 관심을 보입니다.`,
+        카테고리: `${useSummarizeTimeline(startDate, endDate)} 동안 ${summarizeKeys(
+            "generalCategoryData",
+        )} 카테고리에 속한 기업이 파수에 큰 관심을 보입니다.`,
         사용기술: `${useSummarizeTimeline(startDate, endDate)} 동안 관심을 보인 기업은 ${summarizeKeys(
             "generalTechnologyData",
         )} 기술을 가장 많이 사용합니다.`,
     };
 
     const TIPS = [
-        { title: "카테고리", tip: "해당 카테고리에 속하는 기업이 파수 제품에 관심이 많습니다." },
         { title: "산업군", tip: "해당 산업군에 속하는 기업이 파수 제품에 관심이 많습니다." },
+        { title: "카테고리", tip: "해당 카테고리에 속하는 기업이 파수 제품에 관심이 많습니다." },
         { title: "사용기술", tip: "파수 제품에 관심이 많은 기업은 다음 기술을 많이 사용합니다." },
     ];
 

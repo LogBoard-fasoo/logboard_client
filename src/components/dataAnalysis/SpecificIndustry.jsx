@@ -39,16 +39,16 @@ export default function SpecificIndustry() {
                 <CustomDateRangePicker timeline={timeline} setTimeline={setTimeline} />
             </Flex>
             <Grid templateColumns={{ base: "1fr", xl: "1fr 1fr 1fr" }} gap={4}>
-                <CategoryBox
-                    timeline={timeline}
-                    categoryId={categoryId}
-                    setCategoryId={setCategoryId}
-                    setSummaryContent={setSummaryContent}
-                />
                 <IndustryBox
                     timeline={timeline}
                     industryId={industryId}
                     setIndustryId={setIndustryId}
+                    setSummaryContent={setSummaryContent}
+                />
+                <CategoryBox
+                    timeline={timeline}
+                    categoryId={categoryId}
+                    setCategoryId={setCategoryId}
                     setSummaryContent={setSummaryContent}
                 />
                 <TechnologyBox

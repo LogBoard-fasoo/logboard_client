@@ -5,8 +5,8 @@ export const getApiEndpoint = () => {
         case "production":
             return "https://web3.fasoo.com/logboard/"; // TODO: 배포 URL 수정
         case "development":
-            return "https://localhost:44301/";
+            return "https://localhost:44302/";
         default:
-            return "https://localhost:44301/";
+            return "https://localhost:44302/";
     }
 };
