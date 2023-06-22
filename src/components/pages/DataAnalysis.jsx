@@ -1,6 +1,6 @@
-import React, { Suspense } from "react";
+import React from "react";
 import Sidebar from "../layout/Sidebar";
-import { Box, Button, Flex, Icon, Spacer, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Icon, Spacer, Stack, Text } from "@chakra-ui/react";
 import { Heading } from "@chakra-ui/react";
 import { FiHash, FiActivity, FiCheckCircle } from "react-icons/fi";
 import GeneralIndustry from "../dataAnalysis/GeneralIndustry";
@@ -18,7 +18,7 @@ export default function DataAnalysis() {
             title: "산업 동향",
             desc: "선택된 기간 내 Fasoo에 가장 큰 관심을 보이는 기업 카테고리와 산업, 그 기업이 많이 사용하는 기술을 뽑아봤어요.",
             children: (
-                <Suspense>
+                <>
                     <AlertInfo
                         title={"Industry와 Category의 차이점은 뭔가요?"}
                         content={
@@ -52,7 +52,7 @@ export default function DataAnalysis() {
                         }
                     ></AlertInfo>
                     <GeneralIndustry />
-                </Suspense>
+                </>
             ),
         },
         {
@@ -84,7 +84,7 @@ export default function DataAnalysis() {
                         <Heading as="h1" size="2xl" noOfLines={1} mr={3} textShadow="3px 3px 3px rgba(0,0,0,0.2)">
                             <FiActivity />
                         </Heading>
-                        <Heading as="h1" size="2xl" noOfLines={1} textShadow="3px 3px 3px rgba(0,0,0,0.2)">
+                        <Heading as="h1" size="2xl" noOfLines={1} textShadow="3px 3px 3px rgba(0,0,0,0.2)" pb={3}>
                             Data Analysis
                         </Heading>
                     </Flex>
@@ -94,9 +94,6 @@ export default function DataAnalysis() {
                         </Text>
                         <Spacer />
                         <DownloadToPdfBtn />
-                        {/* <Button bg="blue.600" color="white" as="a" my={2}> */}
-                        {/* PDF로 다운로드 */}
-                        {/* </Button> */}
                     </Flex>
                 </Box>
                 <Stack gap={4}>

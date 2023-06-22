@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { Box, Flex, Grid, Heading, Highlight, Spacer } from "@chakra-ui/react";
 import PieChart from "../common/PieChart";
 import CustomTooltip from "../common/Tooltip";
@@ -14,9 +14,6 @@ import { summarizeKeys } from "../utils/summarizeKeys";
 export default function GeneralIndustry() {
     const [timeline, setTimeline] = useRecoilState(initialTimeline);
     const { startDate, endDate } = timeline;
-    const refetchAll = useCallback(() => {
-        results.forEach((result) => result.refetch());
-    });
 
     const results = useQueries({
         queries: [
@@ -56,9 +53,13 @@ export default function GeneralIndustry() {
         { title: "사용기술", tip: "파수 제품에 관심이 많은 기업은 다음 기술을 많이 사용합니다." },
     ];
 
+    const refetchAll = useCallback(() => {
+        results.forEach((result) => result.refetch());
+    });
+
     useEffect(() => {
         refetchAll();
-    }, [startDate, endDate]);
+    }, [timeline]);
 
     return (
         <Box>

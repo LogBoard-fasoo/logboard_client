@@ -69,7 +69,6 @@ function CategoryBox({ timeline, categoryId, setCategoryId, setSummaryContent })
     const { data: allTypes } = useQuery({
         queryKey: ["categories"],
         queryFn: getAllCategoryTypes,
-        staleTime: Infinity,
     });
 
     const { data: ranking, refetch } = useQuery({
@@ -103,7 +102,6 @@ function IndustryBox({ timeline, industryId, setIndustryId, setSummaryContent })
     const { data: allTypes } = useQuery({
         queryKey: ["industries"],
         queryFn: getAllIndsutryTypes,
-        staleTime: Infinity,
     });
 
     const { data: ranking, refetch } = useQuery({
@@ -137,7 +135,6 @@ function TechnologyBox({ timeline, technologyId, setTechnologyId, setSummaryCont
     const { data: allTypes } = useQuery({
         queryKey: ["technologies"],
         queryFn: getAllTechnologyTypes,
-        staleTime: Infinity,
     });
 
     const { data: ranking, refetch } = useQuery({

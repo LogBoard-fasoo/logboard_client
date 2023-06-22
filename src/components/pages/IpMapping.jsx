@@ -18,7 +18,7 @@ function Mapping() {
                     <Heading as="h1" size="2xl" noOfLines={1} mr={3} textShadow="3px 3px 3px rgba(0,0,0,0.2)">
                         <FiMessageCircle />
                     </Heading>
-                    <Heading as="h1" size="2xl" noOfLines={1} textShadow="3px 3px 3px rgba(0,0,0,0.2)">
+                    <Heading as="h1" size="2xl" noOfLines={1} textShadow="3px 3px 3px rgba(0,0,0,0.2)" pb={3}>
                         IP Mapping
                     </Heading>
                 </Flex>

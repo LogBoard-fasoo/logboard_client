@@ -19,7 +19,7 @@ import { FiCheckCircle } from "react-icons/fi";
 export default function SummaryBox({ summaryContent }) {
     return (
         // 디폴트로 open한 상태를 원한다면 defaultIndex={[0]} 속성 추가
-        <Accordion allowMultiple mt={2}>
+        <Accordion allowMultiple mt={2} defaultIndex={[0]}>
             <AccordionItem>
                 <AccordionButton px={0}>
                     <Box flex="1" textAlign="left">
