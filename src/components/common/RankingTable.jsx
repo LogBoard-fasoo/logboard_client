@@ -53,7 +53,7 @@ export default function RankingTable({ timeline }) {
                             <Th color="white">Country</Th>
                             <Th color="white">Industry</Th>
                             <Th color="white" isNumeric>
-                                Counts
+                                Visits
                             </Th>
                             <Th></Th>
                         </Tr>

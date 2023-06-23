@@ -85,7 +85,7 @@ function GraphBox({ data }) {
                     }
                 />
             </Heading>
-            {data.length > 0 ? <GraphChart data={data} /> : <NoResultFound />}
+            {data.length > 0 ? <GraphChart data={data} x={"날짜"} y={"방문횟수"} /> : <NoResultFound />}
         </Box>
     );
 }

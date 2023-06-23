@@ -7,6 +7,7 @@ export default function PieChart({ data, includeLegend = true }) {
         <Box width={"100%"} height={"100%"}>
             <ResponsivePie
                 data={data}
+                valueFormat={(value) => `${value} visits`}
                 margin={{ top: 30, right: 80, bottom: 180, left: 55 }}
                 innerRadius={0.5}
                 padAngle={0.7}

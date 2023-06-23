@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 
-export default function GraphChart({ data }) {
+export default function GraphChart({ data, x = "x", y = "y" }) {
     return (
         <ResponsiveLine
             data={data}
@@ -32,6 +32,16 @@ export default function GraphChart({ data }) {
                 legendOffset: -40,
                 legendPosition: "middle",
             }}
+            tooltip={({ point }) => (
+                <div>
+                    <div>
+                        {x}: {point.data.x}
+                    </div>
+                    <div>
+                        {y}: {point.data.y}
+                    </div>
+                </div>
+            )}
             pointSize={10}
             pointColor={{ theme: "background" }}
             pointBorderWidth={2}

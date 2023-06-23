@@ -11,6 +11,7 @@ import SpecificProduct from "../dataAnalysis/SpecificProduct";
 import ScrollButton from "../common/ScrollButton";
 import AlertInfo from "../common/AlertInfo";
 import DownloadToPdfBtn from "../dataAnalysis/DownloadToPdfBtn";
+import TopVisitedItems from "../dataAnalysis/TopVisitedItems";
 
 export default function DataAnalysis() {
     const containerProps = [
@@ -70,6 +71,11 @@ export default function DataAnalysis() {
             desc: "선택된 기간 내 궁금한 여러 기업의 방문 트렌드를 한눈에 볼 수 있어요.",
             children: <SpecificCompany />,
         },
+        // {
+        //     title: "인기 제품",
+        //     desc: "파수의 가장 인기 제품이에요.",
+        //     children: <TopVisitedItems />,
+        // },
         {
             title: "개별 제품 분석",
             desc: "선택된 기간 내 제품의 관심도 동향을 볼 수 있어요.",

@@ -6,6 +6,7 @@ export default function HBarChart({ data }) {
         <ResponsiveBar
             data={data}
             keys={["count"]}
+            valueFormat={(value) => `${value} visits`}
             indexBy="url"
             margin={{ top: 50, right: 80, bottom: 50, left: 60 }}
             padding={0.25}
