@@ -1,13 +1,12 @@
 import React from "react";
 import Sidebar from "../layout/Sidebar";
-import { Box, Flex, HStack, Heading, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex, HStack, Heading, Text } from "@chakra-ui/react";
 import { FiMessageCircle } from "react-icons/fi";
-import IpMappingTable from "../mapping/IpMappingTable";
-import CustomDateRangePicker from "../common/Datepicker";
 import { initialMappingState } from "../../recoil/atoms/ipMapping";
 import { useRecoilState } from "recoil";
-import CustomRadioGroup from "../mapping/IpCustomRadioGroup";
 import Filter from "../customPopup/Filter";
+import IpTable from "../customPopup/IpTable";
+import MessageBox from "../customPopup/MessageBox";
 
 function CustomPopup() {
     const [ipMappingState, setIpMappingState] = useRecoilState(initialMappingState);
@@ -29,12 +28,26 @@ function CustomPopup() {
                 <Box bg="gray.50" borderRadius="xl" p={6} mt={5} boxShadow="base" rounded="md">
                     <HStack my={3}>
                         <Filter />
-                        {/* <CustomRadioGroup />
-                        <Spacer />
-                        <CustomDateRangePicker timeline={ipMappingState} setTimeline={setIpMappingState} /> */}
                     </HStack>
-                    {/* <IpMappingTable /> */}
                 </Box>
+                <HStack h={"500px"}>
+                    <Box
+                        bg="gray.50"
+                        borderRadius="xl"
+                        p={6}
+                        mt={5}
+                        boxShadow="base"
+                        rounded="md"
+                        w={"70%"}
+                        h={"100%"}
+                        overflow={"scroll"}
+                    >
+                        <IpTable />
+                    </Box>
+                    <Box bg="gray.50" borderRadius="xl" p={6} mt={5} boxShadow="base" rounded="md" w={"30%"} h={"100%"}>
+                        <MessageBox />
+                    </Box>
+                </HStack>
             </Box>
         </Sidebar>
     );

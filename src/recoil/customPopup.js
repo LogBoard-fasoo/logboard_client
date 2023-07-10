@@ -8,6 +8,7 @@ const initialState = {
     endDate: endDate,
     hasMessage: false, // 필터기준1: 메시지 유무
     hasCompany: false, // 필터기준2: 매칭 기업 유무
+    counts: 1,
     interestedProducts: [], // 필터기준3: 관심 제품
 };
 
