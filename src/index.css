@@ -13,3 +13,8 @@ code {
 svg:hover {
     cursor: pointer;
 }
+
+svg {
+    display: inline !important;
+    padding-top: 3px;
+}

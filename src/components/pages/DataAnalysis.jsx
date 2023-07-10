@@ -11,7 +11,6 @@ import SpecificProduct from "../dataAnalysis/SpecificProduct";
 import ScrollButton from "../common/ScrollButton";
 import AlertInfo from "../common/AlertInfo";
 import DownloadToPdfBtn from "../dataAnalysis/DownloadToPdfBtn";
-import TopVisitedItems from "../dataAnalysis/TopVisitedItems";
 
 export default function DataAnalysis() {
     const containerProps = [

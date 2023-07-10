@@ -19,6 +19,8 @@ export const queryClient = new QueryClient({
 });
 
 export default function App() {
+    const basename = process.env.NODE_ENV === "development" ? "" : process.env.PUBLIC_URL;
+
     return (
         <ChakraProvider theme={theme}>
             <Suspense fallback={<CustomSpinner />}>
@@ -26,9 +28,9 @@ export default function App() {
                     <RecoilRoot>
                         <Router>
                             <Routes>
-                                <Route path="/ip-mapping" element={<IpMapping />} />
-                                <Route path="/data-analysis" element={<DataAnalysis />} />
-                                <Route path="*" element={<DataAnalysis />} />
+                                <Route path={basename + "/ip-mapping"} element={<IpMapping />} />
+                                <Route path={basename + "/data-analysis"} element={<DataAnalysis />} />
+                                <Route path={basename + "*"} element={<DataAnalysis />} />
                             </Routes>
                         </Router>
                     </RecoilRoot>

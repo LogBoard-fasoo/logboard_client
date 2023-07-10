@@ -14,9 +14,11 @@ import {
 import { NavLink, useLocation } from "react-router-dom";
 import { FiActivity, FiMessageCircle, FiMenu } from "react-icons/fi";
 
+const basename = process.env.NODE_ENV === "development" ? "" : process.env.PUBLIC_URL;
+
 const LinkItems = [
-    { name: "Data Analysis", icon: FiActivity, to: "/data-analysis" },
-    { name: "Ip Mapping", icon: FiMessageCircle, to: "/ip-mapping" },
+    { name: "Data Analysis", icon: FiActivity, to: basename + "/data-analysis" },
+    { name: "Ip Mapping", icon: FiMessageCircle, to: basename + "/ip-mapping" },
 ];
 
 export default function Sidebar({ children }) {
