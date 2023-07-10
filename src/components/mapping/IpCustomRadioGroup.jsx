@@ -25,42 +25,6 @@ export default function IpCustomRadioGroup() {
                 changeFn={(e) => console.log(e)}
                 defaultValue={filterInterest}
             />
-            {/* <CustomRadioGroup
-                title="매칭 기업 유무"
-                radioLst={[
-                    { value: 1, option: "있음" },
-                    { value: 2, option: "없음" },
-                ]}
-                changeFn={(e) => setIpMappingState((d) => ({ ...d, filterInterest: e.target.value }))}
-                defaultValue={filterInterest}
-            /> */}
-            {/* <CustomRadioGroup
-                title="관심 제품"
-                radioLst={[
-                    { value: 1, option: "방문횟수" },
-                    { value: 2, option: "High intent" },
-                ]}
-                changeFn={(e) => setIpMappingState((d) => ({ ...d, filterInterest: e.target.value }))}
-                defaultValue={filterInterest}
-            />
-            <CustomRadioGroup
-                title="방문 기록"
-                radioLst={[
-                    { value: 1, option: "방문횟수" },
-                    { value: 2, option: "High intent" },
-                ]}
-                changeFn={(e) => setIpMappingState((d) => ({ ...d, filterInterest: e.target.value }))}
-                defaultValue={filterInterest}
-            /> */}
-            {/* <CustomRadioGroup
-                title="메시지"
-                radioLst={[
-                    { value: 1, option: "있음" },
-                    { value: 2, option: "없음" },
-                ]}
-                changeFn={(e) => setIpMappingState((d) => ({ ...d, filterInterest: e.target.value }))}
-                defaultValue={filterInterest}
-            /> */}
         </RadioGroup>
     );
 }

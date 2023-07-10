@@ -25,7 +25,7 @@ export function CustomDatePicker({ isDisabled, setTimeline }) {
     );
 }
 
-export default function CustomDateRangePicker({ timeline, setTimeline }) {
+export default function CustomDateRangePicker({ timeline, setTimeline, onlyAllow = 5 }) {
     const { startDate, endDate } = timeline;
 
     const handleStartDateChange = (date) => {
@@ -38,7 +38,7 @@ export default function CustomDateRangePicker({ timeline, setTimeline }) {
 
     const shouldDisableDate = (date) => {
         if (!(date instanceof Date)) date = new Date(date);
-        return date.getDay() !== 5;
+        return date.getDay() !== onlyAllow;
     };
 
     const theme = createTheme();
@@ -51,7 +51,7 @@ export default function CustomDateRangePicker({ timeline, setTimeline }) {
                     renderInput={(params) => <TextField {...params} />}
                     onChange={handleStartDateChange}
                     label="시작일"
-                    shouldDisableDate={shouldDisableDate}
+                    shouldDisableDate={onlyAllow && shouldDisableDate}
                     maxDate={dayjs(endDate)}
                 />
 
@@ -60,7 +60,7 @@ export default function CustomDateRangePicker({ timeline, setTimeline }) {
                     renderInput={(params) => <TextField {...params} />}
                     onChange={handleEndDateChange}
                     label="종료일"
-                    shouldDisableDate={shouldDisableDate}
+                    shouldDisableDate={onlyAllow && shouldDisableDate}
                     minDate={dayjs(startDate)}
                 />
             </LocalizationProvider>
