@@ -1,9 +1,9 @@
 import React from "react";
 import { HStack, Heading, Radio, RadioGroup, Stack, Text } from "@chakra-ui/react";
 
-export default function CustomRadioGroup({ title, radioLst, changeFn, defaultValue }) {
+export default function CustomRadioGroup({ title, radioLst, onChange, value }) {
     return (
-        <RadioGroup onChange={changeFn} value={defaultValue} defaultValue={"1"}>
+        <RadioGroup onChange={onChange} value={value}>
             <HStack>
                 {title && <Heading size="md">{title}</Heading>}
                 <Stack direction="row">

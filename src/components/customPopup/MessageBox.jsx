@@ -20,9 +20,7 @@ export default function MessageBox() {
                 <FormLabel>컨텐츠</FormLabel>
                 <Textarea
                     type="text"
-                    placeholder="팝업 메시지 컨텐츠. url은 다음 형식으로 추가할 수 있습니다.
-                    &#13;&#10;
-                    e.g. 요즈음 [Data Security Platform](https://www.fasoo.com/solutions/fasoo-data-security-platform) 제품에 관심이 많으시죠?"
+                    placeholder="팝업 메시지 컨텐츠.&#13;&#10;url 추가 방식: &#13;&#10;e.g.요즈음 [Data Security Platform](https://www.fasoo.com/solutions/fasoo-data-security-platform) 제품에 관심이 많으시죠?"
                     rows={10}
                 />
                 <FormLabel>유효일자</FormLabel>

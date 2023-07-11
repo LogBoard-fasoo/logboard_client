@@ -15,12 +15,12 @@ import {
 } from "@chakra-ui/react";
 import CustomDateRangePicker from "../common/Datepicker";
 import SearchableDropdown from "../common/SearchableDropdown";
-import { initialCustomPopupState } from "../../recoil/customPopup";
+import { initialCustomPopupState } from "../../recoil/atoms/popupFilter";
 
 export default function Filter() {
     const [customPopupState, setCustomPopupState] = useRecoilState(initialCustomPopupState);
 
-    const { startDate, endDate, hasMessage, hasCompany, counts, interestedProducts } = customPopupState;
+    const { hasMessage, hasCompany, counts, interestedProducts } = customPopupState;
 
     const dropDownProps = {
         isMulti: true,
@@ -82,7 +82,7 @@ export default function Filter() {
                     최소 방문 횟수
                 </Heading>
                 <NumberInput
-                    defaultValue={2}
+                    defaultValue={counts}
                     min={1}
                     onChange={(e) => setCustomPopupState((d) => ({ ...d, counts: e }))}
                 >

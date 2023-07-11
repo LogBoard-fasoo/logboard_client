@@ -1,18 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomRadioGroup from "../common/RadioGroup";
 
-export default function MessageTypeRadioGroup({ option1, option2 }) {
-    const [filter, setFilter] = useState("1");
-
-    const radioLst = [
-        { value: "1", option: option1 },
-        { value: "2", option: option2 },
-    ];
+export default function MessageTypeRadioGroup({ optionLst, onChange, value }) {
+    const radioLst = optionLst.map((option, idx) => ({ value: idx + 1, option: option }));
 
     const prop = {
         radioLst,
-        changeFn: setFilter,
-        value: filter,
+        onChange: onChange,
+        value,
     };
 
     return <CustomRadioGroup {...prop} />;

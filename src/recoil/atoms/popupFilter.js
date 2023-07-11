@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import getDateRangeFromToday from "../components/utils/getDateRangeFromToday";
+import getDateRangeFromToday from "../../components/utils/getDateRangeFromToday";
 
 const [startDate, endDate] = getDateRangeFromToday();
 
