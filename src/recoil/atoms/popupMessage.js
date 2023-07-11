@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 const initialState = {
     ips: [],
-    message: "",
+    content: "",
     validDate: "",
 };
 

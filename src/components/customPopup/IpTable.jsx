@@ -15,87 +15,38 @@ import {
     Flex,
     Spacer,
     Input,
+    Button,
 } from "@chakra-ui/react";
 import MessageTypeRadioGroup from "../mapping/MessageTypeRadioGroup";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import SubmimtBtn from "../common/SubmitBtn";
-import IpStatistics from "./IpStatistics";
+import IpStatistics, { MESSAGE } from "./IpStatistics";
 import useReconfirmDialog from "../../hooks/useReconfirmDialog";
 import { useRecoilState } from "recoil";
+import { initialPopupIpState } from "../../recoil/atoms/popupIpSetting";
 import { initialPopupMessageState } from "../../recoil/atoms/popupMessage";
-
-const ipsFetched = [
-    {
-        ip: "168.92.10.201",
-        cname: "Pana",
-        hasMessage: "Y",
-        messageType: 1,
-        apply: false,
-    },
-    {
-        ip: "168.92.40.202",
-        cname: "Fasoo",
-        hasMessage: "Y",
-        messageType: 1,
-        apply: false,
-    },
-    {
-        ip: "168.92.10.203",
-        cname: "Sparrow",
-        hasMessage: "Y",
-        messageType: 1,
-        apply: false,
-    },
-    {
-        ip: "168.92.20.204",
-        cname: "SK",
-        hasMessage: "Y",
-        messageType: 1,
-        apply: false,
-    },
-    {
-        ip: "168.92.30.205",
-        cname: null,
-        hasMessage: "Y",
-        messageType: 1,
-        apply: false,
-    },
-    {
-        ip: "168.92.30.206",
-        cname: "CJ",
-        hasMessage: "Y",
-        messageType: 1,
-        apply: false,
-    },
-    {
-        ip: "168.92.30.207",
-        cname: null,
-        hasMessage: "Y",
-        messageType: 1,
-        apply: false,
-    },
-];
 
 export default function IpTable() {
     const [isChanged, setIsChanged] = useState(false);
     const [openRow, setOpenRow] = useState(null);
-    const [ipList, setIpList] = useState(ipsFetched);
+    const [ipList, setIpList] = useRecoilState(initialPopupIpState);
+    const [message, setMessage] = useRecoilState(initialPopupMessageState);
     const [checkbox, setCheckbox] = useState(0);
 
     const [onOpen, ReconfirmDialog] = useReconfirmDialog(
         "변경 사항을 저장하시겠습니까?",
-        "해당 변경 사항은 유저에게 즉시 반영됩니다.",
+        "해당 변경 사항은 즉시 유저에게 반영됩니다.",
         () => console.log("저장되었습니다"),
     );
 
     // const company = [{ ip: "123.20.23.2", cname: "fasoo", messageType: 1 }];
     function changeIps({ ip, cname, messageType, apply }) {
-        ip || cname || messageType || isChanged || setIsChanged(true);
+        isChanged || setIsChanged(true);
         setIpList((prevList) => {
             const newList = [...prevList];
             const idx = newList.findIndex((item) => item.ip === ip);
             if (cname) newList[idx] = { ...newList[idx], cname: cname };
-            else if (messageType) newList[idx] = { ...newList[idx], messageType: messageType };
+            if (messageType) newList[idx] = { ...newList[idx], messageType: messageType };
             newList[idx] = { ...newList[idx], apply: apply };
             return newList;
         });
@@ -124,7 +75,10 @@ export default function IpTable() {
         }
     }
 
-    console.log(ipList);
+    function readMessage(ip) {
+        // get a message
+        setMessage((d) => ({ ...d, content: MESSAGE.content, validDate: MESSAGE.validDate }));
+    }
 
     return (
         <TableContainer>
@@ -152,10 +106,10 @@ export default function IpTable() {
                         <Td></Td>
                         <Td>
                             <Checkbox size="md" isChecked={checkbox == 1} value={1} onChange={bulkChangeMsgType} mr={3}>
-                                개인
+                                일괄
                             </Checkbox>
                             <Checkbox size="md" isChecked={checkbox == 2} value={2} onChange={bulkChangeMsgType}>
-                                기업
+                                일괄
                             </Checkbox>
                         </Td>
                         <Td></Td>
@@ -169,7 +123,7 @@ export default function IpTable() {
                         const isDisabled = openRow !== index;
                         return (
                             <>
-                                <Tr key={company.ip}>
+                                <Tr key={company.ip} bg={isDisabled ? "none" : "yellow.50"}>
                                     <Td>
                                         <Flex>
                                             <HStack
@@ -186,7 +140,8 @@ export default function IpTable() {
                                     <Td>
                                         <Link rel="noreferrer" target="_blank">
                                             <Input
-                                                placeholder="유추기업명을 입력해주세요."
+                                                maxW={"200px"}
+                                                placeholder="기업명을 입력해주세요."
                                                 value={company.cname}
                                                 onChange={(e) =>
                                                     changeIps({
@@ -213,7 +168,11 @@ export default function IpTable() {
                                             }
                                         />
                                     </Td>
-                                    <Td>{company.hasMessage}</Td>
+                                    <Td>
+                                        {company.hasMessage ? (
+                                            <Button onClick={() => readMessage(company.ip)}>조회</Button>
+                                        ) : null}
+                                    </Td>
                                     <Td>
                                         <Checkbox
                                             isChecked={company.apply}
