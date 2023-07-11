@@ -30,7 +30,7 @@ function CustomPopup() {
                         <Filter />
                     </HStack>
                 </Box>
-                <HStack h={"500px"}>
+                <HStack h={"1000px"}>
                     <Box
                         bg="gray.50"
                         borderRadius="xl"
@@ -38,13 +38,13 @@ function CustomPopup() {
                         mt={5}
                         boxShadow="base"
                         rounded="md"
-                        w={"70%"}
+                        w={"75%"}
                         h={"100%"}
                         overflow={"scroll"}
                     >
                         <IpTable />
                     </Box>
-                    <Box bg="gray.50" borderRadius="xl" p={6} mt={5} boxShadow="base" rounded="md" w={"30%"} h={"100%"}>
+                    <Box bg="gray.50" borderRadius="xl" p={6} mt={5} boxShadow="base" rounded="md" w={"25%"} h={"100%"}>
                         <MessageBox />
                     </Box>
                 </HStack>

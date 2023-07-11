@@ -37,7 +37,7 @@ export default function Filter() {
 
     return (
         <RadioGroup w="100%">
-            <Heading size="md">#필터 기준</Heading>
+            <Heading size="md"># 필터 기준</Heading>
             <Flex w="100%">
                 <Spacer />
                 <CustomDateRangePicker timeline={customPopupState} setTimeline={setCustomPopupState} onlyAllow={null} />
