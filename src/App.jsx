@@ -3,7 +3,6 @@ import "./App.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "./styles/theme";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import IpMapping from "./components/pages/IpMapping";
 import CustomPopup from "./components/pages/CustomPopup";
 import DataAnalysis from "./components/pages/DataAnalysis";
 import { RecoilRoot } from "recoil";
@@ -29,7 +28,6 @@ export default function App() {
                     <RecoilRoot>
                         <Router>
                             <Routes>
-                                <Route path={basename + "/ip-mapping"} element={<IpMapping />} />
                                 <Route path={basename + "/custom-popup"} element={<CustomPopup />} />
                                 <Route path={basename + "/data-analysis"} element={<DataAnalysis />} />
                                 <Route path={basename + "*"} element={<DataAnalysis />} />

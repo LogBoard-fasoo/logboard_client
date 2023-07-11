@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import { CustomDatePicker } from "../common/Datepicker";
 import SubmimtBtn from "../common/SubmitBtn";
 import useReconfirmDialog from "../../hooks/useReconfirmDialog";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { initialPopupMessageState } from "../../recoil/atoms/popupMessage";
+import filteredIPsSelector from "../../recoil/selectors/ipsToFetchMsg";
 
 export default function MessageBox() {
     const [message, setMessage] = useRecoilState(initialPopupMessageState);
+    const selectedIps = useRecoilValue(filteredIPsSelector);
     const [isChanged, setIsChanged] = useState(false);
 
     const [onOpen, ReconfirmDialog] = useReconfirmDialog(
@@ -17,9 +19,9 @@ export default function MessageBox() {
     );
 
     useEffect(() => {
-        if (message.content && message.validDate) setIsChanged(true);
+        if (message.content && message.validDate && selectedIps.length > 0) setIsChanged(true);
         else setIsChanged(false);
-    }, [message]);
+    }, [message, selectedIps]);
 
     return (
         <Box>

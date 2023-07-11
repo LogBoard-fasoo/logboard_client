@@ -141,7 +141,7 @@ export const MESSAGE = {
 export default function IpStatistics({ ip }) {
     return (
         <Tr>
-            <Td colSpan="5">
+            <Td colSpan="5" p={0} pt={1}>
                 <SmoothTransition>
                     <Wrap>
                         <CustomCard title="메시지">

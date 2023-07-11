@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CustomRadioGroup from "../common/RadioGroup";
 
 export default function MessageTypeRadioGroup({ optionLst, onChange, value }) {

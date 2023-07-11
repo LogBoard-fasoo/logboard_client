@@ -17,7 +17,7 @@ import {
     Input,
     Button,
 } from "@chakra-ui/react";
-import MessageTypeRadioGroup from "../mapping/MessageTypeRadioGroup";
+import MessageTypeRadioGroup from "./MessageTypeRadioGroup";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import SubmimtBtn from "../common/SubmitBtn";
 import IpStatistics, { MESSAGE } from "./IpStatistics";
@@ -33,9 +33,15 @@ export default function IpTable() {
     const [message, setMessage] = useRecoilState(initialPopupMessageState);
     const [checkbox, setCheckbox] = useState(0);
 
-    const [onOpen, ReconfirmDialog] = useReconfirmDialog(
+    const [onOpenSave, ReconfirmDialogOnSave] = useReconfirmDialog(
         "변경 사항을 저장하시겠습니까?",
         "해당 변경 사항은 즉시 유저에게 반영됩니다.",
+        () => console.log("저장되었습니다"),
+    );
+
+    const [onOpenMsg, ReconfirmDialogOnMsg] = useReconfirmDialog(
+        "메시지를 조회하시겠습니까?",
+        "작성하신 Message Box를 덮어쓰게됩니다.",
         () => console.log("저장되었습니다"),
     );
 
@@ -80,16 +86,19 @@ export default function IpTable() {
         setMessage((d) => ({ ...d, content: MESSAGE.content, validDate: MESSAGE.validDate }));
     }
 
+    console.log(ipList, message);
+
     return (
         <TableContainer>
             <Flex>
                 <Heading size="md"># IP 테이블</Heading>
                 <Spacer />
-                <SubmimtBtn onClick={onOpen} disabled={!isChanged}>
+                <SubmimtBtn onClick={onOpenSave} disabled={!isChanged}>
                     저장
                 </SubmimtBtn>
             </Flex>
-            <ReconfirmDialog />
+            <ReconfirmDialogOnSave />
+            <ReconfirmDialogOnMsg />
             <Table size="md">
                 <Thead bg="blue.600">
                     <Tr>
