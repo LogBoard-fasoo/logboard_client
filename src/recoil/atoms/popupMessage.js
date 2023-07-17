@@ -4,6 +4,7 @@ const initialState = {
     ips: [],
     content: "",
     validDate: "",
+    url: "",
 };
 
 export const initialPopupMessageState = atom({

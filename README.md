@@ -19,7 +19,7 @@ Mapping 페이지 & Data Analysis 페이지.
 
 -   src/components/dataAnalysis
 -   [x] 파이 차트 (플래그, 숫자)
--   [x] 한줄 요약 박스 (제목, 컨텐츠 <- children (색상 강조를 위해서))
+-   [x] 한줄 요약 박스 (제목, 콘텐츠 <- children (색상 강조를 위해서))
 -   [x] 가로 바 차트 (x-axis 명, y-axis 명, {x:y})
 -   [x] 트렌트 그래프
 

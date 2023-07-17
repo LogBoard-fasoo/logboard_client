@@ -15,11 +15,12 @@ export function CustomDatePicker({ isDisabled, value, onChange }) {
         <ThemeProvider theme={theme}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePickerStyle
-                    value={dayjs(value)}
+                    value={dayjs(value.split(" ")[0])}
                     renderInput={(params) => <TextField {...params} />}
                     onChange={onChange}
                     label="유효일"
                     disabled={isDisabled}
+                    minDate={dayjs(new Date())}
                 />
             </LocalizationProvider>
         </ThemeProvider>

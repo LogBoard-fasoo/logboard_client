@@ -1,6 +1,6 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import "./App.css";
-import { ChakraProvider } from "@chakra-ui/react";
+import { Box, ChakraProvider, Spinner } from "@chakra-ui/react";
 import { theme } from "./styles/theme";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CustomPopup from "./components/pages/CustomPopup";
@@ -8,6 +8,7 @@ import DataAnalysis from "./components/pages/DataAnalysis";
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CustomSpinner from "./components/common/Spinner";
+import { authenticateUser } from "./services/authenticate";
 
 export const queryClient = new QueryClient({
     defaultOptions: {
@@ -20,6 +21,13 @@ export const queryClient = new QueryClient({
 
 export default function App() {
     const basename = process.env.NODE_ENV === "development" ? "" : process.env.PUBLIC_URL;
+    const [permission, setPermission] = useState(null);
+
+    useEffect(() => {
+        authenticateUser().then((res) => setPermission(res.data.permission));
+    }, []);
+
+    if (permission === "X") return <Box>권한없음.</Box>;
 
     return (
         <ChakraProvider theme={theme}>
@@ -30,7 +38,7 @@ export default function App() {
                             <Routes>
                                 <Route path={basename + "/custom-popup"} element={<CustomPopup />} />
                                 <Route path={basename + "/data-analysis"} element={<DataAnalysis />} />
-                                <Route path={basename + "*"} element={<DataAnalysis />} />
+                                <Route path={basename + "*"} element={<CustomPopup />} />
                             </Routes>
                         </Router>
                     </RecoilRoot>

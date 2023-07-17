@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Text, Link } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Text, Link, Spinner, Center } from "@chakra-ui/react";
 import { getTop30Companies } from "../../services/dataAnalysis/companies";
 import SmoothTransition from "../../styles/animate/SmoothTransition";
 import { useQuery } from "@tanstack/react-query";
@@ -14,7 +14,7 @@ export default function RankingTable({ timeline }) {
         기업랭킹: `${timelineStr} 간 파수에 가장 큰 관심을 보인 기업은 ${getTop5CompaniesName()} 입니다.`,
     };
 
-    const { data, refetch } = useQuery({
+    const { data, refetch, isLoading } = useQuery({
         queryKey: ["getTop30Companies"],
         queryFn: () => getTop30Companies(startDate, endDate),
     });
@@ -22,6 +22,8 @@ export default function RankingTable({ timeline }) {
     useEffect(() => {
         refetch();
     }, [startDate, endDate]);
+
+    if (isLoading) return <Spinner center={true} />;
 
     return (
         <SmoothTransition>
