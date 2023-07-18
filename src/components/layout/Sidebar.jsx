@@ -10,6 +10,7 @@ import {
     DrawerContent,
     useDisclosure,
     Heading,
+    Text,
 } from "@chakra-ui/react";
 import { NavLink, useLocation } from "react-router-dom";
 import { FiActivity, FiMessageCircle, FiMenu } from "react-icons/fi";
@@ -25,7 +26,7 @@ export default function Sidebar({ children }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
-            <SidebarContent onClose={() => onClose} display={{ base: "none", md: "block" }} />
+            <SidebarContent onClose={() => onClose} display={{ base: "none", xl: "block" }} />
             <Drawer
                 autoFocus={false}
                 isOpen={isOpen}
@@ -33,16 +34,15 @@ export default function Sidebar({ children }) {
                 onClose={onClose}
                 returnFocusOnClose={false}
                 onOverlayClick={onClose}
-                size="full"
+                size="xs"
             >
                 <DrawerContent>
                     <SidebarContent onClose={onClose} />
                 </DrawerContent>
             </Drawer>
             {/* mobilenav */}
-            <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
-
-            <Box ml={{ base: 0, md: 60 }} borderRadius="xl" p="4" h="100%">
+            <MobileNav display={{ base: "flex", xl: "none" }} onOpen={onOpen} />
+            <Box ml={{ base: 0, xl: 60 }} borderRadius="xl" h="100%">
                 {children}
             </Box>
         </Box>
@@ -55,7 +55,7 @@ function SidebarContent({ onClose, ...rest }) {
             bg={useColorModeValue("white", "gray.900")}
             borderRight="1px"
             borderRightColor={useColorModeValue("gray.200", "gray.700")}
-            w={{ base: "full", md: 60 }}
+            w={{ base: "sm", xl: 60 }}
             pos="fixed"
             h="100%"
             {...rest}
@@ -64,11 +64,11 @@ function SidebarContent({ onClose, ...rest }) {
                 <Heading as="h2" fontSize="3xl" fontWeight="bold">
                     Fasoo
                 </Heading>
-                <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
+                <CloseButton display={{ base: "flex", xl: "none" }} onClick={onClose} />
             </Flex>
             {LinkItems.map((link) => (
                 <NavItem key={link.name} icon={link.icon} to={link.to}>
-                    {link.name}
+                    <Text fontSize={"sm"}>{link.name}</Text>
                 </NavItem>
             ))}
         </Box>
@@ -115,8 +115,8 @@ function NavItem({ icon, to, children, ...rest }) {
 function MobileNav({ onOpen, ...rest }) {
     return (
         <Flex
-            ml={{ base: 0, md: 60 }}
-            px={{ base: 4, md: 24 }}
+            ml={{ base: 0, xl: 60 }}
+            px={{ base: 4, xl: 24 }}
             height="20"
             alignItems="center"
             bg={useColorModeValue("white", "gray.900")}

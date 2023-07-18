@@ -18,3 +18,9 @@ svg {
     display: inline !important;
     padding-top: 3px;
 }
+
+td,
+th {
+    /* padding-left: 0 !important; */
+    padding-right: 0 !important;
+}

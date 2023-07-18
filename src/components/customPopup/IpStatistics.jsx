@@ -101,7 +101,7 @@ export default function IpStatistics({ ip, setOpenRow }) {
 
     return (
         <Tr>
-            <Td colSpan="6" p={0} pt={1}>
+            <Td colSpan="8" p={0} pt={1}>
                 <ReconfirmDialog />
                 <SmoothTransition>
                     <Wrap>

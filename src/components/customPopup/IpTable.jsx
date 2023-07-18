@@ -124,16 +124,25 @@ export default function IpTable() {
             <Table size="md">
                 <Thead bg="blue.600">
                     <Tr>
+                        <Th color="white">적용</Th>
                         <Th color="white">IP주소</Th>
+                        <Th></Th>
                         <Th color="white">기업명</Th>
+                        <Th></Th>
                         <Th color="white">메시지 타입</Th>
                         <Th color="white">페이지뷰</Th>
                         <Th color="white">메시지</Th>
-                        <Th color="white">적용</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
                     <Tr>
+                        <Td>
+                            <Checkbox size="md" onChange={bulkChangeMsg}>
+                                일괄
+                            </Checkbox>
+                        </Td>
+                        <Td></Td>
+                        <Td></Td>
                         <Td></Td>
                         <Td></Td>
                         <Td>
@@ -146,11 +155,6 @@ export default function IpTable() {
                         </Td>
                         <Td></Td>
                         <Td></Td>
-                        <Td>
-                            <Checkbox size="md" onChange={bulkChangeMsg}>
-                                일괄
-                            </Checkbox>
-                        </Td>
                     </Tr>
                     {ipList &&
                         ipList.map((company, index) => {
@@ -159,13 +163,28 @@ export default function IpTable() {
                                 <>
                                     <Tr key={company.ip} bg={isDisabled ? "none" : "yellow.50"}>
                                         <Td>
+                                            <Checkbox
+                                                isChecked={company.apply}
+                                                onChange={(e) =>
+                                                    changeIps({
+                                                        ip: company.ip,
+                                                        cname: company.cname,
+                                                        messageType: company.messageType,
+                                                        apply: e.target.checked,
+                                                    })
+                                                }
+                                                mr={5}
+                                            >
+                                                <small>{index + 1}</small>
+                                            </Checkbox>
+                                        </Td>
+                                        <Td>
                                             <Flex>
                                                 <HStack
                                                     onClick={
                                                         isDisabled ? () => setOpenRow(index) : () => setOpenRow(null)
                                                     }
                                                 >
-                                                    <small>{index + 1}</small>
                                                     <Text as="b" cursor="pointer" color="text_grey">
                                                         {company.ip}
                                                     </Text>
@@ -173,7 +192,7 @@ export default function IpTable() {
                                                 </HStack>
                                             </Flex>
                                         </Td>
-                                        <Td>
+                                        <Td colSpan={3}>
                                             <Input
                                                 maxW={"200px"}
                                                 placeholder="기업명을 입력해주세요."
@@ -214,19 +233,6 @@ export default function IpTable() {
                                                     조회
                                                 </Button>
                                             ) : null}
-                                        </Td>
-                                        <Td>
-                                            <Checkbox
-                                                isChecked={company.apply}
-                                                onChange={(e) =>
-                                                    changeIps({
-                                                        ip: company.ip,
-                                                        cname: company.cname,
-                                                        messageType: company.messageType,
-                                                        apply: e.target.checked,
-                                                    })
-                                                }
-                                            />
                                         </Td>
                                     </Tr>
                                     {!isDisabled && (
