@@ -24,7 +24,9 @@ export default function App() {
     const [permission, setPermission] = useState(null);
 
     useEffect(() => {
-        authenticateUser().then((res) => setPermission(res.data.permission));
+        authenticateUser().then((res) => {
+            setPermission(res.data.permission);
+        });
     }, []);
 
     if (permission === "X") return <Box>권한없음.</Box>;

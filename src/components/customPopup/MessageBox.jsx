@@ -37,16 +37,28 @@ export default function MessageBox() {
                     ips += ip.ip;
                 }
             }
-            await updateMessage(ips, content, validDate, url);
-            resetMessage();
+            await updateMessage(ips, content, validDate.split(" ")[0], url);
+            await resetMessage();
             await refetchIps();
+            await setIpList((ipList) => {
+                const ipListCp = [...ipList];
+                for (const ip of ipListCp) {
+                    ip.apply = false;
+                }
+                return ipListCp;
+            });
         },
     });
 
     const [onOpen, ReconfirmDialog] = useReconfirmDialog(
         "해당 메시지를 적용하시겠습니까?",
         "해당 변경 사항은 즉시 유저에게 반영됩니다.",
-        refetch,
+        () => {
+            refetch();
+            setIpList((prev) => {
+                return prev.map((obj) => ({ ...obj, apply: false }));
+            });
+        },
     );
 
     useEffect(() => {
@@ -57,13 +69,13 @@ export default function MessageBox() {
     return (
         <Box>
             <Heading size="md" noOfLines={1} pb={3}>
-                Message Box
+                # Message Box
             </Heading>
             <FormControl>
                 <FormLabel>콘텐츠</FormLabel>
                 <Textarea
                     type="text"
-                    value={message?.content}
+                    value={message?.content.replaceAll("<span>", "").replaceAll("</span>", "")}
                     placeholder="팝업 메시지 콘텐츠.&#13;&#10; 강조하려는 단어에 <strong></strong> 태그를, 줄바꿈은 <br/> 태그 입력. &#13;&#10;  e.g. 요즈음 <br/> <strong>DRM 제품에</strong> 관심이 많으시죠?"
                     rows={10}
                     onChange={(e) => setMessage((d) => ({ ...d, content: e.target.value }))}

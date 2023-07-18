@@ -105,7 +105,10 @@ export default function IpTable() {
         setMessage((d) => ({ ...d, content: message.message, validDate: message.valid_date, url: message.url }));
     }
 
-    if (!ipList || ipList?.length === 0) return <Spinner />;
+    console.log(ipList);
+    if (!ipList || ipList?.length === 0) {
+        return <Spinner />;
+    }
 
     return (
         <TableContainer>
@@ -124,7 +127,7 @@ export default function IpTable() {
                         <Th color="white">IP주소</Th>
                         <Th color="white">기업명</Th>
                         <Th color="white">메시지 타입</Th>
-                        <Th color="white">횟수</Th>
+                        <Th color="white">페이지뷰</Th>
                         <Th color="white">메시지</Th>
                         <Th color="white">적용</Th>
                     </Tr>
@@ -226,7 +229,13 @@ export default function IpTable() {
                                             />
                                         </Td>
                                     </Tr>
-                                    {!isDisabled && <IpStatistics ip={company.ip} key={company.ip + index} />}
+                                    {!isDisabled && (
+                                        <IpStatistics
+                                            ip={company.ip}
+                                            key={company.ip + index}
+                                            setOpenRow={setOpenRow}
+                                        />
+                                    )}
                                 </>
                             );
                         })}
