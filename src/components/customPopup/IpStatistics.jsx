@@ -121,7 +121,9 @@ export default function IpStatistics({ ip, setOpenRow }) {
                                     <Textarea
                                         isDisabled={true}
                                         type="text"
-                                        value={message.data.message.replaceAll("<span>", "").replaceAll("</span>", "")}
+                                        value={message.data.message
+                                            .replaceAll("<span>", "")
+                                            .replaceAll("</span>", "<br/>")}
                                     />
                                     <Textarea isDisabled={true} type="text" value={message.data.url} />
                                     <CustomDatePicker value={message.data.valid_date} isDisabled={true} />
