@@ -17,6 +17,8 @@ import {
     Input,
     Button,
     Spinner,
+    Box,
+    Center,
 } from "@chakra-ui/react";
 import MessageTypeRadioGroup from "./MessageTypeRadioGroup";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
@@ -37,6 +39,8 @@ export default function IpTable() {
     const [checkbox, setCheckbox] = useState(0);
     const [updatedIps, setUpdatedIps] = useState({});
     const [clickedIp, setClickedIp] = useState("");
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const [onOpenSave, ReconfirmDialogOnSave] = useReconfirmDialog(
         "변경 사항을 저장하시겠습니까?",
@@ -105,10 +109,11 @@ export default function IpTable() {
         setMessage((d) => ({ ...d, content: message.message, validDate: message.valid_date, url: message.url }));
     }
 
-    console.log(ipList);
-    if (!ipList || ipList?.length === 0) {
-        return <Spinner />;
+    if (isLoading && typeof ipList === "undefined") {
+        setIsLoading(false);
     }
+
+    if (isLoading) return <Spinner />;
 
     return (
         <TableContainer>
@@ -156,7 +161,7 @@ export default function IpTable() {
                         <Td></Td>
                         <Td></Td>
                     </Tr>
-                    {ipList &&
+                    {ipList?.length > 0 ? (
                         ipList.map((company, index) => {
                             const isDisabled = openRow !== index;
                             return (
@@ -221,7 +226,9 @@ export default function IpTable() {
                                                 }
                                             />
                                         </Td>
-                                        <Td>{company.visits}</Td>
+                                        <Td>
+                                            <strong>{company.visits}</strong>
+                                        </Td>
                                         <Td>
                                             {company.hasMessage ? (
                                                 <Button
@@ -244,7 +251,14 @@ export default function IpTable() {
                                     )}
                                 </>
                             );
-                        })}
+                        })
+                    ) : (
+                        <Tr>
+                            <Td colSpan={8}>
+                                <Center>검색 결과가 없습니다.</Center>
+                            </Td>
+                        </Tr>
+                    )}
                 </Tbody>
             </Table>
         </TableContainer>
