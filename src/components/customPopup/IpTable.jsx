@@ -23,7 +23,7 @@ import {
 import MessageTypeRadioGroup from "./MessageTypeRadioGroup";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import SubmimtBtn from "../common/SubmitBtn";
-import IpStatistics, { MESSAGE } from "./IpStatistics";
+import IpStatistics from "./IpStatistics";
 import useReconfirmDialog from "../../hooks/useReconfirmDialog";
 import { useRecoilState } from "recoil";
 import { initialPopupIpState } from "../../recoil/atoms/popupIpSetting";
@@ -126,141 +126,151 @@ export default function IpTable() {
             </Flex>
             <ReconfirmDialogOnSave />
             <ReconfirmDialogOnMsg />
-            <Table size="md">
-                <Thead bg="blue.600">
-                    <Tr>
-                        <Th color="white">적용</Th>
-                        <Th color="white">IP주소</Th>
-                        <Th></Th>
-                        <Th color="white">기업명</Th>
-                        <Th></Th>
-                        <Th color="white">메시지 타입</Th>
-                        <Th color="white">페이지뷰</Th>
-                        <Th color="white">메시지</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    <Tr>
-                        <Td>
-                            <Checkbox size="md" onChange={bulkChangeMsg}>
-                                일괄
-                            </Checkbox>
-                        </Td>
-                        <Td></Td>
-                        <Td></Td>
-                        <Td></Td>
-                        <Td></Td>
-                        <Td>
-                            <Checkbox size="md" isChecked={checkbox == 1} value={1} onChange={bulkChangeMsgType} mr={3}>
-                                일괄
-                            </Checkbox>
-                            <Checkbox size="md" isChecked={checkbox == 2} value={2} onChange={bulkChangeMsgType}>
-                                일괄
-                            </Checkbox>
-                        </Td>
-                        <Td></Td>
-                        <Td></Td>
-                    </Tr>
-                    {ipList?.length > 0 ? (
-                        ipList.map((company, index) => {
-                            const isDisabled = openRow !== index;
-                            return (
-                                <>
-                                    <Tr key={company.ip} bg={isDisabled ? "none" : "yellow.50"}>
-                                        <Td>
-                                            <Checkbox
-                                                isChecked={company.apply}
-                                                onChange={(e) =>
-                                                    changeIps({
-                                                        ip: company.ip,
-                                                        cname: company.cname,
-                                                        messageType: company.messageType,
-                                                        apply: e.target.checked,
-                                                    })
-                                                }
-                                                mr={5}
-                                            >
-                                                <small>{index + 1}</small>
-                                            </Checkbox>
-                                        </Td>
-                                        <Td>
-                                            <Flex>
-                                                <HStack
-                                                    onClick={
-                                                        isDisabled ? () => setOpenRow(index) : () => setOpenRow(null)
-                                                    }
-                                                >
-                                                    <Text as="b" cursor="pointer" color="text_grey">
-                                                        {company.ip}
-                                                    </Text>
-                                                    {isDisabled ? <FiChevronDown /> : <FiChevronUp />}
-                                                </HStack>
-                                            </Flex>
-                                        </Td>
-                                        <Td colSpan={3}>
-                                            <Input
-                                                maxW={"200px"}
-                                                placeholder="기업명을 입력해주세요."
-                                                value={company.cname}
-                                                onChange={(e) => {
-                                                    changeIps({
-                                                        ip: company.ip,
-                                                        cname: e.target.value,
-                                                        messageType: company.messageType,
-                                                        apply: company.apply,
-                                                    });
-                                                }}
-                                            />
-                                        </Td>
-                                        <Td>
-                                            <MessageTypeRadioGroup
-                                                optionLst={["개인", "기업"]}
-                                                value={company.messageType}
-                                                onChange={(e) =>
-                                                    changeIps({
-                                                        ip: company.ip,
-                                                        cname: company.cname,
-                                                        messageType: parseInt(e),
-                                                        apply: company.apply,
-                                                    })
-                                                }
-                                            />
-                                        </Td>
-                                        <Td>
-                                            <strong>{company.visits}</strong>
-                                        </Td>
-                                        <Td>
-                                            {company.hasMessage ? (
-                                                <Button
-                                                    onClick={() => {
-                                                        setClickedIp(company.ip);
-                                                        onOpenMsg();
-                                                    }}
-                                                >
-                                                    조회
-                                                </Button>
-                                            ) : null}
-                                        </Td>
-                                    </Tr>
-                                    {!isDisabled && (
-                                        <IpStatistics
-                                            ip={company.ip}
-                                            key={company.ip + index}
-                                            setOpenRow={setOpenRow}
-                                        />
-                                    )}
-                                </>
-                            );
-                        })
-                    ) : (
+            <Box maxH={"800px"} overflowY={"scroll"}>
+                <Table size="md">
+                    <Thead bg="blue.600" position={"sticky"} top="0" zIndex={5}>
                         <Tr>
-                            <Td colSpan={8}>
-                                <Center>검색 결과가 없습니다.</Center>
-                            </Td>
+                            <Th color="white">적용</Th>
+                            <Th color="white">IP주소</Th>
+                            <Th></Th>
+                            <Th color="white">기업명</Th>
+                            <Th></Th>
+                            <Th color="white">메시지 타입</Th>
+                            <Th color="white">페이지뷰</Th>
+                            <Th color="white">메시지</Th>
                         </Tr>
-                    )}
-                </Tbody>
-            </Table>
+                    </Thead>
+                    <Tbody>
+                        <Tr>
+                            <Td>
+                                <Checkbox size="md" onChange={bulkChangeMsg}>
+                                    일괄
+                                </Checkbox>
+                            </Td>
+                            <Td></Td>
+                            <Td></Td>
+                            <Td></Td>
+                            <Td></Td>
+                            <Td>
+                                <Checkbox
+                                    size="md"
+                                    isChecked={checkbox == 1}
+                                    value={1}
+                                    onChange={bulkChangeMsgType}
+                                    mr={3}
+                                >
+                                    일괄
+                                </Checkbox>
+                                <Checkbox size="md" isChecked={checkbox == 2} value={2} onChange={bulkChangeMsgType}>
+                                    일괄
+                                </Checkbox>
+                            </Td>
+                            <Td></Td>
+                            <Td></Td>
+                        </Tr>
+                        {ipList?.length > 0 ? (
+                            ipList.map((company, index) => {
+                                const isDisabled = openRow !== index;
+                                return (
+                                    <>
+                                        <Tr key={company.ip} bg={isDisabled ? "none" : "yellow.50"}>
+                                            <Td>
+                                                <Checkbox
+                                                    isChecked={company.apply}
+                                                    onChange={(e) =>
+                                                        changeIps({
+                                                            ip: company.ip,
+                                                            cname: company.cname,
+                                                            messageType: company.messageType,
+                                                            apply: e.target.checked,
+                                                        })
+                                                    }
+                                                    mr={5}
+                                                >
+                                                    <small>{index + 1}</small>
+                                                </Checkbox>
+                                            </Td>
+                                            <Td>
+                                                <Flex>
+                                                    <HStack
+                                                        onClick={
+                                                            isDisabled
+                                                                ? () => setOpenRow(index)
+                                                                : () => setOpenRow(null)
+                                                        }
+                                                    >
+                                                        <Text as="b" cursor="pointer" color="text_grey">
+                                                            {company.ip}
+                                                        </Text>
+                                                        {isDisabled ? <FiChevronDown /> : <FiChevronUp />}
+                                                    </HStack>
+                                                </Flex>
+                                            </Td>
+                                            <Td colSpan={3}>
+                                                <Input
+                                                    maxW={"200px"}
+                                                    placeholder="기업명을 입력해주세요."
+                                                    value={company.cname}
+                                                    onChange={(e) => {
+                                                        changeIps({
+                                                            ip: company.ip,
+                                                            cname: e.target.value,
+                                                            messageType: company.messageType,
+                                                            apply: company.apply,
+                                                        });
+                                                    }}
+                                                />
+                                            </Td>
+                                            <Td>
+                                                <MessageTypeRadioGroup
+                                                    optionLst={["개인", "기업"]}
+                                                    value={company.messageType}
+                                                    onChange={(e) =>
+                                                        changeIps({
+                                                            ip: company.ip,
+                                                            cname: company.cname,
+                                                            messageType: parseInt(e),
+                                                            apply: company.apply,
+                                                        })
+                                                    }
+                                                />
+                                            </Td>
+                                            <Td>
+                                                <strong>{company.visits}</strong>
+                                            </Td>
+                                            <Td>
+                                                {company.hasMessage ? (
+                                                    <Button
+                                                        onClick={() => {
+                                                            setClickedIp(company.ip);
+                                                            onOpenMsg();
+                                                        }}
+                                                    >
+                                                        조회
+                                                    </Button>
+                                                ) : null}
+                                            </Td>
+                                        </Tr>
+                                        {!isDisabled && (
+                                            <IpStatistics
+                                                ip={company.ip}
+                                                key={company.ip + index}
+                                                setOpenRow={setOpenRow}
+                                            />
+                                        )}
+                                    </>
+                                );
+                            })
+                        ) : (
+                            <Tr>
+                                <Td colSpan={8}>
+                                    <Center>검색 결과가 없습니다.</Center>
+                                </Td>
+                            </Tr>
+                        )}
+                    </Tbody>
+                </Table>
+            </Box>
         </TableContainer>
     );
 }

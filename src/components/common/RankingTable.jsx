@@ -30,7 +30,7 @@ export default function RankingTable({ timeline }) {
             <TableContainer
                 borderRadius={7}
                 h="500px"
-                overflowY="scroll"
+                // overflowY="scroll"
                 css={{
                     "&::-webkit-scrollbar": {
                         width: "8px",

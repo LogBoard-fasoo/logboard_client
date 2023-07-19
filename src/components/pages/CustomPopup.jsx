@@ -30,17 +30,7 @@ function CustomPopup() {
                     <Box bg="gray.50" borderRadius="xl" p={6} mt={5} boxShadow="base" rounded="md" w={"30%"} h={"100%"}>
                         <MessageBox />
                     </Box>
-                    <Box
-                        bg="gray.50"
-                        borderRadius="xl"
-                        p={6}
-                        mt={5}
-                        boxShadow="base"
-                        rounded="md"
-                        w={"70%"}
-                        h={"100%"}
-                        overflow={"scroll"}
-                    >
+                    <Box bg="gray.50" borderRadius="xl" p={6} mt={5} boxShadow="base" rounded="md" w={"70%"} h={"100%"}>
                         <IpTable />
                     </Box>
                 </HStack>
