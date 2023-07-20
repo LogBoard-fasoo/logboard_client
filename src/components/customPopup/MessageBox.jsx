@@ -75,7 +75,10 @@ export default function MessageBox() {
                 <FormLabel>콘텐츠</FormLabel>
                 <Textarea
                     type="text"
-                    value={message?.content.replaceAll("<span>", "").replaceAll("</span>", "<br/>")}
+                    value={message?.content
+                        .replaceAll("<span>", "")
+                        .replaceAll("&nbsp;", " ")
+                        .replaceAll("</span>", "<br/>")}
                     placeholder="팝업 메시지 콘텐츠.&#13;&#10; 강조하려는 단어에 <strong></strong> 태그를, 줄바꿈은 <br/> 태그 입력. &#13;&#10;  e.g. 요즈음 <br/> <strong>DRM 제품에</strong> 관심이 많으시죠?"
                     rows={10}
                     onChange={(e) => setMessage((d) => ({ ...d, content: e.target.value }))}

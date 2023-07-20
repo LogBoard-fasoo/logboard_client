@@ -123,6 +123,7 @@ export default function IpStatistics({ ip, setOpenRow }) {
                                         type="text"
                                         value={message.data.message
                                             .replaceAll("<span>", "")
+                                            .replaceAll("&nbsp;", " ")
                                             .replaceAll("</span>", "<br/>")}
                                     />
                                     <Textarea isDisabled={true} type="text" value={message.data.url} />

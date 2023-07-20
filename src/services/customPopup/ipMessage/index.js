@@ -9,7 +9,10 @@ export function getMessage(ip_address) {
 }
 
 export function updateMessage(ips, content, valid_date, url) {
-    const contentFormatted = content.split("<br/>").reduce((acc, item) => acc + `<span>${item}</span>`, "");
+    const contentFormatted = content
+        .replaceAll(" <strong>", "&nbsp;<strong>")
+        .split("<br/>")
+        .reduce((acc, item) => acc + `<span>${item}</span>`, "");
     return api.put(`/message/update`, {
         ips,
         content: contentFormatted,
