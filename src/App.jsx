@@ -38,7 +38,7 @@ export default function App() {
                     <RecoilRoot>
                         <Router>
                             <Routes>
-                                <Route path={basename + "/custom-popup"} element={<CustomPopup />} />
+                                <Route path={basename + "/marketing-popup"} element={<CustomPopup />} />
                                 <Route path={basename + "/data-analysis"} element={<DataAnalysis />} />
                                 <Route path={basename + "*"} element={<CustomPopup />} />
                             </Routes>

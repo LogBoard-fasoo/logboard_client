@@ -19,7 +19,7 @@ const basename = process.env.NODE_ENV === "development" ? "" : process.env.PUBLI
 
 const LinkItems = [
     { name: "Data Analysis", icon: FiActivity, to: basename + "/data-analysis" },
-    { name: "Custom Popup", icon: FiMessageCircle, to: basename + "/custom-popup" },
+    { name: "Marketing Popup", icon: FiMessageCircle, to: basename + "/marketing-popup" },
 ];
 
 export default function Sidebar({ children }) {

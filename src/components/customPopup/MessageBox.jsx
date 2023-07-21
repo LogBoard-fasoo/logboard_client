@@ -69,7 +69,7 @@ export default function MessageBox() {
     return (
         <Box>
             <Heading size="md" noOfLines={1} pb={3}>
-                # Message Box
+                # 메시지 폼
             </Heading>
             <FormControl>
                 <FormLabel>콘텐츠</FormLabel>

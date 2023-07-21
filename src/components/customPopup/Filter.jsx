@@ -152,7 +152,7 @@ export default function Filter() {
 
                                     <Flex w="100%" alignItems={"center"} mt={3}>
                                         <Heading w="40%" size="sm">
-                                            관심 페이지
+                                            방문 페이지
                                         </Heading>
                                         <SearchableDropdown {...dropDownProps} />
                                     </Flex>

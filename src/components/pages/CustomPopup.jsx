@@ -5,6 +5,7 @@ import { FiMessageCircle } from "react-icons/fi";
 import Filter from "../customPopup/Filter";
 import IpTable from "../customPopup/IpTable";
 import MessageBox from "../customPopup/MessageBox";
+import PreviewBox from "../customPopup/PreviewBox";
 
 function CustomPopup() {
     return (
@@ -15,7 +16,7 @@ function CustomPopup() {
                         <FiMessageCircle />
                     </Heading>
                     <Heading as="h1" size="2xl" noOfLines={1} textShadow="3px 3px 3px rgba(0,0,0,0.2)" pb={3}>
-                        Custom Popup
+                        Marketing Popup
                     </Heading>
                 </Flex>
                 <Text fontSize={"sm"} my={2}>
@@ -29,6 +30,7 @@ function CustomPopup() {
                 <HStack h={"1000px"}>
                     <Box bg="gray.50" borderRadius="xl" p={6} mt={5} boxShadow="base" rounded="md" w={"30%"} h={"100%"}>
                         <MessageBox />
+                        <PreviewBox />
                     </Box>
                     <Box bg="gray.50" borderRadius="xl" p={6} mt={5} boxShadow="base" rounded="md" w={"70%"} h={"100%"}>
                         <IpTable />
