@@ -4,8 +4,8 @@ import getDateRangeFromToday from "../../components/utils/getDateRangeFromToday"
 const [startDate, endDate] = getDateRangeFromToday();
 
 const initialState = {
-    startDate: window.localStorage.getItem("startDate") || startDate,
-    endDate: window.localStorage.getItem("endDate") || endDate,
+    startDate: startDate,
+    endDate: endDate,
     hasMessage: window.localStorage.getItem("hasMessage") == "true", // 필터기준1: 메시지 유무
     hasCompany: window.localStorage.getItem("hasCompany") == "true", // 필터기준2: 매칭 기업 유무
     counts: JSON.parse(window.localStorage.getItem("counts")) || 1,

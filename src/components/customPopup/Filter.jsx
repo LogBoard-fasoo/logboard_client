@@ -41,8 +41,6 @@ export default function Filter() {
     const { hasMessage, hasCompany, counts, interestedProducts, itemsList, startDate, endDate } = customPopupState;
 
     function saveFilterLs() {
-        window.localStorage.setItem("startDate", startDate);
-        window.localStorage.setItem("endDate", endDate);
         window.localStorage.setItem("hasMessage", hasMessage);
         window.localStorage.setItem("hasCompany", hasCompany);
         window.localStorage.setItem("counts", counts);
