@@ -12,6 +12,7 @@ const initialState = {
     interestedProducts: window.localStorage.getItem("interestedProducts") || "", // 필터기준3: 관심 제품
     itemsforTrend: "", // 제품 트렌드 검색
     itemsList: [], // 모든 페이지 리스트
+    isFetching: true,
 };
 
 export const initialCustomPopupState = atom({

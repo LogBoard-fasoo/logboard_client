@@ -15,11 +15,10 @@ export default function getDefaultTimeline() {
         closestPreviousFriday.getDate() - 28,
     );
 
-    const defaultStartDate = previousFriday.toISOString().split("T")[0];
-    const defaultEndDate = closestPreviousFriday.toISOString().split("T")[0];
+    // const defaultStartDate = previousFriday.toISOString().split("T")[0];
 
-    // const defaultStartDate = previousFriday;
-    // const defaultEndDate = closestPreviousFriday;
+    const defaultStartDate = "2023-03-31";
+    const defaultEndDate = closestPreviousFriday.toISOString().split("T")[0];
 
     return [defaultStartDate, defaultEndDate];
 }

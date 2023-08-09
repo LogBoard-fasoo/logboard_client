@@ -83,7 +83,7 @@ export default function DataAnalysis() {
     ];
     return (
         <Sidebar>
-            <Box h="100%" py="10">
+            <Box h="100%" p="10">
                 <Box>
                     <Flex>
                         <Heading as="h1" size="2xl" noOfLines={1} mr={3} textShadow="3px 3px 3px rgba(0,0,0,0.2)">

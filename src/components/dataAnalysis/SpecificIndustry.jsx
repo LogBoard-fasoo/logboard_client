@@ -91,6 +91,7 @@ function CategoryBox({ timeline, categoryId, setCategoryId, setSummaryContent })
         onChangeFn: (e) => setCategoryId(parseInt(e?.value)),
         data: ranking?.data || [],
         tip: "선택한 카테고리에 속하는 기업은 해당 제품들에 가장 관심이 많아요.",
+        w: "100%",
     };
 
     return <SpecificIndustryBox {...prop} />;
@@ -124,6 +125,7 @@ function IndustryBox({ timeline, industryId, setIndustryId, setSummaryContent })
         onChangeFn: (e) => setIndustryId(parseInt(e?.value)),
         data: ranking?.data || [],
         tip: "선택한 카테고리에 속하는 기업은 해당 제품들에 가장 관심이 많아요.",
+        w: "100%",
     };
 
     return <SpecificIndustryBox {...prop} />;
@@ -159,6 +161,7 @@ function TechnologyBox({ timeline, technologyId, setTechnologyId, setSummaryCont
         data: ranking?.data || [],
         isMulti: true,
         tip: "선택한 카테고리에 속하는 기업은 해당 제품들에 가장 관심이 많아요.",
+        w: "100%",
     };
 
     return <SpecificIndustryBox {...prop} />;

@@ -30,12 +30,14 @@ import { initialPopupIpState } from "../../recoil/atoms/popupIpSetting";
 import { initialPopupMessageState } from "../../recoil/atoms/popupMessage";
 import { updateIpDetail } from "../../services/customPopup/ipItems";
 import { getMessage } from "../../services/customPopup/ipMessage";
+import { initialCustomPopupState } from "../../recoil/atoms/popupFilter";
 
 export default function IpTable() {
     const [isChanged, setIsChanged] = useState(false);
     const [openRow, setOpenRow] = useState(null);
     const [ipList, setIpList] = useRecoilState(initialPopupIpState);
     const [message, setMessage] = useRecoilState(initialPopupMessageState);
+    const [customPopupState, setCustomPopupState] = useRecoilState(initialCustomPopupState);
     const [checkbox, setCheckbox] = useState(0);
     const [updatedIps, setUpdatedIps] = useState({});
     const [clickedIp, setClickedIp] = useState("");
@@ -113,7 +115,7 @@ export default function IpTable() {
         setIsLoading(false);
     }
 
-    if (isLoading) return <Spinner />;
+    if (customPopupState.isFetching) return <Spinner />;
 
     return (
         <TableContainer>

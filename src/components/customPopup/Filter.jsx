@@ -67,7 +67,11 @@ export default function Filter() {
         queryFn: getAllItemsList,
     });
 
-    const { data: allIps, refetch } = useQuery({
+    const {
+        data: allIps,
+        refetch,
+        isFetching,
+    } = useQuery({
         queryKey: ["getFilteredIps"],
         queryFn: () => getFilteredIps(hasMessage, hasCompany, interestedProducts, counts, startDate, endDate),
     });
@@ -79,6 +83,10 @@ export default function Filter() {
     useEffect(() => {
         allItems?.data && setCustomPopupState((d) => ({ ...d, itemsList: allItems?.data }));
     }, [allItems]);
+
+    useEffect(() => {
+        setCustomPopupState((d) => ({ ...d, isFetching: isFetching }));
+    }, [isFetching]);
 
     return (
         <RadioGroup w="100%">
