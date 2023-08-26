@@ -6,13 +6,13 @@ Mapping 페이지 & Data Analysis 페이지.
 ### 재사용 가능 컴포넌트
 
 -   src/components/common
--   [ ] 안내 모달 (내용)
+-   [x] 안내 모달 (내용)
 -   [x] 달력/Datepicker (디폴트 일자)
 -   [x] 드롭다운 (placeholder, {k: v})
 -   [x] 툴팁 (내용)
 -   [x] Searchable dropdown (placeholder, {k:v})
 -   [x] Radio group
--   [ ] 기업정보 card
+-   [x] 기업정보 card
 
 -   src/components/layout
 -   [x] 사이드바
@@ -27,4 +27,4 @@ Mapping 페이지 & Data Analysis 페이지.
 -   [x] Radio button group
 -   [x] IP table
 -   [x] 유추 기업 container
--   [ ] mapping된 ip / message가 있는 ip 필터 기능 추가
+-   [x] mapping된 ip / message가 있는 ip 필터 기능 추가
